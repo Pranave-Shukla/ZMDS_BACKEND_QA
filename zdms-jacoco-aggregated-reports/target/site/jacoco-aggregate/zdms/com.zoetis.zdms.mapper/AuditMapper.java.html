@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>AuditMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">AuditMapper.java</span></div><h1>AuditMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.AuditDto;
+import com.zoetis.zdms.api.dto.AuditsResponseDto;
+import com.zoetis.zdms.model.Audit;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+
+@Mapper(componentModel = &quot;spring&quot;)
+public interface AuditMapper {
+
+    default AuditsResponseDto pagedAuditsToGetAuditsResponseDto(Page&lt;Audit&gt; pagedAudits) {
+<span class="fc" id="L16">        return pagedAuditsToGetAuditsResponseDto(pagedAudits.getNumber(), pagedAudits.getContent(),</span>
+<span class="fc" id="L17">                pagedAudits.getTotalPages(), pagedAudits.getTotalElements());</span>
+    }
+
+    @Mapping(target = &quot;pageInfo.pageNumber&quot;, source = &quot;pageNumber&quot;)
+    @Mapping(target = &quot;pageInfo.totalElements&quot;, source = &quot;totalElements&quot;)
+    @Mapping(target = &quot;pageInfo.totalPages&quot;, source = &quot;totalPages&quot;)
+    @Mapping(target = &quot;audits&quot;, source = &quot;elements&quot;)
+    AuditsResponseDto pagedAuditsToGetAuditsResponseDto(Integer pageNumber, List&lt;Audit&gt; elements, Integer totalPages, Long totalElements);
+
+    @Mapping(target = &quot;header&quot;, source = &quot;transactionHeader&quot;)
+    @Mapping(target = &quot;message&quot;, source = &quot;transactionMessage&quot;)
+    @Mapping(target = &quot;initiator&quot;, source = &quot;logBy&quot;)
+    @Mapping(target = &quot;date&quot;, source = &quot;logTime&quot;)
+    AuditDto auditToAuditDto(Audit audit);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

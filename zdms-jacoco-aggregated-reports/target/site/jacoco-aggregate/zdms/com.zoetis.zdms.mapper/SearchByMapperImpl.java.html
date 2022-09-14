@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SearchByMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">SearchByMapperImpl.java</span></div><h1>SearchByMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.SearchAuditsByDto;
+import com.zoetis.zdms.api.dto.SearchAuditsByFieldDto;
+import com.zoetis.zdms.api.dto.SearchByOperationDto;
+import com.zoetis.zdms.api.dto.SearchCustomersByDto;
+import com.zoetis.zdms.api.dto.SearchCustomersByFieldDto;
+import com.zoetis.zdms.api.dto.SearchProductsByDto;
+import com.zoetis.zdms.api.dto.SearchProductsByFieldDto;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField.Audit;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField.Customer;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField.Product;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByOperation;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L26">public class SearchByMapperImpl implements SearchByMapper {</span>
+
+    @Override
+    public Customer dtoToSearchByFieldCustomer(SearchCustomersByFieldDto searchCustomersByFieldDto) {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if ( searchCustomersByFieldDto == null ) {</span>
+<span class="nc" id="L31">            return null;</span>
+        }
+
+        Customer customer;
+
+<span class="nc bnc" id="L36" title="All 10 branches missed.">        switch ( searchCustomersByFieldDto ) {</span>
+<span class="nc" id="L37">            case NATIVE_STATUS: customer = Customer.NATIVE_STATUS;</span>
+<span class="nc" id="L38">            break;</span>
+<span class="nc" id="L39">            case ERP_ID: customer = Customer.ERP_ID;</span>
+<span class="nc" id="L40">            break;</span>
+<span class="nc" id="L41">            case COMPANY_NAME: customer = Customer.COMPANY_NAME;</span>
+<span class="nc" id="L42">            break;</span>
+<span class="nc" id="L43">            case ADDRESS: customer = Customer.ADDRESS;</span>
+<span class="nc" id="L44">            break;</span>
+<span class="nc" id="L45">            case STATE: customer = Customer.STATE;</span>
+<span class="nc" id="L46">            break;</span>
+<span class="nc" id="L47">            case TYPE: customer = Customer.TYPE;</span>
+<span class="nc" id="L48">            break;</span>
+<span class="nc" id="L49">            case NATIVE_CREATED_DATE: customer = Customer.NATIVE_CREATED_DATE;</span>
+<span class="nc" id="L50">            break;</span>
+<span class="nc" id="L51">            case SOURCE: customer = Customer.SOURCE;</span>
+<span class="nc" id="L52">            break;</span>
+<span class="nc" id="L53">            case REJECTION_REASON: customer = Customer.REJECTION_REASON;</span>
+<span class="nc" id="L54">            break;</span>
+<span class="nc" id="L55">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + searchCustomersByFieldDto );</span>
+        }
+
+<span class="nc" id="L58">        return customer;</span>
+    }
+
+    @Override
+    public Product dtoToSearchByFieldProduct(SearchProductsByFieldDto searchProductsByFieldDto) {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if ( searchProductsByFieldDto == null ) {</span>
+<span class="nc" id="L64">            return null;</span>
+        }
+
+        Product product;
+
+<span class="nc bnc" id="L69" title="All 9 branches missed.">        switch ( searchProductsByFieldDto ) {</span>
+<span class="nc" id="L70">            case IS_VISIBLE: product = Product.IS_VISIBLE;</span>
+<span class="nc" id="L71">            break;</span>
+<span class="nc" id="L72">            case AVAILABILITY: product = Product.AVAILABILITY;</span>
+<span class="nc" id="L73">            break;</span>
+<span class="nc" id="L74">            case PRODUCT_ID: product = Product.PRODUCT_ID;</span>
+<span class="nc" id="L75">            break;</span>
+<span class="nc" id="L76">            case DESCRIPTION: product = Product.DESCRIPTION;</span>
+<span class="nc" id="L77">            break;</span>
+<span class="nc" id="L78">            case MINIMUM_ORDER_QUANTITY: product = Product.MINIMUM_ORDER_QUANTITY;</span>
+<span class="nc" id="L79">            break;</span>
+<span class="nc" id="L80">            case MAXIMUM_ORDER_QUANTITY: product = Product.MAXIMUM_ORDER_QUANTITY;</span>
+<span class="nc" id="L81">            break;</span>
+<span class="nc" id="L82">            case HAS_MEDIA: product = Product.HAS_MEDIA;</span>
+<span class="nc" id="L83">            break;</span>
+<span class="nc" id="L84">            case SOURCE: product = Product.SOURCE;</span>
+<span class="nc" id="L85">            break;</span>
+<span class="nc" id="L86">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + searchProductsByFieldDto );</span>
+        }
+
+<span class="nc" id="L89">        return product;</span>
+    }
+
+    @Override
+    public Audit dtoToSearchByFieldAudit(SearchAuditsByFieldDto searchAuditsByFieldDto) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if ( searchAuditsByFieldDto == null ) {</span>
+<span class="nc" id="L95">            return null;</span>
+        }
+
+        Audit audit;
+
+<span class="nc bnc" id="L100" title="All 6 branches missed.">        switch ( searchAuditsByFieldDto ) {</span>
+<span class="nc" id="L101">            case DATA_SET: audit = Audit.DATA_SET;</span>
+<span class="nc" id="L102">            break;</span>
+<span class="nc" id="L103">            case HEADER: audit = Audit.HEADER;</span>
+<span class="nc" id="L104">            break;</span>
+<span class="nc" id="L105">            case MESSAGE: audit = Audit.MESSAGE;</span>
+<span class="nc" id="L106">            break;</span>
+<span class="nc" id="L107">            case INITIATOR: audit = Audit.INITIATOR;</span>
+<span class="nc" id="L108">            break;</span>
+<span class="nc" id="L109">            case DATE: audit = Audit.DATE;</span>
+<span class="nc" id="L110">            break;</span>
+<span class="nc" id="L111">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + searchAuditsByFieldDto );</span>
+        }
+
+<span class="nc" id="L114">        return audit;</span>
+    }
+
+    @Override
+    public SearchByOperation dtoToSearchByOperation(SearchByOperationDto searchByOperationDto) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if ( searchByOperationDto == null ) {</span>
+<span class="nc" id="L120">            return null;</span>
+        }
+
+        SearchByOperation searchByOperation;
+
+<span class="nc bnc" id="L125" title="All 3 branches missed.">        switch ( searchByOperationDto ) {</span>
+<span class="nc" id="L126">            case IN: searchByOperation = SearchByOperation.IN;</span>
+<span class="nc" id="L127">            break;</span>
+<span class="nc" id="L128">            case LIKE: searchByOperation = SearchByOperation.LIKE;</span>
+<span class="nc" id="L129">            break;</span>
+<span class="nc" id="L130">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + searchByOperationDto );</span>
+        }
+
+<span class="nc" id="L133">        return searchByOperation;</span>
+    }
+
+    @Override
+    public SearchBy&lt;Customer&gt; mapCustomerSearchByField(SearchCustomersByDto searchCustomersByDto) {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if ( searchCustomersByDto == null ) {</span>
+<span class="nc" id="L139">            return null;</span>
+        }
+
+<span class="nc" id="L142">        List&lt;String&gt; values = null;</span>
+
+<span class="nc" id="L144">        List&lt;String&gt; list = searchCustomersByDto.getValues();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L146">            values = new ArrayList&lt;String&gt;( list );</span>
+        }
+
+<span class="nc" id="L149">        Customer searchByField = dtoToSearchByFieldCustomer(searchCustomersByDto.getField());</span>
+<span class="nc" id="L150">        SearchByOperation searchByOperation = dtoToSearchByOperation(searchCustomersByDto.getOperation());</span>
+
+<span class="nc" id="L152">        SearchBy&lt;Customer&gt; searchBy = new SearchBy&lt;Customer&gt;( searchByField, searchByOperation, values );</span>
+
+<span class="nc" id="L154">        return searchBy;</span>
+    }
+
+    @Override
+    public SearchBy&lt;Product&gt; mapProductSearchByField(SearchProductsByDto searchProductsByDto) {
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if ( searchProductsByDto == null ) {</span>
+<span class="nc" id="L160">            return null;</span>
+        }
+
+<span class="nc" id="L163">        List&lt;String&gt; values = null;</span>
+
+<span class="nc" id="L165">        List&lt;String&gt; list = searchProductsByDto.getValues();</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L167">            values = new ArrayList&lt;String&gt;( list );</span>
+        }
+
+<span class="nc" id="L170">        Product searchByField = dtoToSearchByFieldProduct(searchProductsByDto.getField());</span>
+<span class="nc" id="L171">        SearchByOperation searchByOperation = dtoToSearchByOperation(searchProductsByDto.getOperation());</span>
+
+<span class="nc" id="L173">        SearchBy&lt;Product&gt; searchBy = new SearchBy&lt;Product&gt;( searchByField, searchByOperation, values );</span>
+
+<span class="nc" id="L175">        return searchBy;</span>
+    }
+
+    @Override
+    public SearchBy&lt;Audit&gt; mapAuditSearchByField(SearchAuditsByDto searchAuditsByDto) {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        if ( searchAuditsByDto == null ) {</span>
+<span class="nc" id="L181">            return null;</span>
+        }
+
+<span class="nc" id="L184">        List&lt;String&gt; values = null;</span>
+
+<span class="nc" id="L186">        List&lt;String&gt; list = searchAuditsByDto.getValues();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L188">            values = new ArrayList&lt;String&gt;( list );</span>
+        }
+
+<span class="nc" id="L191">        Audit searchByField = dtoToSearchByFieldAudit(searchAuditsByDto.getField());</span>
+<span class="nc" id="L192">        SearchByOperation searchByOperation = dtoToSearchByOperation(searchAuditsByDto.getOperation());</span>
+
+<span class="nc" id="L194">        SearchBy&lt;Audit&gt; searchBy = new SearchBy&lt;Audit&gt;( searchByField, searchByOperation, values );</span>
+
+<span class="nc" id="L196">        return searchBy;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

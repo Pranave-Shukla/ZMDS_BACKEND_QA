@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>AuditDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">AuditDto.java</span></div><h1>AuditDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.AuditDataSetDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * AuditDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="fc" id="L23">public class AuditDto   {</span>
+  @JsonProperty(&quot;dataSet&quot;)
+  private AuditDataSetDto dataSet;
+
+  @JsonProperty(&quot;header&quot;)
+  private String header;
+
+  @JsonProperty(&quot;message&quot;)
+  private String message;
+
+  @JsonProperty(&quot;initiator&quot;)
+  private String initiator;
+
+  @JsonProperty(&quot;date&quot;)
+  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime date;
+
+  public AuditDto dataSet(AuditDataSetDto dataSet) {
+<span class="nc" id="L41">    this.dataSet = dataSet;</span>
+<span class="nc" id="L42">    return this;</span>
+  }
+
+  /**
+   * Get dataSet
+   * @return dataSet
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public AuditDataSetDto getDataSet() {
+<span class="fc" id="L54">    return dataSet;</span>
+  }
+
+  public void setDataSet(AuditDataSetDto dataSet) {
+<span class="fc" id="L58">    this.dataSet = dataSet;</span>
+<span class="fc" id="L59">  }</span>
+
+  public AuditDto header(String header) {
+<span class="nc" id="L62">    this.header = header;</span>
+<span class="nc" id="L63">    return this;</span>
+  }
+
+  /**
+   * Get header
+   * @return header
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getHeader() {
+<span class="fc" id="L74">    return header;</span>
+  }
+
+  public void setHeader(String header) {
+<span class="fc" id="L78">    this.header = header;</span>
+<span class="fc" id="L79">  }</span>
+
+  public AuditDto message(String message) {
+<span class="nc" id="L82">    this.message = message;</span>
+<span class="nc" id="L83">    return this;</span>
+  }
+
+  /**
+   * Get message
+   * @return message
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getMessage() {
+<span class="fc" id="L94">    return message;</span>
+  }
+
+  public void setMessage(String message) {
+<span class="fc" id="L98">    this.message = message;</span>
+<span class="fc" id="L99">  }</span>
+
+  public AuditDto initiator(String initiator) {
+<span class="nc" id="L102">    this.initiator = initiator;</span>
+<span class="nc" id="L103">    return this;</span>
+  }
+
+  /**
+   * Get initiator
+   * @return initiator
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getInitiator() {
+<span class="fc" id="L114">    return initiator;</span>
+  }
+
+  public void setInitiator(String initiator) {
+<span class="fc" id="L118">    this.initiator = initiator;</span>
+<span class="fc" id="L119">  }</span>
+
+  public AuditDto date(OffsetDateTime date) {
+<span class="nc" id="L122">    this.date = date;</span>
+<span class="nc" id="L123">    return this;</span>
+  }
+
+  /**
+   * Get date
+   * @return date
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public OffsetDateTime getDate() {
+<span class="fc" id="L135">    return date;</span>
+  }
+
+  public void setDate(OffsetDateTime date) {
+<span class="fc" id="L139">    this.date = date;</span>
+<span class="fc" id="L140">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L146">      return true;</span>
+    }
+<span class="nc bnc" id="L148" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L149">      return false;</span>
+    }
+<span class="nc" id="L151">    AuditDto audit = (AuditDto) o;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    return Objects.equals(this.dataSet, audit.dataSet) &amp;&amp;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        Objects.equals(this.header, audit.header) &amp;&amp;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        Objects.equals(this.message, audit.message) &amp;&amp;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        Objects.equals(this.initiator, audit.initiator) &amp;&amp;</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        Objects.equals(this.date, audit.date);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L161">    return Objects.hash(dataSet, header, message, initiator, date);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="fc" id="L166">    StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L167">    sb.append(&quot;class AuditDto {\n&quot;);</span>
+    
+<span class="fc" id="L169">    sb.append(&quot;    dataSet: &quot;).append(toIndentedString(dataSet)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L170">    sb.append(&quot;    header: &quot;).append(toIndentedString(header)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L171">    sb.append(&quot;    message: &quot;).append(toIndentedString(message)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L172">    sb.append(&quot;    initiator: &quot;).append(toIndentedString(initiator)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L173">    sb.append(&quot;    date: &quot;).append(toIndentedString(date)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L174">    sb.append(&quot;}&quot;);</span>
+<span class="fc" id="L175">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L184">      return &quot;null&quot;;</span>
+    }
+<span class="fc" id="L186">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

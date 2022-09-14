@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FieldPredicateExpressionFactory.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.service.impl.factory</a> &gt; <span class="el_source">FieldPredicateExpressionFactory.java</span></div><h1>FieldPredicateExpressionFactory.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.service.impl.factory;
+
+import com.querydsl.core.types.dsl.*;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+//todo refactor!!
+<span class="fc" id="L21">@AllArgsConstructor(access = AccessLevel.PRIVATE)</span>
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+<span class="pc" id="L23">@Builder(access = AccessLevel.PRIVATE)</span>
+<span class="fc" id="L24">@Slf4j</span>
+public class FieldPredicateExpressionFactory&lt;T&gt; {
+
+    private static final String LIKE_CHARACTER = &quot;%&quot;;
+
+<span class="pc" id="L29">    private static final BiFunction&lt;String, StringPath, BooleanExpression&gt; SEARCH_OPERATION_LIKE_STRING = (value, stringPath) -&gt; stringPath.likeIgnoreCase(LIKE_CHARACTER + value + LIKE_CHARACTER);</span>
+<span class="pc" id="L30">    private static final BiFunction&lt;Integer, NumberPath&lt;Integer&gt;, BooleanExpression&gt; SEARCH_OPERATION_LIKE_INTEGER = (value, integerPath) -&gt; integerPath.like(LIKE_CHARACTER + value + LIKE_CHARACTER);</span>
+<span class="pc" id="L31">    private static final BiFunction&lt;Integer, NumberPath&lt;Integer&gt;, BooleanExpression&gt; SEARCH_OPERATION_GOE_INTEGER = (value, integerPath) -&gt; integerPath.goe(value);</span>
+<span class="pc" id="L32">    private static final BiFunction&lt;Integer, NumberPath&lt;Integer&gt;, BooleanExpression&gt; SEARCH_OPERATION_NULL_OR_LOE_INTEGER = (value, integerPath) -&gt; integerPath.isNull().or(integerPath.loe(value));</span>
+
+
+<span class="fc" id="L35">    private static final BiFunction&lt;Date, DateTimePath&lt;OffsetDateTime&gt;, BooleanExpression&gt; SEARCH_OPERATION_LIKE_OFFSET_DATE_TIME = (value, dateTimePath) -&gt;</span>
+<span class="nc" id="L36">            dateTimePath.between(value.toInstant().atOffset(OffsetDateTime.now().getOffset()), value.toInstant().plus(1, ChronoUnit.DAYS).atOffset(OffsetDateTime.now().getOffset()));</span>
+
+<span class="pc" id="L38">    private static final BiFunction&lt;List&lt;? extends Enum&gt;, EnumPath, BooleanExpression&gt; SEARCH_OPERATION_IN_ENUM = (values, enumPath) -&gt; enumPath.in(values);</span>
+<span class="pc" id="L39">    private static final BiFunction&lt;List&lt;String&gt;, StringPath, BooleanExpression&gt; SEARCH_OPERATION_IN_STRING = (values, stringPath) -&gt; stringPath.in(values);</span>
+
+    private FieldType fieldType;
+
+    private StringPath stringPath;
+
+    private NumberPath&lt;Integer&gt; numberPath;
+
+    private DateTimePath&lt;OffsetDateTime&gt; dateTimePath;
+
+    private EnumPath&lt;? extends Enum&gt; enumPath;
+
+    private Class&lt;? extends Enum&gt; enumExpressionClass;
+
+    public static &lt;T extends Enum&gt; FieldPredicateExpressionFactory&lt;T&gt; enumOf(Class&lt;T&gt; enumExpressionClass, EnumPath enumPath) {
+<span class="fc" id="L54">        return new FieldPredicateExpressionFactory.FieldPredicateExpressionFactoryBuilder&lt;T&gt;()</span>
+<span class="fc" id="L55">                .fieldType(FieldType.ENUM)</span>
+<span class="fc" id="L56">                .enumPath(enumPath)</span>
+<span class="fc" id="L57">                .enumExpressionClass(enumExpressionClass)</span>
+<span class="fc" id="L58">                .build();</span>
+    }
+
+    public static FieldPredicateExpressionFactory&lt;OffsetDateTime&gt; offsetDateTimeOf(DateTimePath&lt;OffsetDateTime&gt; dateTimePath) {
+<span class="fc" id="L62">        return new FieldPredicateExpressionFactoryBuilder&lt;OffsetDateTime&gt;()</span>
+<span class="fc" id="L63">                .fieldType(FieldType.DATE_TIME)</span>
+<span class="fc" id="L64">                .dateTimePath(dateTimePath)</span>
+<span class="fc" id="L65">                .build();</span>
+    }
+
+    public static FieldPredicateExpressionFactory&lt;String&gt; stringOf(StringPath stringPath) {
+<span class="fc" id="L69">        return new FieldPredicateExpressionFactoryBuilder&lt;String&gt;()</span>
+<span class="fc" id="L70">                .fieldType(FieldType.STRING)</span>
+<span class="fc" id="L71">                .stringPath(stringPath)</span>
+<span class="fc" id="L72">                .build();</span>
+    }
+
+    public static FieldPredicateExpressionFactory&lt;String&gt; stringListOf(StringPath stringPath) {
+<span class="fc" id="L76">        return new FieldPredicateExpressionFactoryBuilder&lt;String&gt;()</span>
+<span class="fc" id="L77">                .fieldType(FieldType.STRING_LIST)</span>
+<span class="fc" id="L78">                .stringPath(stringPath)</span>
+<span class="fc" id="L79">                .build();</span>
+    }
+
+    public static FieldPredicateExpressionFactory&lt;Integer&gt; integerOf(NumberPath&lt;Integer&gt; numberPath) {
+<span class="fc" id="L83">        return new FieldPredicateExpressionFactoryBuilder&lt;Integer&gt;()</span>
+<span class="fc" id="L84">                .fieldType(FieldType.NUMBER)</span>
+<span class="fc" id="L85">                .numberPath(numberPath)</span>
+<span class="fc" id="L86">                .build();</span>
+    }
+
+    public static FieldPredicateExpressionFactory&lt;Integer&gt; integerToBooleanOf(NumberPath&lt;Integer&gt; numberPath) {
+<span class="fc" id="L90">        return new FieldPredicateExpressionFactoryBuilder&lt;Integer&gt;()</span>
+<span class="fc" id="L91">                .fieldType(FieldType.NUMBER_TO_BOOLEAN)</span>
+<span class="fc" id="L92">                .numberPath(numberPath)</span>
+<span class="fc" id="L93">                .build();</span>
+    }
+
+    public BooleanExpression create(List&lt;String&gt; values) {
+        try {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (fieldType.equals(FieldType.STRING_LIST)) {</span>
+<span class="nc" id="L99">                return SEARCH_OPERATION_IN_STRING.apply(values, stringPath);</span>
+            }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (fieldType.equals(FieldType.STRING)) {</span>
+<span class="nc" id="L102">                return SEARCH_OPERATION_LIKE_STRING.apply(values.stream().findFirst().orElseThrow(), stringPath);</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            } else if (fieldType.equals(FieldType.NUMBER)) {</span>
+<span class="nc" id="L104">                Integer integerValue = values.stream()</span>
+<span class="nc" id="L105">                        .map(Integer::valueOf)</span>
+<span class="nc" id="L106">                        .findFirst()</span>
+<span class="nc" id="L107">                        .orElseThrow();</span>
+<span class="nc" id="L108">                return SEARCH_OPERATION_LIKE_INTEGER.apply(integerValue, numberPath);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            } else if (fieldType.equals(FieldType.NUMBER_TO_BOOLEAN)) {</span>
+<span class="nc" id="L110">                BooleanExpression booleanExpression = null;</span>
+<span class="nc" id="L111">                List&lt;BooleanValue&gt; booleanValue = values.stream()</span>
+<span class="nc" id="L112">                        .map(BooleanValue::valueOf)</span>
+<span class="nc" id="L113">                        .collect(Collectors.toList());</span>
+
+<span class="nc bnc" id="L115" title="All 2 branches missed.">                if (booleanValue.contains(BooleanValue.TRUE))</span>
+<span class="nc" id="L116">                    booleanExpression = SEARCH_OPERATION_GOE_INTEGER.apply(1, numberPath);</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                if (booleanValue.contains(BooleanValue.FALSE)) {</span>
+<span class="nc" id="L118">                    BooleanExpression apply = SEARCH_OPERATION_NULL_OR_LOE_INTEGER.apply(0, numberPath);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                    booleanExpression = Objects.isNull(booleanExpression) ? apply : booleanExpression.or(apply);</span>
+                }
+
+<span class="nc" id="L122">                return booleanExpression;</span>
+
+            } 
+            // else if (fieldType.equals(FieldType.ENUM)) {
+            //     List&lt;? extends Enum&gt; enumValues = values.stream()
+            //             .map(value -&gt; Enum.valueOf(enumExpressionClass, value))
+            //             .collect(Collectors.toList());
+            //     return SEARCH_OPERATION_IN_ENUM.apply(enumValues, enumPath);
+            // } 
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            else if (fieldType.equals(FieldType.DATE_TIME)) {</span>
+<span class="nc" id="L132">                String value = values.stream()</span>
+<span class="nc" id="L133">                        .findFirst()</span>
+<span class="nc" id="L134">                        .orElseThrow();</span>
+<span class="nc" id="L135">                Date dateValue = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(value);</span>
+<span class="nc" id="L136">                return SEARCH_OPERATION_LIKE_OFFSET_DATE_TIME.apply(dateValue, dateTimePath);</span>
+            } else {
+<span class="nc" id="L138">                throw new IllegalArgumentException(&quot;Unsupported field operation&quot;);</span>
+            }
+<span class="nc" id="L140">        } catch (Exception ex) {</span>
+<span class="nc" id="L141">            log.error(&quot;Unexpected exception during creating Predicate Expression&quot;, ex);</span>
+<span class="nc" id="L142">            throw new IllegalArgumentException(&quot;Unsupported field operation&quot;);</span>
+        }
+    }
+
+<span class="fc" id="L146">    enum FieldType {</span>
+<span class="fc" id="L147">        STRING, STRING_LIST, ENUM, DATE_TIME, NUMBER, NUMBER_TO_BOOLEAN</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.rest</a> &gt; <span class="el_source">CustomerController.java</span></div><h1>CustomerController.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.rest;
+
+import com.zoetis.zdms.api.dto.CustomerDetailsResponseDto;
+import com.zoetis.zdms.api.dto.CustomerPartialRequestDto;
+import com.zoetis.zdms.api.dto.CustomersRequestDto;
+import com.zoetis.zdms.api.dto.CustomersResponseDto;
+import com.zoetis.zdms.api.rest.CustomerApi;
+import com.zoetis.zdms.mapper.*;
+import com.zoetis.zdms.model.Customer;
+import com.zoetis.zdms.model.CustomerPartial;
+import com.zoetis.zdms.model.dictionary.Language;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortDirection;
+import com.zoetis.zdms.model.view.CustomerView;
+import com.zoetis.zdms.rest.factory.ResponseEntityFactory;
+import com.zoetis.zdms.service.CustomerService;
+import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.SetUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@RestController
+<span class="fc" id="L30">@AllArgsConstructor</span>
+// @CrossOrigin(origins = &quot;*&quot;, allowedHeaders=&quot;*&quot;)
+public class CustomerController implements CustomerApi {
+
+    private final CustomerService customerService;
+
+    private final CustomerMapper customerMapper;
+    private final CustomerPartialMapper customerPartialMapper;
+    private final CustomerDetailsMapper customerDetailsMapper;
+    private final SortDirectionMapper sortDirectionMapper;
+    private final SortByMapper sortByMapper;
+    private final LanguageMapper languageMapper;
+    private final SearchByMapper searchByMapper;
+
+    @Override
+    public ResponseEntity&lt;CustomersResponseDto&gt; getCustomers(CustomersRequestDto customersRequestDto) {
+<span class="nc" id="L46">        SortDirection sortDirection = sortDirectionMapper.map(customersRequestDto.getSortDirection());</span>
+<span class="nc" id="L47">        SortBy.Customer sortBy = sortByMapper.mapSortCustomersByDto(customersRequestDto.getSortBy());</span>
+<span class="nc" id="L48">        Language language = languageMapper.map(customersRequestDto.getLanguage());</span>
+<span class="nc" id="L49">        Integer pageNumber = customersRequestDto.getPageNumber();</span>
+<span class="nc" id="L50">        Integer pageSize = customersRequestDto.getPageSize();</span>
+
+<span class="nc" id="L52">        Set&lt;SearchBy&lt;SearchByField.Customer&gt;&gt; searchBySet = SetUtils.emptyIfNull(customersRequestDto.getFilters())</span>
+<span class="nc" id="L53">                .stream()</span>
+<span class="nc" id="L54">                .map(searchByMapper::mapCustomerSearchByField)</span>
+<span class="nc" id="L55">                .collect(Collectors.toSet());</span>
+
+<span class="nc" id="L57">        Page&lt;CustomerView&gt; customers = customerService.getCustomerViews(pageNumber, language, pageSize, sortDirection, sortBy, searchBySet);</span>
+<span class="nc" id="L58">        CustomersResponseDto customersDto = customerMapper.pagedCustomersToGetCustomersResponseDto(customers);</span>
+
+<span class="nc" id="L60">        return ResponseEntityFactory.buildOk(customersDto);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;CustomerDetailsResponseDto&gt; getCustomerDetails(String id) {
+<span class="nc" id="L65">        Customer customer = customerService.getCustomer(id);</span>
+
+<span class="nc" id="L67">        CustomerDetailsResponseDto customerDetailsDto = customerDetailsMapper.mapCustomerToCustomerDetailsResponseDto(customer);</span>
+
+<span class="nc" id="L69">        return ResponseEntityFactory.buildOk(customerDetailsDto);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;Void&gt; updateCustomer(String id, CustomerPartialRequestDto customerPartialRequestDto) {
+<span class="nc" id="L74">        CustomerPartial customerPartial = customerPartialMapper.map(customerPartialRequestDto.getCustomerPartial());</span>
+
+<span class="nc" id="L76">        customerService.updateCustomer(id, customerPartial);</span>
+
+<span class="nc" id="L78">        return ResponseEntityFactory.buildNoContent();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

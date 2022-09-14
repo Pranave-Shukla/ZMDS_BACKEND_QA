@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">ProductMapper.java</span></div><h1>ProductMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.ProductDetailsResponseDto;
+import com.zoetis.zdms.api.dto.ProductDto;
+import com.zoetis.zdms.api.dto.ProductsResponseDto;
+import com.zoetis.zdms.model.*;
+import com.zoetis.zdms.model.view.ProductView;
+import org.apache.commons.lang3.ObjectUtils;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+
+@Mapper(componentModel = &quot;spring&quot;, uses = {DictionariesMapper.class, SourceSystemMapper.class})
+public interface ProductMapper {
+
+    default ProductsResponseDto pagedProductViewsToProductsResponseDto(Page&lt;ProductView&gt; pagedProductViews) {
+<span class="fc" id="L21">        return pagedProductViewsToProductsResponseDto(pagedProductViews.getNumber(), pagedProductViews.getContent(),</span>
+<span class="fc" id="L22">                pagedProductViews.getTotalPages(), pagedProductViews.getTotalElements());</span>
+    }
+
+    @Mapping(target = &quot;pageInfo.pageNumber&quot;, source = &quot;pageNumber&quot;)
+    @Mapping(target = &quot;pageInfo.totalElements&quot;, source = &quot;totalElements&quot;)
+    @Mapping(target = &quot;pageInfo.totalPages&quot;, source = &quot;totalPages&quot;)
+    @Mapping(target = &quot;products&quot;, source = &quot;elements&quot;)
+    ProductsResponseDto pagedProductViewsToProductsResponseDto(Integer pageNumber, List&lt;ProductView&gt; elements,
+                                                               Integer totalPages, Long totalElements);
+
+    @Mapping(target = &quot;id&quot;, source = &quot;productId&quot;)
+    @Mapping(target = &quot;statusId&quot;, source = &quot;statusId&quot;)
+    @Mapping(target = &quot;sourceSystem&quot;, source = &quot;productView.source&quot;)
+    ProductDto productViewToProductDto(ProductView productView);
+
+
+    @Mapping(target = &quot;product.id&quot;, source = &quot;product.id&quot;)
+    @Mapping(target = &quot;product.statusId&quot;, source = &quot;productStatus.id&quot;)
+    @Mapping(target = &quot;product.price&quot;, source = &quot;product.price&quot;)
+    @Mapping(target = &quot;product.isVisible&quot;, source = &quot;productStatus.isVisible&quot;)
+    @Mapping(target = &quot;product.availability&quot;, source = &quot;productStatus.availability&quot;)
+    @Mapping(target = &quot;product.minimumOrderQuantity&quot;, source = &quot;productStatus.minimumOrderQuantity&quot;)
+    @Mapping(target = &quot;product.maximumOrderQuantity&quot;, source = &quot;productStatus.maximumOrderQuantity&quot;)
+    @Mapping(target = &quot;product.associatedProducts&quot;, source = &quot;productStatus.associatedProducts&quot;)
+    @Mapping(target = &quot;product.sourceSystem&quot;, source = &quot;productStatus.sourceSystem&quot;)
+    @Mapping(target = &quot;product.imageFilename&quot;, source = &quot;productMediaFile.name&quot;)
+    @Mapping(target = &quot;product.imageFilepath&quot;, source = &quot;apiMediaFilepath&quot;)
+    @Mapping(target = &quot;product.imageUploadDate&quot;, source = &quot;productMediaFile.updatedDate&quot;)
+    ProductDetailsResponseDto productAndStatusAndMediaFileAndApiMediaFilepathToDto(Product product, ProductStatus productStatus,
+                                                                              ProductMediaFile productMediaFile, String apiMediaFilepath);
+
+    @Mapping(target = &quot;product.id&quot;, source = &quot;product.id&quot;)
+    @Mapping(target = &quot;product.statusId&quot;, source = &quot;productStatus.id&quot;)
+    @Mapping(target = &quot;product.price&quot;, source = &quot;product.price&quot;)
+    @Mapping(target = &quot;product.isVisible&quot;, source = &quot;productStatus.isVisible&quot;)
+    @Mapping(target = &quot;product.availability&quot;, source = &quot;productStatus.availability&quot;)
+    @Mapping(target = &quot;product.minimumOrderQuantity&quot;, source = &quot;productStatus.minimumOrderQuantity&quot;)
+    @Mapping(target = &quot;product.maximumOrderQuantity&quot;, source = &quot;productStatus.maximumOrderQuantity&quot;)
+    @Mapping(target = &quot;product.associatedProducts&quot;, source = &quot;productStatus.associatedProducts&quot;)
+    @Mapping(target = &quot;product.sourceSystem&quot;, source = &quot;productStatus.sourceSystem&quot;)
+    ProductDetailsResponseDto productAndStatusToDto(Product product, ProductStatus productStatus);
+
+    @AfterMapping
+    default void addProductNameAndDescription(@MappingTarget ProductDetailsResponseDto result, Product product) {
+<span class="nc" id="L66">        result.getProduct().setName(ObjectUtils.firstNonNull(product.getLocalName(), product.getGlobalName()));</span>
+<span class="nc" id="L67">        result.getProduct().setDescription(ObjectUtils.firstNonNull(product.getLocalDescription(), product.getGlobalDescription()));</span>
+<span class="nc" id="L68">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

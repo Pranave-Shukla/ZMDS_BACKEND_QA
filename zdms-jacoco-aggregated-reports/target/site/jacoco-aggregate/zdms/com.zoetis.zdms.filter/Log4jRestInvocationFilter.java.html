@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Log4jRestInvocationFilter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.filter</a> &gt; <span class="el_source">Log4jRestInvocationFilter.java</span></div><h1>Log4jRestInvocationFilter.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.filter;
+
+import com.zoetis.zdms.util.MultiReadHttpServletRequest;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.springframework.util.StopWatch;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.ContentCachingResponseWrapper;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+<span class="nc bnc" id="L19" title="All 6 branches missed.">@EqualsAndHashCode(callSuper = false)</span>
+<span class="fc" id="L20">@Slf4j</span>
+<span class="fc" id="L21">public class Log4jRestInvocationFilter extends OncePerRequestFilter {</span>
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+<span class="nc" id="L25">        log.info(&quot;REST request with method [{}] and endpoint [{}] has been invoked.&quot;, request.getMethod(), request.getRequestURI());</span>
+<span class="nc" id="L26">        MultiReadHttpServletRequest requestWrapper = new MultiReadHttpServletRequest(request);</span>
+<span class="nc" id="L27">        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);</span>
+<span class="nc" id="L28">        String requestBody = IOUtils.toString(requestWrapper.getInputStream(), UTF_8);</span>
+<span class="nc" id="L29">        log.debug(&quot;REST request body [{}].&quot;, requestBody);</span>
+<span class="nc" id="L30">        StopWatch watch = new StopWatch(getClass().getSimpleName());</span>
+        try {
+<span class="nc" id="L32">            watch.start();</span>
+<span class="nc" id="L33">            filterChain.doFilter(requestWrapper, responseWrapper);</span>
+        } finally {
+<span class="nc" id="L35">            watch.stop();</span>
+<span class="nc" id="L36">            log.info(&quot;REST request completed with response status [{}] within: [{}] ms.&quot;, responseWrapper.getStatus(), watch.getTotalTimeMillis());</span>
+<span class="nc" id="L37">            log.debug(&quot;REST response body [{}]&quot;, IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8));</span>
+<span class="nc" id="L38">            responseWrapper.copyBodyToResponse();</span>
+        }
+<span class="nc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

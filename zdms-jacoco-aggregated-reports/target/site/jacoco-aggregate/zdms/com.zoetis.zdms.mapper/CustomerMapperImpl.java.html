@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">CustomerMapperImpl.java</span></div><h1>CustomerMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.CustomerContactDetailsDto;
+import com.zoetis.zdms.api.dto.CustomerDto;
+import com.zoetis.zdms.api.dto.CustomerLookupDto;
+import com.zoetis.zdms.api.dto.CustomerLookupResponseDto;
+import com.zoetis.zdms.api.dto.CustomerNativeStatusDto;
+import com.zoetis.zdms.api.dto.CustomerStateDto;
+import com.zoetis.zdms.api.dto.CustomerTypeDto;
+import com.zoetis.zdms.api.dto.CustomersResponseDto;
+import com.zoetis.zdms.api.dto.PageInfoDto;
+import com.zoetis.zdms.api.dto.RejectionReasonDto;
+import com.zoetis.zdms.model.ContactDetails;
+import com.zoetis.zdms.model.Customer;
+import com.zoetis.zdms.model.dictionary.CustomerState;
+import com.zoetis.zdms.model.dictionary.CustomerStatus;
+import com.zoetis.zdms.model.dictionary.CustomerType;
+import com.zoetis.zdms.model.dictionary.RejectionReason;
+import com.zoetis.zdms.model.view.CustomerLookupView;
+import com.zoetis.zdms.model.view.CustomerView;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L33">public class CustomerMapperImpl implements CustomerMapper {</span>
+
+    @Autowired
+    private DictionariesMapper dictionariesMapper;
+    @Autowired
+    private SourceSystemMapper sourceSystemMapper;
+
+    @Override
+    public CustomerDto customerViewToCustomerDto(CustomerView customerView) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if ( customerView == null ) {</span>
+<span class="nc" id="L43">            return null;</span>
+        }
+
+<span class="fc" id="L46">        CustomerDto customerDto = new CustomerDto();</span>
+
+<span class="fc" id="L48">        customerDto.setNativeStatus( customerStatusToCustomerNativeStatusDto( customerView.getLocalStatus() ) );</span>
+<span class="fc" id="L49">        customerDto.setSourceSystem( sourceSystemMapper.mapSourceSystemNameToDto( customerView.getSource() ) );</span>
+<span class="fc" id="L50">        customerDto.setId( customerView.getId() );</span>
+<span class="fc" id="L51">        customerDto.setErpId( customerView.getErpId() );</span>
+<span class="fc" id="L52">        customerDto.setType( customerTypeToCustomerTypeDto( customerView.getType() ) );</span>
+<span class="fc" id="L53">        customerDto.setCompanyName( customerView.getCompanyName() );</span>
+<span class="fc" id="L54">        customerDto.setAddress( customerView.getAddress() );</span>
+<span class="fc" id="L55">        customerDto.setState( customerStateToCustomerStateDto( customerView.getState() ) );</span>
+<span class="fc" id="L56">        customerDto.setNativeCreatedDate( customerView.getNativeCreatedDate() );</span>
+<span class="fc" id="L57">        customerDto.setRejectionReason( rejectionReasonToRejectionReasonDto( customerView.getRejectionReason() ) );</span>
+
+<span class="fc" id="L59">        return customerDto;</span>
+    }
+
+    @Override
+    public CustomersResponseDto pagedCustomersToGetCustomersResponseDto(Integer pageNumber, List&lt;CustomerView&gt; elements, Integer totalPages, Long totalElements) {
+<span class="pc bpc" id="L64" title="7 of 8 branches missed.">        if ( pageNumber == null &amp;&amp; elements == null &amp;&amp; totalPages == null &amp;&amp; totalElements == null ) {</span>
+<span class="nc" id="L65">            return null;</span>
+        }
+
+<span class="fc" id="L68">        CustomersResponseDto customersResponseDto = new CustomersResponseDto();</span>
+
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if ( pageNumber != null ) {</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">            if ( customersResponseDto.getPageInfo() == null ) {</span>
+<span class="fc" id="L72">                customersResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L74">            integerToPageInfoDto( pageNumber, customersResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if ( elements != null ) {</span>
+<span class="fc" id="L77">            customersResponseDto.setCustomers( customerViewListToCustomerDtoList( elements ) );</span>
+        }
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if ( totalPages != null ) {</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">            if ( customersResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L81">                customersResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L83">            integerToPageInfoDto1( totalPages, customersResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if ( totalElements != null ) {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">            if ( customersResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L87">                customersResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L89">            longToPageInfoDto( totalElements, customersResponseDto.getPageInfo() );</span>
+        }
+
+<span class="fc" id="L92">        return customersResponseDto;</span>
+    }
+
+    @Override
+    public CustomerDto customerToCustomerDto(Customer customer) {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if ( customer == null ) {</span>
+<span class="nc" id="L98">            return null;</span>
+        }
+
+<span class="nc" id="L101">        CustomerDto customerDto = new CustomerDto();</span>
+
+<span class="nc" id="L103">        customerDto.setNativeStatus( customerStatusToCustomerNativeStatusDto( customerStatusLocalStatus( customer ) ) );</span>
+<span class="nc" id="L104">        customerDto.setState( customerStateToCustomerStateDto( customer.getState() ) );</span>
+<span class="nc" id="L105">        customerDto.setAddress( customer.getFormattedAddress() );</span>
+<span class="nc" id="L106">        customerDto.setCompanyName( customer.getFormattedCompanyName() );</span>
+<span class="nc" id="L107">        customerDto.setRejectionReason( rejectionReasonToRejectionReasonDto( customerStatusRejectionReason( customer ) ) );</span>
+<span class="nc" id="L108">        customerDto.setSourceSystem( sourceSystemMapper.mapSourceSystemNameToDto( customer.getSource() ) );</span>
+<span class="nc" id="L109">        customerDto.setId( customer.getId() );</span>
+<span class="nc" id="L110">        customerDto.setErpId( customer.getErpId() );</span>
+<span class="nc" id="L111">        customerDto.setType( customerTypeToCustomerTypeDto( customer.getType() ) );</span>
+<span class="nc" id="L112">        customerDto.setNativeCreatedDate( customer.getNativeCreatedDate() );</span>
+
+<span class="nc" id="L114">        return customerDto;</span>
+    }
+
+    @Override
+    public CustomerLookupDto customerLookupViewToDto(CustomerLookupView customerLookupView) {
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if ( customerLookupView == null ) {</span>
+<span class="nc" id="L120">            return null;</span>
+        }
+
+<span class="fc" id="L123">        CustomerLookupDto customerLookupDto = new CustomerLookupDto();</span>
+
+<span class="fc" id="L125">        customerLookupDto.setErpId( customerLookupView.getId() );</span>
+<span class="fc" id="L126">        customerLookupDto.setType( dictionariesMapper.accountTypeToCustomerTypeDto( customerLookupView.getAccountType() ) );</span>
+<span class="fc" id="L127">        customerLookupDto.setName1( customerLookupView.getName1() );</span>
+<span class="fc" id="L128">        customerLookupDto.setName2( customerLookupView.getName2() );</span>
+<span class="fc" id="L129">        customerLookupDto.setName3( customerLookupView.getName3() );</span>
+<span class="fc" id="L130">        customerLookupDto.setName4( customerLookupView.getName4() );</span>
+<span class="fc" id="L131">        customerLookupDto.setTitle( customerLookupView.getTitle() );</span>
+<span class="fc" id="L132">        customerLookupDto.setStreetAddress( customerLookupView.getStreetAddress() );</span>
+<span class="fc" id="L133">        customerLookupDto.setPostalCode( customerLookupView.getPostalCode() );</span>
+<span class="fc" id="L134">        customerLookupDto.setCountryCode( customerLookupView.getCountryCode() );</span>
+<span class="fc" id="L135">        customerLookupDto.setCity( customerLookupView.getCity() );</span>
+<span class="fc" id="L136">        customerLookupDto.setContactDetails( contactDetailsToCustomerContactDetailsDto( customerLookupView.getContactDetails() ) );</span>
+
+<span class="fc" id="L138">        return customerLookupDto;</span>
+    }
+
+    @Override
+    public CustomerLookupResponseDto customerLookupViewToResponseDto(CustomerLookupView customerLookupView) {
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if ( customerLookupView == null ) {</span>
+<span class="nc" id="L144">            return null;</span>
+        }
+
+<span class="fc" id="L147">        CustomerLookupResponseDto customerLookupResponseDto = new CustomerLookupResponseDto();</span>
+
+<span class="fc" id="L149">        customerLookupResponseDto.setCustomerLookup( customerLookupViewToDto( customerLookupView ) );</span>
+
+<span class="fc" id="L151">        return customerLookupResponseDto;</span>
+    }
+
+    protected CustomerNativeStatusDto customerStatusToCustomerNativeStatusDto(CustomerStatus customerStatus) {
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if ( customerStatus == null ) {</span>
+<span class="nc" id="L156">            return null;</span>
+        }
+
+        CustomerNativeStatusDto customerNativeStatusDto;
+
+<span class="pc bpc" id="L161" title="3 of 4 branches missed.">        switch ( customerStatus ) {</span>
+<span class="fc" id="L162">            case IN_REVIEW: customerNativeStatusDto = CustomerNativeStatusDto.IN_REVIEW;</span>
+<span class="fc" id="L163">            break;</span>
+<span class="nc" id="L164">            case VALIDATED: customerNativeStatusDto = CustomerNativeStatusDto.VALIDATED;</span>
+<span class="nc" id="L165">            break;</span>
+<span class="nc" id="L166">            case BLOCKED: customerNativeStatusDto = CustomerNativeStatusDto.BLOCKED;</span>
+<span class="nc" id="L167">            break;</span>
+<span class="nc" id="L168">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + customerStatus );</span>
+        }
+
+<span class="fc" id="L171">        return customerNativeStatusDto;</span>
+    }
+
+    protected CustomerTypeDto customerTypeToCustomerTypeDto(CustomerType customerType) {
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if ( customerType == null ) {</span>
+<span class="nc" id="L176">            return null;</span>
+        }
+
+        CustomerTypeDto customerTypeDto;
+
+<span class="pc bpc" id="L181" title="3 of 4 branches missed.">        switch ( customerType ) {</span>
+<span class="fc" id="L182">            case DELIVERY: customerTypeDto = CustomerTypeDto.DELIVERY;</span>
+<span class="fc" id="L183">            break;</span>
+<span class="nc" id="L184">            case VET_PRACTICE: customerTypeDto = CustomerTypeDto.VET_PRACTICE;</span>
+<span class="nc" id="L185">            break;</span>
+<span class="nc" id="L186">            case OTHER: customerTypeDto = CustomerTypeDto.OTHER;</span>
+<span class="nc" id="L187">            break;</span>
+<span class="nc" id="L188">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + customerType );</span>
+        }
+
+<span class="fc" id="L191">        return customerTypeDto;</span>
+    }
+
+    protected CustomerStateDto customerStateToCustomerStateDto(CustomerState customerState) {
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if ( customerState == null ) {</span>
+<span class="nc" id="L196">            return null;</span>
+        }
+
+        CustomerStateDto customerStateDto;
+
+<span class="pc bpc" id="L201" title="2 of 3 branches missed.">        switch ( customerState ) {</span>
+<span class="fc" id="L202">            case ACTIVE: customerStateDto = CustomerStateDto.ACTIVE;</span>
+<span class="fc" id="L203">            break;</span>
+<span class="nc" id="L204">            case DELETED: customerStateDto = CustomerStateDto.DELETED;</span>
+<span class="nc" id="L205">            break;</span>
+<span class="nc" id="L206">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + customerState );</span>
+        }
+
+<span class="fc" id="L209">        return customerStateDto;</span>
+    }
+
+    protected RejectionReasonDto rejectionReasonToRejectionReasonDto(RejectionReason rejectionReason) {
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if ( rejectionReason == null ) {</span>
+<span class="nc" id="L214">            return null;</span>
+        }
+
+        RejectionReasonDto rejectionReasonDto;
+
+<span class="pc bpc" id="L219" title="4 of 5 branches missed.">        switch ( rejectionReason ) {</span>
+<span class="fc" id="L220">            case ADDRESS: rejectionReasonDto = RejectionReasonDto.ADDRESS;</span>
+<span class="fc" id="L221">            break;</span>
+<span class="nc" id="L222">            case NAME: rejectionReasonDto = RejectionReasonDto.NAME;</span>
+<span class="nc" id="L223">            break;</span>
+<span class="nc" id="L224">            case OTHER: rejectionReasonDto = RejectionReasonDto.OTHER;</span>
+<span class="nc" id="L225">            break;</span>
+<span class="nc" id="L226">            case REFERENCE: rejectionReasonDto = RejectionReasonDto.REFERENCE;</span>
+<span class="nc" id="L227">            break;</span>
+<span class="nc" id="L228">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + rejectionReason );</span>
+        }
+
+<span class="fc" id="L231">        return rejectionReasonDto;</span>
+    }
+
+    protected void integerToPageInfoDto(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L236">            return;</span>
+        }
+
+<span class="fc" id="L239">        mappingTarget.setPageNumber( integer );</span>
+<span class="fc" id="L240">    }</span>
+
+    protected void longToPageInfoDto(Long long1, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">        if ( long1 == null ) {</span>
+<span class="nc" id="L244">            return;</span>
+        }
+
+<span class="fc" id="L247">        mappingTarget.setTotalElements( long1 );</span>
+<span class="fc" id="L248">    }</span>
+
+    protected void integerToPageInfoDto1(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L252">            return;</span>
+        }
+
+<span class="fc" id="L255">        mappingTarget.setTotalPages( integer );</span>
+<span class="fc" id="L256">    }</span>
+
+    protected List&lt;CustomerDto&gt; customerViewListToCustomerDtoList(List&lt;CustomerView&gt; list) {
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L260">            return null;</span>
+        }
+
+<span class="fc" id="L263">        List&lt;CustomerDto&gt; list1 = new ArrayList&lt;CustomerDto&gt;( list.size() );</span>
+<span class="fc bfc" id="L264" title="All 2 branches covered.">        for ( CustomerView customerView : list ) {</span>
+<span class="fc" id="L265">            list1.add( customerViewToCustomerDto( customerView ) );</span>
+<span class="fc" id="L266">        }</span>
+
+<span class="fc" id="L268">        return list1;</span>
+    }
+
+    private CustomerStatus customerStatusLocalStatus(Customer customer) {
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        if ( customer == null ) {</span>
+<span class="nc" id="L273">            return null;</span>
+        }
+<span class="nc" id="L275">        com.zoetis.zdms.model.CustomerStatus status = customer.getStatus();</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        if ( status == null ) {</span>
+<span class="nc" id="L277">            return null;</span>
+        }
+<span class="nc" id="L279">        CustomerStatus localStatus = status.getLocalStatus();</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        if ( localStatus == null ) {</span>
+<span class="nc" id="L281">            return null;</span>
+        }
+<span class="nc" id="L283">        return localStatus;</span>
+    }
+
+    private RejectionReason customerStatusRejectionReason(Customer customer) {
+<span class="nc bnc" id="L287" title="All 2 branches missed.">        if ( customer == null ) {</span>
+<span class="nc" id="L288">            return null;</span>
+        }
+<span class="nc" id="L290">        com.zoetis.zdms.model.CustomerStatus status = customer.getStatus();</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        if ( status == null ) {</span>
+<span class="nc" id="L292">            return null;</span>
+        }
+<span class="nc" id="L294">        RejectionReason rejectionReason = status.getRejectionReason();</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">        if ( rejectionReason == null ) {</span>
+<span class="nc" id="L296">            return null;</span>
+        }
+<span class="nc" id="L298">        return rejectionReason;</span>
+    }
+
+    protected CustomerContactDetailsDto contactDetailsToCustomerContactDetailsDto(ContactDetails contactDetails) {
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">        if ( contactDetails == null ) {</span>
+<span class="nc" id="L303">            return null;</span>
+        }
+
+<span class="fc" id="L306">        CustomerContactDetailsDto customerContactDetailsDto = new CustomerContactDetailsDto();</span>
+
+<span class="fc" id="L308">        customerContactDetailsDto.setEmail( contactDetails.getEmail() );</span>
+<span class="fc" id="L309">        customerContactDetailsDto.setPhoneNumber( contactDetails.getPhoneNumber() );</span>
+<span class="fc" id="L310">        customerContactDetailsDto.setSearchTerms( contactDetails.getSearchTerms() );</span>
+
+<span class="fc" id="L312">        return customerContactDetailsDto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

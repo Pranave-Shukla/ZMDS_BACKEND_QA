@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Formula;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+
+@Entity
+@Table(name = &quot;ZMDS_CUSTOMER_IN&quot;, schema = &quot;ZMDS_ODS&quot;)
+<span class="nc bnc" id="L15" title="All 126 branches missed.">@Data</span>
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+<span class="fc" id="L18">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L19">@NoArgsConstructor</span>
+public class Customer implements Serializable {
+
+    @Id
+    @Column(name = &quot;ID&quot;, insertable = false, updatable = false)
+<span class="nc" id="L24">    private String id;</span>
+
+    @Column(name = &quot;TITLE&quot;, insertable = false, updatable = false)
+<span class="nc" id="L27">    private String title;</span>
+
+    @Column(name = &quot;FIRST_NAME&quot;, insertable = false, updatable = false)
+<span class="nc" id="L30">    private String firstName;</span>
+
+    @Column(name = &quot;LAST_NAME&quot;, insertable = false, updatable = false)
+<span class="nc" id="L33">    private String lastName;</span>
+
+    @OneToOne(mappedBy = &quot;customer&quot;, cascade = CascadeType.ALL)
+<span class="nc" id="L36">    private CustomerStatus status;</span>
+
+    @Column(name = &quot;STATE_NATIVE&quot;, insertable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
+<span class="nc" id="L40">    private com.zoetis.zdms.model.dictionary.CustomerState state;</span>
+
+    @Column(name = &quot;CUSTOMER_ERP_ID&quot;, insertable = false, updatable = false)
+<span class="nc" id="L43">    private String erpId;</span>
+
+    @Column(name = &quot;CUSTOMER_NATIVE_ID&quot;, insertable = false, updatable = false)
+<span class="nc" id="L46">    private String nativeId;</span>
+
+    @Column(name = &quot;CUSTOMER_TYPE&quot;, insertable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
+<span class="nc" id="L50">    private com.zoetis.zdms.model.dictionary.CustomerType type;</span>
+
+    @Column(name = &quot;COMPANY_NAME&quot;, insertable = false, updatable = false)
+<span class="nc" id="L53">    private String companyName;</span>
+
+    @Formula(&quot;COMPANY_NAME || ' ' || TITLE || ' ' || FIRST_NAME || ' ' || LAST_NAME&quot;)
+<span class="nc" id="L56">    private String formattedCompanyName;</span>
+
+    @Embedded
+    @AttributeOverride(name = &quot;countryCode&quot;, column = @Column(name = &quot;COUNTRY_CODE&quot;, insertable = false, updatable = false))
+    @AttributeOverride(name = &quot;city&quot;, column = @Column(name = &quot;CITY&quot;, insertable = false, updatable = false))
+    @AttributeOverride(name = &quot;postalCode&quot;, column = @Column(name = &quot;POSTAL_CODE&quot;, insertable = false, updatable = false))
+    @AttributeOverride(name = &quot;street&quot;, column = @Column(name = &quot;STREET&quot;, insertable = false, updatable = false))
+    @AttributeOverride(name = &quot;streetNumber&quot;, column = @Column(name = &quot;STREET_NUMBER&quot;, insertable = false, updatable = false))
+<span class="nc" id="L64">    private Address address;</span>
+
+    @Formula(&quot;STREET || ' ' || STREET_NUMBER || ' ' || CITY || ' ' || POSTAL_CODE&quot;)
+<span class="nc" id="L67">    private String formattedAddress;</span>
+
+    @Column(name = &quot;SOURCE&quot;, insertable = false, updatable = false)
+<span class="nc" id="L70">    private String source;</span>
+
+    @Column(name = &quot;DATE_CREATED_NATIVE&quot;, insertable = false, updatable = false)
+<span class="nc" id="L73">    private OffsetDateTime nativeCreatedDate;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

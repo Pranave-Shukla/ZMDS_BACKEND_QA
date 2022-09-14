@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">ProductMapperImpl.java</span></div><h1>ProductMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.BooleanValueDto;
+import com.zoetis.zdms.api.dto.PageInfoDto;
+import com.zoetis.zdms.api.dto.ProductAvailabilityDto;
+import com.zoetis.zdms.api.dto.ProductDetailsDto;
+import com.zoetis.zdms.api.dto.ProductDetailsResponseDto;
+import com.zoetis.zdms.api.dto.ProductDto;
+import com.zoetis.zdms.api.dto.ProductsResponseDto;
+import com.zoetis.zdms.model.Product;
+import com.zoetis.zdms.model.ProductMediaFile;
+import com.zoetis.zdms.model.ProductStatus;
+import com.zoetis.zdms.model.dictionary.Availability;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import com.zoetis.zdms.model.view.ProductView;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L28">public class ProductMapperImpl implements ProductMapper {</span>
+
+    @Autowired
+    private SourceSystemMapper sourceSystemMapper;
+
+    @Override
+    public ProductsResponseDto pagedProductViewsToProductsResponseDto(Integer pageNumber, List&lt;ProductView&gt; elements, Integer totalPages, Long totalElements) {
+<span class="pc bpc" id="L35" title="7 of 8 branches missed.">        if ( pageNumber == null &amp;&amp; elements == null &amp;&amp; totalPages == null &amp;&amp; totalElements == null ) {</span>
+<span class="nc" id="L36">            return null;</span>
+        }
+
+<span class="fc" id="L39">        ProductsResponseDto productsResponseDto = new ProductsResponseDto();</span>
+
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if ( pageNumber != null ) {</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">            if ( productsResponseDto.getPageInfo() == null ) {</span>
+<span class="fc" id="L43">                productsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L45">            integerToPageInfoDto( pageNumber, productsResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if ( elements != null ) {</span>
+<span class="fc" id="L48">            productsResponseDto.setProducts( productViewListToProductDtoList( elements ) );</span>
+        }
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if ( totalPages != null ) {</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">            if ( productsResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L52">                productsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L54">            integerToPageInfoDto1( totalPages, productsResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if ( totalElements != null ) {</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">            if ( productsResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L58">                productsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L60">            longToPageInfoDto( totalElements, productsResponseDto.getPageInfo() );</span>
+        }
+
+<span class="fc" id="L63">        return productsResponseDto;</span>
+    }
+
+    @Override
+    public ProductDto productViewToProductDto(ProductView productView) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if ( productView == null ) {</span>
+<span class="nc" id="L69">            return null;</span>
+        }
+
+<span class="fc" id="L72">        ProductDto productDto = new ProductDto();</span>
+
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if ( productView.getProductId() != null ) {</span>
+<span class="fc" id="L75">            productDto.setId( String.valueOf( productView.getProductId() ) );</span>
+        }
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if ( productView.getStatusId() != null ) {</span>
+<span class="fc" id="L78">            productDto.setStatusId( String.valueOf( productView.getStatusId() ) );</span>
+        }
+<span class="fc" id="L80">        productDto.setSourceSystem( sourceSystemMapper.mapSourceSystemNameToDto( productView.getSource() ) );</span>
+<span class="fc" id="L81">        productDto.setIsVisible( booleanValueToBooleanValueDto( productView.getIsVisible() ) );</span>
+<span class="fc" id="L82">        productDto.setAvailability( availabilityToProductAvailabilityDto( productView.getAvailability() ) );</span>
+<span class="fc" id="L83">        productDto.setDescription( productView.getDescription() );</span>
+<span class="fc" id="L84">        productDto.setMinimumOrderQuantity( productView.getMinimumOrderQuantity() );</span>
+<span class="fc" id="L85">        productDto.setMaximumOrderQuantity( productView.getMaximumOrderQuantity() );</span>
+<span class="fc" id="L86">        productDto.setHasMedia( booleanValueToBooleanValueDto( productView.getHasMedia() ) );</span>
+
+<span class="fc" id="L88">        return productDto;</span>
+    }
+
+    @Override
+    public ProductDetailsResponseDto productAndStatusAndMediaFileAndApiMediaFilepathToDto(Product product, ProductStatus productStatus, ProductMediaFile productMediaFile, String apiMediaFilepath) {
+<span class="nc bnc" id="L93" title="All 8 branches missed.">        if ( product == null &amp;&amp; productStatus == null &amp;&amp; productMediaFile == null &amp;&amp; apiMediaFilepath == null ) {</span>
+<span class="nc" id="L94">            return null;</span>
+        }
+
+<span class="nc" id="L97">        ProductDetailsResponseDto productDetailsResponseDto = new ProductDetailsResponseDto();</span>
+
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if ( product != null ) {</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L101">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L103">            productToProductDetailsDto( product, productDetailsResponseDto.getProduct() );</span>
+        }
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if ( productStatus != null ) {</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L107">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L109">            productStatusToProductDetailsDto( productStatus, productDetailsResponseDto.getProduct() );</span>
+        }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if ( productMediaFile != null ) {</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L113">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L115">            productMediaFileToProductDetailsDto( productMediaFile, productDetailsResponseDto.getProduct() );</span>
+        }
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if ( apiMediaFilepath != null ) {</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L119">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L121">            stringToProductDetailsDto( apiMediaFilepath, productDetailsResponseDto.getProduct() );</span>
+        }
+
+<span class="nc" id="L124">        addProductNameAndDescription( productDetailsResponseDto, product );</span>
+
+<span class="nc" id="L126">        return productDetailsResponseDto;</span>
+    }
+
+    @Override
+    public ProductDetailsResponseDto productAndStatusToDto(Product product, ProductStatus productStatus) {
+<span class="nc bnc" id="L131" title="All 4 branches missed.">        if ( product == null &amp;&amp; productStatus == null ) {</span>
+<span class="nc" id="L132">            return null;</span>
+        }
+
+<span class="nc" id="L135">        ProductDetailsResponseDto productDetailsResponseDto = new ProductDetailsResponseDto();</span>
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if ( product != null ) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L139">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L141">            productToProductDetailsDto1( product, productDetailsResponseDto.getProduct() );</span>
+        }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if ( productStatus != null ) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            if ( productDetailsResponseDto.getProduct() == null ) {</span>
+<span class="nc" id="L145">                productDetailsResponseDto.setProduct( new ProductDetailsDto() );</span>
+            }
+<span class="nc" id="L147">            productStatusToProductDetailsDto1( productStatus, productDetailsResponseDto.getProduct() );</span>
+        }
+
+<span class="nc" id="L150">        addProductNameAndDescription( productDetailsResponseDto, product );</span>
+
+<span class="nc" id="L152">        return productDetailsResponseDto;</span>
+    }
+
+    protected void integerToPageInfoDto(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L157">            return;</span>
+        }
+
+<span class="fc" id="L160">        mappingTarget.setPageNumber( integer );</span>
+<span class="fc" id="L161">    }</span>
+
+    protected void longToPageInfoDto(Long long1, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if ( long1 == null ) {</span>
+<span class="nc" id="L165">            return;</span>
+        }
+
+<span class="fc" id="L168">        mappingTarget.setTotalElements( long1 );</span>
+<span class="fc" id="L169">    }</span>
+
+    protected void integerToPageInfoDto1(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L173">            return;</span>
+        }
+
+<span class="fc" id="L176">        mappingTarget.setTotalPages( integer );</span>
+<span class="fc" id="L177">    }</span>
+
+    protected List&lt;ProductDto&gt; productViewListToProductDtoList(List&lt;ProductView&gt; list) {
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L181">            return null;</span>
+        }
+
+<span class="fc" id="L184">        List&lt;ProductDto&gt; list1 = new ArrayList&lt;ProductDto&gt;( list.size() );</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        for ( ProductView productView : list ) {</span>
+<span class="fc" id="L186">            list1.add( productViewToProductDto( productView ) );</span>
+<span class="fc" id="L187">        }</span>
+
+<span class="fc" id="L189">        return list1;</span>
+    }
+
+    protected BooleanValueDto booleanValueToBooleanValueDto(BooleanValue booleanValue) {
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if ( booleanValue == null ) {</span>
+<span class="nc" id="L194">            return null;</span>
+        }
+
+        BooleanValueDto booleanValueDto;
+
+<span class="pc bpc" id="L199" title="1 of 3 branches missed.">        switch ( booleanValue ) {</span>
+<span class="fc" id="L200">            case TRUE: booleanValueDto = BooleanValueDto.TRUE;</span>
+<span class="fc" id="L201">            break;</span>
+<span class="fc" id="L202">            case FALSE: booleanValueDto = BooleanValueDto.FALSE;</span>
+<span class="fc" id="L203">            break;</span>
+<span class="nc" id="L204">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + booleanValue );</span>
+        }
+
+<span class="fc" id="L207">        return booleanValueDto;</span>
+    }
+
+    protected ProductAvailabilityDto availabilityToProductAvailabilityDto(Availability availability) {
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if ( availability == null ) {</span>
+<span class="nc" id="L212">            return null;</span>
+        }
+
+        ProductAvailabilityDto productAvailabilityDto;
+
+<span class="pc bpc" id="L217" title="5 of 6 branches missed.">        switch ( availability ) {</span>
+<span class="fc" id="L218">            case AVAILABLE: productAvailabilityDto = ProductAvailabilityDto.AVAILABLE;</span>
+<span class="fc" id="L219">            break;</span>
+<span class="nc" id="L220">            case NOT_AVAILABLE: productAvailabilityDto = ProductAvailabilityDto.NOT_AVAILABLE;</span>
+<span class="nc" id="L221">            break;</span>
+<span class="nc" id="L222">            case SHORT_TERM_NOT_AVAILABLE: productAvailabilityDto = ProductAvailabilityDto.SHORT_TERM_NOT_AVAILABLE;</span>
+<span class="nc" id="L223">            break;</span>
+<span class="nc" id="L224">            case MEDIUM_TERM_NOT_AVAILABLE: productAvailabilityDto = ProductAvailabilityDto.MEDIUM_TERM_NOT_AVAILABLE;</span>
+<span class="nc" id="L225">            break;</span>
+<span class="nc" id="L226">            case LONG_TERM_NOT_AVAILABLE: productAvailabilityDto = ProductAvailabilityDto.LONG_TERM_NOT_AVAILABLE;</span>
+<span class="nc" id="L227">            break;</span>
+<span class="nc" id="L228">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + availability );</span>
+        }
+
+<span class="fc" id="L231">        return productAvailabilityDto;</span>
+    }
+
+    protected void productToProductDetailsDto(Product product, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        if ( product == null ) {</span>
+<span class="nc" id="L236">            return;</span>
+        }
+
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        if ( product.getId() != null ) {</span>
+<span class="nc" id="L240">            mappingTarget.setId( String.valueOf( product.getId() ) );</span>
+        }
+        else {
+<span class="nc" id="L243">            mappingTarget.setId( null );</span>
+        }
+<span class="nc" id="L245">        mappingTarget.setPrice( product.getPrice() );</span>
+<span class="nc" id="L246">    }</span>
+
+    protected void productStatusToProductDetailsDto(ProductStatus productStatus, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        if ( productStatus == null ) {</span>
+<span class="nc" id="L250">            return;</span>
+        }
+
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if ( productStatus.getId() != null ) {</span>
+<span class="nc" id="L254">            mappingTarget.setStatusId( String.valueOf( productStatus.getId() ) );</span>
+        }
+        else {
+<span class="nc" id="L257">            mappingTarget.setStatusId( null );</span>
+        }
+<span class="nc" id="L259">        mappingTarget.setIsVisible( booleanValueToBooleanValueDto( productStatus.getIsVisible() ) );</span>
+<span class="nc" id="L260">        mappingTarget.setAvailability( availabilityToProductAvailabilityDto( productStatus.getAvailability() ) );</span>
+<span class="nc" id="L261">        mappingTarget.setMinimumOrderQuantity( productStatus.getMinimumOrderQuantity() );</span>
+<span class="nc" id="L262">        mappingTarget.setMaximumOrderQuantity( productStatus.getMaximumOrderQuantity() );</span>
+<span class="nc" id="L263">        mappingTarget.setAssociatedProducts( productStatus.getAssociatedProducts() );</span>
+<span class="nc" id="L264">        mappingTarget.setSourceSystem( sourceSystemMapper.mapSourceSystemToDto( productStatus.getSourceSystem() ) );</span>
+<span class="nc" id="L265">    }</span>
+
+    protected void productMediaFileToProductDetailsDto(ProductMediaFile productMediaFile, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L268" title="All 2 branches missed.">        if ( productMediaFile == null ) {</span>
+<span class="nc" id="L269">            return;</span>
+        }
+
+<span class="nc" id="L272">        mappingTarget.setImageFilename( productMediaFile.getName() );</span>
+<span class="nc" id="L273">        mappingTarget.setImageUploadDate( productMediaFile.getUpdatedDate() );</span>
+<span class="nc" id="L274">    }</span>
+
+    protected void stringToProductDetailsDto(String string, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        if ( string == null ) {</span>
+<span class="nc" id="L278">            return;</span>
+        }
+
+<span class="nc" id="L281">        mappingTarget.setImageFilepath( string );</span>
+<span class="nc" id="L282">    }</span>
+
+    protected void productToProductDetailsDto1(Product product, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        if ( product == null ) {</span>
+<span class="nc" id="L286">            return;</span>
+        }
+
+<span class="nc bnc" id="L289" title="All 2 branches missed.">        if ( product.getId() != null ) {</span>
+<span class="nc" id="L290">            mappingTarget.setId( String.valueOf( product.getId() ) );</span>
+        }
+        else {
+<span class="nc" id="L293">            mappingTarget.setId( null );</span>
+        }
+<span class="nc" id="L295">        mappingTarget.setPrice( product.getPrice() );</span>
+<span class="nc" id="L296">    }</span>
+
+    protected void productStatusToProductDetailsDto1(ProductStatus productStatus, ProductDetailsDto mappingTarget) {
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        if ( productStatus == null ) {</span>
+<span class="nc" id="L300">            return;</span>
+        }
+
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        if ( productStatus.getId() != null ) {</span>
+<span class="nc" id="L304">            mappingTarget.setStatusId( String.valueOf( productStatus.getId() ) );</span>
+        }
+        else {
+<span class="nc" id="L307">            mappingTarget.setStatusId( null );</span>
+        }
+<span class="nc" id="L309">        mappingTarget.setIsVisible( booleanValueToBooleanValueDto( productStatus.getIsVisible() ) );</span>
+<span class="nc" id="L310">        mappingTarget.setAvailability( availabilityToProductAvailabilityDto( productStatus.getAvailability() ) );</span>
+<span class="nc" id="L311">        mappingTarget.setMinimumOrderQuantity( productStatus.getMinimumOrderQuantity() );</span>
+<span class="nc" id="L312">        mappingTarget.setMaximumOrderQuantity( productStatus.getMaximumOrderQuantity() );</span>
+<span class="nc" id="L313">        mappingTarget.setAssociatedProducts( productStatus.getAssociatedProducts() );</span>
+<span class="nc" id="L314">        mappingTarget.setSourceSystem( sourceSystemMapper.mapSourceSystemToDto( productStatus.getSourceSystem() ) );</span>
+<span class="nc" id="L315">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

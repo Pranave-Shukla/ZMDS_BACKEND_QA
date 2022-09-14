@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductPartialDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">ProductPartialDto.java</span></div><h1>ProductPartialDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.NullableBooleanValueDto;
+import com.zoetis.zdms.api.dto.NullableProductAvailabilityDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * ProductPartialDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="fc" id="L25">public class ProductPartialDto   {</span>
+<span class="fc" id="L26">  @JsonProperty(&quot;isVisible&quot;)</span>
+<span class="fc" id="L27">  private JsonNullable&lt;NullableBooleanValueDto&gt; isVisible = JsonNullable.undefined();</span>
+
+<span class="fc" id="L29">  @JsonProperty(&quot;availability&quot;)</span>
+<span class="fc" id="L30">  private JsonNullable&lt;NullableProductAvailabilityDto&gt; availability = JsonNullable.undefined();</span>
+
+<span class="fc" id="L32">  @JsonProperty(&quot;minimumOrderQuantity&quot;)</span>
+<span class="fc" id="L33">  private JsonNullable&lt;Integer&gt; minimumOrderQuantity = JsonNullable.undefined();</span>
+
+<span class="fc" id="L35">  @JsonProperty(&quot;maximumOrderQuantity&quot;)</span>
+<span class="fc" id="L36">  private JsonNullable&lt;Integer&gt; maximumOrderQuantity = JsonNullable.undefined();</span>
+
+<span class="fc" id="L38">  @JsonProperty(&quot;associatedProducts&quot;)</span>
+<span class="fc" id="L39">  private JsonNullable&lt;String&gt; associatedProducts = JsonNullable.undefined();</span>
+
+<span class="fc" id="L41">  @JsonProperty(&quot;image&quot;)</span>
+<span class="fc" id="L42">  private JsonNullable&lt;String&gt; image = JsonNullable.undefined();</span>
+
+<span class="fc" id="L44">  @JsonProperty(&quot;imageFilename&quot;)</span>
+<span class="fc" id="L45">  private JsonNullable&lt;String&gt; imageFilename = JsonNullable.undefined();</span>
+
+  public ProductPartialDto isVisible(NullableBooleanValueDto isVisible) {
+<span class="nc" id="L48">    this.isVisible = JsonNullable.of(isVisible);</span>
+<span class="nc" id="L49">    return this;</span>
+  }
+
+  /**
+   * Get isVisible
+   * @return isVisible
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public JsonNullable&lt;NullableBooleanValueDto&gt; getIsVisible() {
+<span class="fc" id="L61">    return isVisible;</span>
+  }
+
+  public void setIsVisible(JsonNullable&lt;NullableBooleanValueDto&gt; isVisible) {
+<span class="fc" id="L65">    this.isVisible = isVisible;</span>
+<span class="fc" id="L66">  }</span>
+
+  public ProductPartialDto availability(NullableProductAvailabilityDto availability) {
+<span class="nc" id="L69">    this.availability = JsonNullable.of(availability);</span>
+<span class="nc" id="L70">    return this;</span>
+  }
+
+  /**
+   * Get availability
+   * @return availability
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public JsonNullable&lt;NullableProductAvailabilityDto&gt; getAvailability() {
+<span class="fc" id="L82">    return availability;</span>
+  }
+
+  public void setAvailability(JsonNullable&lt;NullableProductAvailabilityDto&gt; availability) {
+<span class="fc" id="L86">    this.availability = availability;</span>
+<span class="fc" id="L87">  }</span>
+
+  public ProductPartialDto minimumOrderQuantity(Integer minimumOrderQuantity) {
+<span class="nc" id="L90">    this.minimumOrderQuantity = JsonNullable.of(minimumOrderQuantity);</span>
+<span class="nc" id="L91">    return this;</span>
+  }
+
+  /**
+   * Get minimumOrderQuantity
+   * @return minimumOrderQuantity
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public JsonNullable&lt;Integer&gt; getMinimumOrderQuantity() {
+<span class="fc" id="L102">    return minimumOrderQuantity;</span>
+  }
+
+  public void setMinimumOrderQuantity(JsonNullable&lt;Integer&gt; minimumOrderQuantity) {
+<span class="fc" id="L106">    this.minimumOrderQuantity = minimumOrderQuantity;</span>
+<span class="fc" id="L107">  }</span>
+
+  public ProductPartialDto maximumOrderQuantity(Integer maximumOrderQuantity) {
+<span class="nc" id="L110">    this.maximumOrderQuantity = JsonNullable.of(maximumOrderQuantity);</span>
+<span class="nc" id="L111">    return this;</span>
+  }
+
+  /**
+   * Get maximumOrderQuantity
+   * @return maximumOrderQuantity
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public JsonNullable&lt;Integer&gt; getMaximumOrderQuantity() {
+<span class="fc" id="L122">    return maximumOrderQuantity;</span>
+  }
+
+  public void setMaximumOrderQuantity(JsonNullable&lt;Integer&gt; maximumOrderQuantity) {
+<span class="fc" id="L126">    this.maximumOrderQuantity = maximumOrderQuantity;</span>
+<span class="fc" id="L127">  }</span>
+
+  public ProductPartialDto associatedProducts(String associatedProducts) {
+<span class="nc" id="L130">    this.associatedProducts = JsonNullable.of(associatedProducts);</span>
+<span class="nc" id="L131">    return this;</span>
+  }
+
+  /**
+   * Get associatedProducts
+   * @return associatedProducts
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public JsonNullable&lt;String&gt; getAssociatedProducts() {
+<span class="fc" id="L142">    return associatedProducts;</span>
+  }
+
+  public void setAssociatedProducts(JsonNullable&lt;String&gt; associatedProducts) {
+<span class="nc" id="L146">    this.associatedProducts = associatedProducts;</span>
+<span class="nc" id="L147">  }</span>
+
+  public ProductPartialDto image(String image) {
+<span class="nc" id="L150">    this.image = JsonNullable.of(image);</span>
+<span class="nc" id="L151">    return this;</span>
+  }
+
+  /**
+   * Get image
+   * @return image
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public JsonNullable&lt;String&gt; getImage() {
+<span class="fc" id="L162">    return image;</span>
+  }
+
+  public void setImage(JsonNullable&lt;String&gt; image) {
+<span class="nc" id="L166">    this.image = image;</span>
+<span class="nc" id="L167">  }</span>
+
+  public ProductPartialDto imageFilename(String imageFilename) {
+<span class="nc" id="L170">    this.imageFilename = JsonNullable.of(imageFilename);</span>
+<span class="nc" id="L171">    return this;</span>
+  }
+
+  /**
+   * Get imageFilename
+   * @return imageFilename
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public JsonNullable&lt;String&gt; getImageFilename() {
+<span class="fc" id="L182">    return imageFilename;</span>
+  }
+
+  public void setImageFilename(JsonNullable&lt;String&gt; imageFilename) {
+<span class="nc" id="L186">    this.imageFilename = imageFilename;</span>
+<span class="nc" id="L187">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L192" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L193">      return true;</span>
+    }
+<span class="nc bnc" id="L195" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L196">      return false;</span>
+    }
+<span class="nc" id="L198">    ProductPartialDto productPartial = (ProductPartialDto) o;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">    return Objects.equals(this.isVisible, productPartial.isVisible) &amp;&amp;</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        Objects.equals(this.availability, productPartial.availability) &amp;&amp;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        Objects.equals(this.minimumOrderQuantity, productPartial.minimumOrderQuantity) &amp;&amp;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        Objects.equals(this.maximumOrderQuantity, productPartial.maximumOrderQuantity) &amp;&amp;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        Objects.equals(this.associatedProducts, productPartial.associatedProducts) &amp;&amp;</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        Objects.equals(this.image, productPartial.image) &amp;&amp;</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        Objects.equals(this.imageFilename, productPartial.imageFilename);</span>
+  }
+
+  private static &lt;T&gt; boolean equalsNullable(JsonNullable&lt;T&gt; a, JsonNullable&lt;T&gt; b) {
+<span class="nc bnc" id="L209" title="All 12 branches missed.">    return a == b || (a != null &amp;&amp; b != null &amp;&amp; a.isPresent() &amp;&amp; b.isPresent() &amp;&amp; Objects.deepEquals(a.get(), b.get()));</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L214">    return Objects.hash(isVisible, availability, minimumOrderQuantity, maximumOrderQuantity, associatedProducts, image, imageFilename);</span>
+  }
+
+  private static &lt;T&gt; int hashCodeNullable(JsonNullable&lt;T&gt; a) {
+<span class="nc bnc" id="L218" title="All 2 branches missed.">    if (a == null) {</span>
+<span class="nc" id="L219">      return 1;</span>
+    }
+<span class="nc bnc" id="L221" title="All 2 branches missed.">    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L226">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L227">    sb.append(&quot;class ProductPartialDto {\n&quot;);</span>
+    
+<span class="nc" id="L229">    sb.append(&quot;    isVisible: &quot;).append(toIndentedString(isVisible)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L230">    sb.append(&quot;    availability: &quot;).append(toIndentedString(availability)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L231">    sb.append(&quot;    minimumOrderQuantity: &quot;).append(toIndentedString(minimumOrderQuantity)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L232">    sb.append(&quot;    maximumOrderQuantity: &quot;).append(toIndentedString(maximumOrderQuantity)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L233">    sb.append(&quot;    associatedProducts: &quot;).append(toIndentedString(associatedProducts)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L234">    sb.append(&quot;    image: &quot;).append(toIndentedString(image)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L235">    sb.append(&quot;    imageFilename: &quot;).append(toIndentedString(imageFilename)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L236">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L237">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L245" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L246">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L248">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>PredicateFactory.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.service.impl.factory</a> &gt; <span class="el_source">PredicateFactory.java</span></div><h1>PredicateFactory.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.service.impl.factory;
+
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.StringPath;
+import com.zoetis.zdms.model.QAudit;
+import com.zoetis.zdms.model.dictionary.*;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField;
+import com.zoetis.zdms.model.view.QCustomerView;
+import com.zoetis.zdms.model.view.QProductView;
+import org.springframework.stereotype.Component;
+
+import java.time.OffsetDateTime;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Set;
+
+@Component
+<span class="fc" id="L21">public class PredicateFactory {</span>
+
+<span class="fc" id="L23">    private final static Map&lt;SearchByField.Customer, FieldPredicateExpressionFactory&lt;?&gt;&gt; CUSTOMER_SEARCH_BY_EXPRESSION = new EnumMap&lt;&gt;(SearchByField.Customer.class);</span>
+<span class="fc" id="L24">    private final static Map&lt;SearchByField.Product, FieldPredicateExpressionFactory&lt;?&gt;&gt; PRODUCT_SEARCH_BY_EXPRESSION = new EnumMap&lt;&gt;(SearchByField.Product.class);</span>
+<span class="fc" id="L25">    private final static Map&lt;SearchByField.Audit, FieldPredicateExpressionFactory&lt;?&gt;&gt; AUDIT_SEARCH_BY_EXPRESSION = new EnumMap&lt;&gt;(SearchByField.Audit.class);</span>
+
+    static {
+<span class="fc" id="L28">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.IS_VISIBLE, FieldPredicateExpressionFactory.enumOf(BooleanValue.class, Expressions.enumPath(BooleanValue.class, QProductView.productView, &quot;isVisible&quot;)));</span>
+<span class="fc" id="L29">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.PRODUCT_ID, FieldPredicateExpressionFactory.integerOf(Expressions.numberPath(Integer.class, QProductView.productView, &quot;productId&quot;)));</span>
+<span class="fc" id="L30">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.AVAILABILITY, FieldPredicateExpressionFactory.enumOf(Availability.class, Expressions.enumPath(Availability.class, QProductView.productView, &quot;availability&quot;)));</span>
+<span class="fc" id="L31">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.DESCRIPTION, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QProductView.productView, &quot;description&quot;)));</span>
+<span class="fc" id="L32">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.MINIMUM_ORDER_QUANTITY, FieldPredicateExpressionFactory.integerToBooleanOf(Expressions.numberPath(Integer.class, QProductView.productView, &quot;minimumOrderQuantity&quot;)));</span>
+<span class="fc" id="L33">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.MAXIMUM_ORDER_QUANTITY, FieldPredicateExpressionFactory.integerToBooleanOf(Expressions.numberPath(Integer.class, QProductView.productView, &quot;maximumOrderQuantity&quot;)));</span>
+<span class="fc" id="L34">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.HAS_MEDIA, FieldPredicateExpressionFactory.enumOf(BooleanValue.class, Expressions.enumPath(BooleanValue.class, QProductView.productView, &quot;hasMedia&quot;)));</span>
+<span class="fc" id="L35">        PRODUCT_SEARCH_BY_EXPRESSION.put(SearchByField.Product.SOURCE, FieldPredicateExpressionFactory.stringListOf(Expressions.stringPath(QProductView.productView, &quot;source&quot;)));</span>
+
+<span class="fc" id="L37">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.STATE, FieldPredicateExpressionFactory.enumOf(CustomerState.class, Expressions.enumPath(CustomerState.class, QCustomerView.customerView, &quot;state&quot;)));</span>
+<span class="fc" id="L38">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.ERP_ID, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QCustomerView.customerView, &quot;erpId&quot;)));</span>
+<span class="fc" id="L39">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.COMPANY_NAME, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QCustomerView.customerView, &quot;companyName&quot;)));</span>
+<span class="fc" id="L40">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.ADDRESS, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QCustomerView.customerView, &quot;address&quot;)));</span>
+<span class="fc" id="L41">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.NATIVE_STATUS, FieldPredicateExpressionFactory.enumOf(CustomerStatus.class, Expressions.enumPath(CustomerStatus.class, QCustomerView.customerView, &quot;localStatus&quot;)));</span>
+<span class="fc" id="L42">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.NATIVE_CREATED_DATE, FieldPredicateExpressionFactory.offsetDateTimeOf(Expressions.dateTimePath(OffsetDateTime.class, QCustomerView.customerView, &quot;nativeCreatedDate&quot;)));</span>
+<span class="fc" id="L43">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.TYPE, FieldPredicateExpressionFactory.enumOf(CustomerType.class, Expressions.enumPath(CustomerType.class, QCustomerView.customerView, &quot;type&quot;)));</span>
+<span class="fc" id="L44">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.SOURCE, FieldPredicateExpressionFactory.stringListOf(Expressions.stringPath(QCustomerView.customerView, &quot;source&quot;)));</span>
+<span class="fc" id="L45">        CUSTOMER_SEARCH_BY_EXPRESSION.put(SearchByField.Customer.REJECTION_REASON, FieldPredicateExpressionFactory.enumOf(RejectionReason.class, Expressions.enumPath(RejectionReason.class, QCustomerView.customerView.rejectionReason, &quot;rejectionReason&quot;)));</span>
+
+<span class="fc" id="L47">        AUDIT_SEARCH_BY_EXPRESSION.put(SearchByField.Audit.DATA_SET, FieldPredicateExpressionFactory.enumOf(DataSet.class, Expressions.enumPath(DataSet.class, QAudit.audit, &quot;dataSet&quot;)));</span>
+<span class="fc" id="L48">        AUDIT_SEARCH_BY_EXPRESSION.put(SearchByField.Audit.DATE, FieldPredicateExpressionFactory.offsetDateTimeOf(Expressions.dateTimePath(OffsetDateTime.class, QAudit.audit, &quot;logTime&quot;)));</span>
+<span class="fc" id="L49">        AUDIT_SEARCH_BY_EXPRESSION.put(SearchByField.Audit.HEADER, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QAudit.audit, &quot;transactionHeader&quot;)));</span>
+<span class="fc" id="L50">        AUDIT_SEARCH_BY_EXPRESSION.put(SearchByField.Audit.INITIATOR, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QAudit.audit, &quot;logBy&quot;)));</span>
+<span class="fc" id="L51">        AUDIT_SEARCH_BY_EXPRESSION.put(SearchByField.Audit.MESSAGE, FieldPredicateExpressionFactory.stringOf(Expressions.stringPath(QAudit.audit, &quot;transactionMessage&quot;)));</span>
+<span class="fc" id="L52">    }</span>
+
+
+    public Predicate buildCustomerPredicate(Set&lt;SearchBy&lt;SearchByField.Customer&gt;&gt; searchBySet, Language language) {
+<span class="fc" id="L56">        StringPath stateNativeLanguagePath = QCustomerView.customerView.stateNativeLanguage;</span>
+<span class="fc" id="L57">        StringPath localStatusLanguagePath = QCustomerView.customerView.localStatusLanguage;</span>
+<span class="fc" id="L58">        StringPath typeLanguagePath = QCustomerView.customerView.typeLanguage;</span>
+<span class="fc" id="L59">        StringPath rejectionReasonLanguagePath = QCustomerView.customerView.rejectionReasonLanguage;</span>
+
+<span class="fc" id="L61">        BooleanBuilder predicateBuilder = new BooleanBuilder()</span>
+<span class="fc" id="L62">                .and(stateNativeLanguagePath.isNull().or(stateNativeLanguagePath.equalsIgnoreCase(language.getValue())))</span>
+<span class="fc" id="L63">                .and(localStatusLanguagePath.isNull().or(localStatusLanguagePath.equalsIgnoreCase(language.getValue())))</span>
+<span class="fc" id="L64">                .and(typeLanguagePath.isNull().or(typeLanguagePath.equalsIgnoreCase(language.getValue())))</span>
+<span class="fc" id="L65">                .and(rejectionReasonLanguagePath.isNull().or(rejectionReasonLanguagePath.equalsIgnoreCase(language.getValue())));</span>
+
+<span class="fc" id="L67">        searchBySet</span>
+<span class="fc" id="L68">                .forEach(searchBy -&gt; {</span>
+<span class="nc" id="L69">                    FieldPredicateExpressionFactory&lt;?&gt; fieldPredicateExpressionFactory = CUSTOMER_SEARCH_BY_EXPRESSION.get(searchBy.getSearchByField());</span>
+<span class="nc" id="L70">                    predicateBuilder.and(fieldPredicateExpressionFactory.create(searchBy.getValues()));</span>
+<span class="nc" id="L71">                });</span>
+
+<span class="fc" id="L73">        return predicateBuilder;</span>
+    }
+
+    public Predicate buildProductPredicate(Set&lt;SearchBy&lt;SearchByField.Product&gt;&gt; searchBySet, Language language) {
+<span class="nc" id="L77">        StringPath availabilityLanguagePath = QProductView.productView.availabilityLanguage;</span>
+<span class="nc" id="L78">        StringPath isVisibleLanguagePath = QProductView.productView.isVisibleLanguage;</span>
+<span class="nc" id="L79">        StringPath hasMediaLanguagePath = QProductView.productView.hasMediaLanguage;</span>
+
+<span class="nc" id="L81">        BooleanBuilder predicateBuilder = new BooleanBuilder()</span>
+<span class="nc" id="L82">                .and(availabilityLanguagePath.isNull().or(availabilityLanguagePath.equalsIgnoreCase(language.getValue())))</span>
+<span class="nc" id="L83">                .and(isVisibleLanguagePath.isNull().or(isVisibleLanguagePath.equalsIgnoreCase(language.getValue())))</span>
+<span class="nc" id="L84">                .and(hasMediaLanguagePath.isNull().or(hasMediaLanguagePath.equalsIgnoreCase(language.getValue())));</span>
+
+<span class="nc" id="L86">        searchBySet</span>
+<span class="nc" id="L87">                .forEach(searchBy -&gt; {</span>
+<span class="nc" id="L88">                    FieldPredicateExpressionFactory&lt;?&gt; fieldPredicateExpressionFactory = PRODUCT_SEARCH_BY_EXPRESSION.get(searchBy.getSearchByField());</span>
+<span class="nc" id="L89">                    predicateBuilder.and(fieldPredicateExpressionFactory.create(searchBy.getValues()));</span>
+<span class="nc" id="L90">                });</span>
+<span class="nc" id="L91">        return predicateBuilder;</span>
+    }
+
+    public Predicate buildAuditPredicate(Set&lt;SearchBy&lt;SearchByField.Audit&gt;&gt; searchBySet) {
+<span class="nc" id="L95">        BooleanBuilder predicateBuilder = new BooleanBuilder();</span>
+
+<span class="nc" id="L97">        searchBySet</span>
+<span class="nc" id="L98">                .forEach(searchBy -&gt; {</span>
+<span class="nc" id="L99">                    FieldPredicateExpressionFactory&lt;?&gt; fieldPredicateExpressionFactory = AUDIT_SEARCH_BY_EXPRESSION.get(searchBy.getSearchByField());</span>
+<span class="nc" id="L100">                    predicateBuilder.and(fieldPredicateExpressionFactory.create(searchBy.getValues()));</span>
+<span class="nc" id="L101">                });</span>
+<span class="nc" id="L102">        return predicateBuilder;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

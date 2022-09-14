@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerPartialDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">CustomerPartialDto.java</span></div><h1>CustomerPartialDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.CustomerNativeStatusDto;
+import com.zoetis.zdms.api.dto.RejectionReasonDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * CustomerPartialDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="nc" id="L23">public class CustomerPartialDto   {</span>
+  @JsonProperty(&quot;nativeStatus&quot;)
+  private CustomerNativeStatusDto nativeStatus;
+
+  @JsonProperty(&quot;rejectionReason&quot;)
+  private RejectionReasonDto rejectionReason;
+
+  @JsonProperty(&quot;freeText&quot;)
+  private String freeText;
+
+  public CustomerPartialDto nativeStatus(CustomerNativeStatusDto nativeStatus) {
+<span class="nc" id="L34">    this.nativeStatus = nativeStatus;</span>
+<span class="nc" id="L35">    return this;</span>
+  }
+
+  /**
+   * Get nativeStatus
+   * @return nativeStatus
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public CustomerNativeStatusDto getNativeStatus() {
+<span class="nc" id="L47">    return nativeStatus;</span>
+  }
+
+  public void setNativeStatus(CustomerNativeStatusDto nativeStatus) {
+<span class="nc" id="L51">    this.nativeStatus = nativeStatus;</span>
+<span class="nc" id="L52">  }</span>
+
+  public CustomerPartialDto rejectionReason(RejectionReasonDto rejectionReason) {
+<span class="nc" id="L55">    this.rejectionReason = rejectionReason;</span>
+<span class="nc" id="L56">    return this;</span>
+  }
+
+  /**
+   * Get rejectionReason
+   * @return rejectionReason
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public RejectionReasonDto getRejectionReason() {
+<span class="nc" id="L68">    return rejectionReason;</span>
+  }
+
+  public void setRejectionReason(RejectionReasonDto rejectionReason) {
+<span class="nc" id="L72">    this.rejectionReason = rejectionReason;</span>
+<span class="nc" id="L73">  }</span>
+
+  public CustomerPartialDto freeText(String freeText) {
+<span class="nc" id="L76">    this.freeText = freeText;</span>
+<span class="nc" id="L77">    return this;</span>
+  }
+
+  /**
+   * Get freeText
+   * @return freeText
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+@Size(max = 127) 
+  public String getFreeText() {
+<span class="nc" id="L88">    return freeText;</span>
+  }
+
+  public void setFreeText(String freeText) {
+<span class="nc" id="L92">    this.freeText = freeText;</span>
+<span class="nc" id="L93">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L99">      return true;</span>
+    }
+<span class="nc bnc" id="L101" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L102">      return false;</span>
+    }
+<span class="nc" id="L104">    CustomerPartialDto customerPartial = (CustomerPartialDto) o;</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    return Objects.equals(this.nativeStatus, customerPartial.nativeStatus) &amp;&amp;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        Objects.equals(this.rejectionReason, customerPartial.rejectionReason) &amp;&amp;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        Objects.equals(this.freeText, customerPartial.freeText);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L112">    return Objects.hash(nativeStatus, rejectionReason, freeText);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L117">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L118">    sb.append(&quot;class CustomerPartialDto {\n&quot;);</span>
+    
+<span class="nc" id="L120">    sb.append(&quot;    nativeStatus: &quot;).append(toIndentedString(nativeStatus)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L121">    sb.append(&quot;    rejectionReason: &quot;).append(toIndentedString(rejectionReason)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L122">    sb.append(&quot;    freeText: &quot;).append(toIndentedString(freeText)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L123">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L124">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L133">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L135">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

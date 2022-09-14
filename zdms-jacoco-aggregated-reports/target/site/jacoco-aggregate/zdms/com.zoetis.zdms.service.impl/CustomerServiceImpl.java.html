@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerServiceImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.service.impl</a> &gt; <span class="el_source">CustomerServiceImpl.java</span></div><h1>CustomerServiceImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.service.impl;
+
+import com.querydsl.core.types.Predicate;
+import com.zoetis.zdms.dao.repository.CustomerLookupViewRepository;
+import com.zoetis.zdms.dao.repository.CustomerRepository;
+import com.zoetis.zdms.dao.repository.CustomerViewRepository;
+import com.zoetis.zdms.exception.CustomerLookupNotFoundException;
+import com.zoetis.zdms.exception.CustomerNotFoundException;
+import com.zoetis.zdms.exception.IllegalParametersException;
+import com.zoetis.zdms.model.Customer;
+import com.zoetis.zdms.model.CustomerPartial;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import com.zoetis.zdms.model.dictionary.Language;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortDirection;
+import com.zoetis.zdms.model.view.CustomerLookupView;
+import com.zoetis.zdms.model.view.CustomerView;
+import com.zoetis.zdms.service.CustomerService;
+import com.zoetis.zdms.service.UserService;
+import com.zoetis.zdms.service.impl.factory.PageFactory;
+import com.zoetis.zdms.service.impl.factory.PredicateFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.OffsetDateTime;
+import java.util.Set;
+
+@Service
+<span class="fc" id="L36">@AllArgsConstructor</span>
+<span class="fc" id="L37">@Slf4j</span>
+public class CustomerServiceImpl implements CustomerService {
+
+    private final CustomerRepository customerRepository;
+    private final CustomerViewRepository customerViewRepository;
+    private final CustomerLookupViewRepository customerLookupViewRepository;
+
+    private final PredicateFactory predicateFactory;
+    private final PageFactory pageFactory;
+
+    private final UserService userService;
+
+    @Override
+    public Page&lt;CustomerView&gt; getCustomerViews(Integer pageNumber, Language language, Integer pageSize, SortDirection sortDirection,
+                                               SortBy.Customer sortBy, Set&lt;SearchBy&lt;SearchByField.Customer&gt;&gt; searchBy) {
+<span class="fc" id="L52">        log.info(&quot;[getCustomers] started processing with parameters [pageNumber = {}, language = {}, pageSize = {}, sortDirection = {}, sortBy = {}]&quot;,</span>
+                pageNumber, language, pageSize, sortDirection, sortBy);
+
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (ObjectUtils.anyNull(pageNumber, language, pageSize, sortDirection, sortBy))</span>
+<span class="nc" id="L56">            throw IllegalParametersException.of(String.format(&quot;Parameters [%s, %s, %s, %s] cannot be null&quot;, pageNumber, pageSize, sortDirection, sortBy));</span>
+
+<span class="fc" id="L58">        Predicate predicate = predicateFactory.buildCustomerPredicate(searchBy, language);</span>
+<span class="fc" id="L59">        Pageable pageRequest = getPageRequestLimitedToLastPageNumber(pageNumber, pageSize, sortDirection, sortBy, predicate);</span>
+
+<span class="fc" id="L61">        log.debug(&quot;[CustomerViewRepository.findAll] invoked with parameters [predicate = {}, pageRequest = {}]&quot;, predicate, pageRequest);</span>
+<span class="fc" id="L62">        return customerViewRepository.findAll(predicate, pageRequest);</span>
+    }
+
+    @Override
+    public Customer getCustomer(String id) {
+<span class="nc" id="L67">        log.info(&quot;[getCustomerDetails] started processing with parameters [id = {}]&quot;, id);</span>
+<span class="nc" id="L68">        log.debug(&quot;[CustomerRepository.findById] invoked with parameters [id = {}]&quot;, id);</span>
+<span class="nc" id="L69">        return customerRepository.findById(id)</span>
+<span class="nc" id="L70">                .orElseThrow(() -&gt; CustomerNotFoundException.of(&quot;Customer not found&quot;));</span>
+    }
+
+    @Override
+    @Transactional
+    public Customer updateCustomer(String id, CustomerPartial customerPartial) {
+<span class="nc" id="L76">        log.info(&quot;[updateCustomer] started processing with parameters [id = {}, customerPartial = {}]&quot;, id, customerPartial);</span>
+<span class="nc" id="L77">        log.debug(&quot;[CustomerRepository.findById] invoked with parameters [id = {}]&quot;, id);</span>
+<span class="nc" id="L78">        Customer customer = customerRepository.findById(id)</span>
+<span class="nc" id="L79">                .orElseThrow(() -&gt; CustomerNotFoundException.of(&quot;Customer not found&quot;));</span>
+<span class="nc" id="L80">        com.zoetis.zdms.model.CustomerStatus customerStatus = customer.getStatus();</span>
+
+<span class="nc" id="L82">        customerStatus.setRejectionReason(customerPartial.getRejectionReason());</span>
+<span class="nc" id="L83">        customerStatus.setFreeText(customerPartial.getFreeText());</span>
+<span class="nc" id="L84">        customerStatus.setLocalStatus(customerPartial.getLocalStatus());</span>
+
+<span class="nc" id="L86">        customerStatus.setUpdatedBy(userService.getUser().getEmailAddress());</span>
+<span class="nc" id="L87">        customerStatus.setUpdatedDate(OffsetDateTime.now());</span>
+<span class="nc" id="L88">        customerStatus.setAppProcessed(BooleanValue.TRUE);</span>
+<span class="nc" id="L89">        log.debug(&quot;[CustomerRepository.save] invoked with parameters [customer = {}]&quot;, customer);</span>
+<span class="nc" id="L90">        return customerRepository.save(customer);</span>
+    }
+
+    @Override
+    public CustomerLookupView getCustomerLookup(String id) {
+<span class="nc" id="L95">        log.info(&quot;[getCustomerLookup] started processing with parameters [id = {}]&quot;, id);</span>
+<span class="nc" id="L96">        log.debug(&quot;[CustomerLookupViewRepository.findById] invoked with parameters [id = {}]&quot;, id);</span>
+<span class="nc" id="L97">        return customerLookupViewRepository.findById(id)</span>
+<span class="nc" id="L98">                .orElseThrow(() -&gt; CustomerLookupNotFoundException.of(&quot;Customer lookup not found&quot;));</span>
+    }
+
+    private Pageable getPageRequestLimitedToLastPageNumber(Integer pageNumber, Integer pageSize, SortDirection sortDirection,
+                                                           SortBy.Customer sortBy, Predicate predicate) {
+<span class="fc" id="L103">        log.debug(&quot;[CustomerViewRepository.count] invoked with parameters [predicate = {}]&quot;, predicate);</span>
+<span class="fc" id="L104">        long resultElementsCount = customerViewRepository.count(predicate);</span>
+
+<span class="fc" id="L106">        return pageFactory.buildCustomerPageRequest(resultElementsCount, pageNumber, pageSize, sortDirection, sortBy);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

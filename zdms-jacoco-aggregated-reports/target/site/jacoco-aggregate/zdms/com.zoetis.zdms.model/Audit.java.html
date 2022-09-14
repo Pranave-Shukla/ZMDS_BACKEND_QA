@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Audit.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">Audit.java</span></div><h1>Audit.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import com.zoetis.zdms.model.dictionary.DataSet;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.*;
+import java.time.OffsetDateTime;
+
+@Entity
+@Table(name = &quot;ZMDS_AUDIT_LOG&quot;, schema = &quot;ZMDS_ODS&quot;)
+<span class="nc bnc" id="L14" title="All 54 branches missed.">@Data</span>
+@Immutable
+<span class="fc" id="L16">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L17">@NoArgsConstructor</span>
+public class Audit {
+
+    @Id
+    @Column(name = &quot;ID&quot;)
+<span class="nc" id="L22">    private String id;</span>
+
+    @Column(name = &quot;DATA_SET&quot;)
+    @Enumerated(EnumType.STRING)
+<span class="fc" id="L26">    private DataSet dataSet;</span>
+
+    @Column(name = &quot;TRANSACTION_HEADER&quot;, length = 300)
+<span class="fc" id="L29">    private String transactionHeader;</span>
+
+    @Column(name = &quot;TRANSACTION_MESSAGE&quot;, length = 1024)
+<span class="fc" id="L32">    private String transactionMessage;</span>
+
+    @Column(name = &quot;LOG_BY&quot;, length = 128)
+<span class="fc" id="L35">    private String logBy;</span>
+
+    @Column(name = &quot;LOG_TIME&quot;, length = 3000)
+<span class="fc" id="L38">    private OffsetDateTime logTime;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

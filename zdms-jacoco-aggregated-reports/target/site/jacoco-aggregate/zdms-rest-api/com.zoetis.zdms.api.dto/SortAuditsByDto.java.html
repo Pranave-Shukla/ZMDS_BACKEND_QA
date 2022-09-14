@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SortAuditsByDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">SortAuditsByDto.java</span></div><h1>SortAuditsByDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonValue;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+/**
+ * Gets or Sets SortAuditsBy
+ */
+<span class="nc" id="L20">public enum SortAuditsByDto {</span>
+  
+<span class="nc" id="L22">  DATA_SET(&quot;DATA_SET&quot;),</span>
+  
+<span class="nc" id="L24">  HEADER(&quot;HEADER&quot;),</span>
+  
+<span class="nc" id="L26">  MESSAGE(&quot;MESSAGE&quot;),</span>
+  
+<span class="nc" id="L28">  INITIATOR(&quot;INITIATOR&quot;),</span>
+  
+<span class="nc" id="L30">  DATE(&quot;DATE&quot;);</span>
+
+  private String value;
+
+<span class="nc" id="L34">  SortAuditsByDto(String value) {</span>
+<span class="nc" id="L35">    this.value = value;</span>
+<span class="nc" id="L36">  }</span>
+
+  @JsonValue
+  public String getValue() {
+<span class="nc" id="L40">    return value;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L45">    return String.valueOf(value);</span>
+  }
+
+  @JsonCreator
+  public static SortAuditsByDto fromValue(String value) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">    for (SortAuditsByDto b : SortAuditsByDto.values()) {</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">      if (b.value.equals(value)) {</span>
+<span class="nc" id="L52">        return b;</span>
+      }
+    }
+<span class="nc" id="L55">    throw new IllegalArgumentException(&quot;Unexpected value '&quot; + value + &quot;'&quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>QAddress.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">QAddress.java</span></div><h1>QAddress.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.processing.Generated;
+import com.querydsl.core.types.Path;
+
+
+/**
+ * QAddress is a Querydsl query type for Address
+ */
+@Generated(&quot;com.querydsl.codegen.DefaultEmbeddableSerializer&quot;)
+public class QAddress extends BeanPath&lt;Address&gt; {
+
+    private static final long serialVersionUID = -1095906332L;
+
+<span class="fc" id="L20">    public static final QAddress address = new QAddress(&quot;address&quot;);</span>
+
+<span class="pc" id="L22">    public final StringPath city = createString(&quot;city&quot;);</span>
+
+<span class="pc" id="L24">    public final StringPath countryCode = createString(&quot;countryCode&quot;);</span>
+
+<span class="pc" id="L26">    public final StringPath postalCode = createString(&quot;postalCode&quot;);</span>
+
+<span class="pc" id="L28">    public final StringPath street = createString(&quot;street&quot;);</span>
+
+<span class="pc" id="L30">    public final StringPath streetNumber = createString(&quot;streetNumber&quot;);</span>
+
+    public QAddress(String variable) {
+<span class="fc" id="L33">        super(Address.class, forVariable(variable));</span>
+<span class="fc" id="L34">    }</span>
+
+    public QAddress(Path&lt;? extends Address&gt; path) {
+<span class="nc" id="L37">        super(path.getType(), path.getMetadata());</span>
+<span class="nc" id="L38">    }</span>
+
+    public QAddress(PathMetadata metadata) {
+<span class="fc" id="L41">        super(Address.class, metadata);</span>
+<span class="fc" id="L42">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerLookupView.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model.view</a> &gt; <span class="el_source">CustomerLookupView.java</span></div><h1>CustomerLookupView.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model.view;
+
+import com.zoetis.zdms.converter.BooleanValueToStringConverter;
+import com.zoetis.zdms.model.ContactDetails;
+import com.zoetis.zdms.model.dictionary.AccountType;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = &quot;V_ZMDR_CUSTOMER_LOOKUP&quot;)
+<span class="nc bnc" id="L17" title="All 110 branches missed.">@Data</span>
+@Immutable
+<span class="fc" id="L19">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L20">@NoArgsConstructor</span>
+public class CustomerLookupView implements Serializable {
+
+    @Id
+    @Column(name = &quot;ID&quot;, nullable = false, length = 20)
+<span class="fc" id="L25">    private String id;</span>
+
+    @Embedded
+    @AttributeOverride(name = &quot;searchTerms&quot;, column = @Column(name = &quot;SEARCH_TERMS&quot;))
+    @AttributeOverride(name = &quot;phoneNumber&quot;, column = @Column(name = &quot;PHONE_NUMBER&quot;))
+    @AttributeOverride(name = &quot;email&quot;, column = @Column(name = &quot;EMAIL_ADDRESS&quot;))
+<span class="fc" id="L31">    private ContactDetails contactDetails;</span>
+
+    @Column(name = &quot;CUSTOMER_NAME_1&quot;)
+<span class="fc" id="L34">    private String name1;</span>
+
+    @Column(name = &quot;CUSTOMER_NAME_2&quot;)
+<span class="fc" id="L37">    private String name2;</span>
+
+    @Column(name = &quot;CUSTOMER_NAME_3&quot;)
+<span class="fc" id="L40">    private String name3;</span>
+
+    @Column(name = &quot;CUSTOMER_NAME_4&quot;)
+<span class="fc" id="L43">    private String name4;</span>
+
+    @Column(name = &quot;TITLE&quot;)
+<span class="fc" id="L46">    private String title;</span>
+
+    @Column(name = &quot;ACCOUNT_TYPE&quot;)
+    @Enumerated(EnumType.STRING)
+<span class="fc" id="L50">    private AccountType accountType;</span>
+
+    @Column(name = &quot;CUSTOMER_ADDRESS&quot;)
+<span class="fc" id="L53">    private String streetAddress;</span>
+
+    @Column(name = &quot;POSTAL_CODE&quot;)
+<span class="fc" id="L56">    private String postalCode;</span>
+
+    @Column(name = &quot;COUNTRY_CODE&quot;)
+<span class="fc" id="L59">    private String countryCode;</span>
+
+    @Column(name = &quot;CITY&quot;)
+<span class="fc" id="L62">    private String city;</span>
+
+    @Column(name = &quot;IS_DELETED&quot;, nullable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L66">    private BooleanValue isdDeleted;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

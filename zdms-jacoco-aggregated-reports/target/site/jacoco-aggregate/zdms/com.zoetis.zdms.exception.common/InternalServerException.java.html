@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>InternalServerException.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.exception.common</a> &gt; <span class="el_source">InternalServerException.java</span></div><h1>InternalServerException.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.exception.common;
+
+import com.zoetis.zdms.exception.status.ResponseStatus;
+import com.zoetis.zdms.exception.status.ErrorMessage;
+import com.zoetis.zdms.model.dictionary.ErrorCode;
+import org.springframework.http.HttpStatus;
+
+@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, code = ErrorCode.INTERNAL_SERVER_ERROR, message = ErrorMessage.INTERNAL_SERVER_ERROR)
+public class InternalServerException extends RuntimeException {
+
+    protected InternalServerException(String message) {
+<span class="nc" id="L12">        super(message);</span>
+<span class="nc" id="L13">    }</span>
+
+    protected InternalServerException(Throwable throwable) {
+<span class="nc" id="L16">        super(throwable);</span>
+<span class="nc" id="L17">    }</span>
+
+    public static InternalServerException of(String message) {
+<span class="nc" id="L20">        return new InternalServerException(message);</span>
+    }
+
+    public static InternalServerException of(Throwable throwable) {
+<span class="nc" id="L24">        return new InternalServerException(throwable);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

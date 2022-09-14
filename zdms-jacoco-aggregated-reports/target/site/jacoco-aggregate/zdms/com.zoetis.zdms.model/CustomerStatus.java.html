@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerStatus.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">CustomerStatus.java</span></div><h1>CustomerStatus.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import com.zoetis.zdms.converter.BooleanValueToStringConverter;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import com.zoetis.zdms.model.dictionary.RejectionReason;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+
+@Entity
+@Table(name = &quot;ZMDS_CUSTOMER_STATUS&quot;, schema = &quot;ZMDS_ODS&quot;)
+<span class="nc bnc" id="L17" title="All 78 branches missed.">@Data</span>
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+<span class="fc" id="L20">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L21">@NoArgsConstructor</span>
+public class CustomerStatus implements Serializable {
+
+    @Id
+    @Column(name = &quot;ID&quot;)
+<span class="nc" id="L26">    private String id;</span>
+
+    @OneToOne()
+    @JoinColumn(name = &quot;CUSTOMER_IN_ID&quot;, referencedColumnName = &quot;id&quot;)
+<span class="nc" id="L30">    private Customer customer;</span>
+
+    @Column(name = &quot;CUSTOMER_STATUS_LOCAL&quot;)
+    @Enumerated(EnumType.STRING)
+<span class="nc" id="L34">    private com.zoetis.zdms.model.dictionary.CustomerStatus localStatus;</span>
+
+    @Column(name = &quot;PROCESSED_ETL&quot;, insertable = false, updatable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L38">    private BooleanValue etlProcessed;</span>
+
+    @Column(name = &quot;PROCESSED_APP&quot;)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L42">    private BooleanValue appProcessed;</span>
+
+    @Column(name = &quot;UPDATED_DATE&quot;)
+<span class="nc" id="L45">    private OffsetDateTime updatedDate;</span>
+
+    @Column(name = &quot;UPDATED_BY&quot;)
+<span class="nc" id="L48">    private String updatedBy;</span>
+
+    @Column(name = &quot;CUSTOMER_STATUS_REASON&quot;)
+    @Enumerated(EnumType.STRING)
+<span class="nc" id="L52">    private RejectionReason rejectionReason;</span>
+
+    @Column(name = &quot;FREE_TEXT_LOCAL&quot;, length = 127)
+<span class="nc" id="L55">    private String freeText;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

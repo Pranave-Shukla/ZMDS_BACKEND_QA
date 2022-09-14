@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductView.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model.view</a> &gt; <span class="el_source">ProductView.java</span></div><h1>ProductView.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model.view;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zoetis.zdms.converter.BooleanValueToStringConverter;
+import com.zoetis.zdms.model.dictionary.Availability;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = &quot;ZMDS_PRODUCT_IN_VIEW&quot;, schema = &quot;ZMDS_ODS&quot;)
+<span class="nc bnc" id="L17" title="All 134 branches missed.">@Data</span>
+@Immutable
+<span class="fc" id="L19">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L20">@NoArgsConstructor</span>
+public class ProductView implements Serializable {
+
+    @Id
+    @Column(name=&quot;UUID&quot;)
+    @JsonIgnore
+<span class="nc" id="L26">    private String uuid;</span>
+
+    @Column(name = &quot;PRODUCT_ID&quot;, nullable = false)
+<span class="fc" id="L29">    private Integer productId;</span>
+
+    @Column(name = &quot;STATUS_ID&quot;, nullable = false)
+<span class="fc" id="L32">    private Integer statusId;</span>
+
+    @Column(name = &quot;IS_VISIBLE&quot;, nullable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="fc" id="L36">    private BooleanValue isVisible;</span>
+
+    @Column(name = &quot;IS_VISIBLE_LOCALIZED&quot;, nullable = false)
+<span class="nc" id="L39">    private String isVisibleLocalized;</span>
+
+    @Column(name = &quot;IS_VISIBLE_LANGUAGE&quot;, nullable = false)
+<span class="nc" id="L42">    private String isVisibleLanguage;</span>
+
+    @Column(name = &quot;AVAILABILITY&quot;, insertable = false, nullable = false)
+    @Enumerated(EnumType.STRING)
+<span class="fc" id="L46">    private Availability availability;</span>
+
+    @Column(name = &quot;AVAILABILITY_LOCALIZED&quot;, nullable = false)
+<span class="nc" id="L49">    private String availabilityLocalized;</span>
+
+    @Column(name = &quot;AVAILABILITY_LANGUAGE&quot;, nullable = false)
+<span class="nc" id="L52">    private String availabilityLanguage;</span>
+
+    @Column(name = &quot;DESCRIPTION&quot;, nullable = false)
+<span class="fc" id="L55">    private String description;</span>
+
+    @Column(name = &quot;MINIMUM_ORDER_QUANTITY&quot;)
+<span class="fc" id="L58">    private Integer minimumOrderQuantity;</span>
+
+    @Column(name = &quot;MAXIMUM_ORDER_QUANTITY&quot;)
+<span class="fc" id="L61">    private Integer maximumOrderQuantity;</span>
+
+    @Column(name = &quot;HAS_MEDIA&quot;, nullable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="fc" id="L65">    private BooleanValue hasMedia;</span>
+
+    @Column(name = &quot;HAS_MEDIA_LOCALIZED&quot;, nullable = false)
+<span class="nc" id="L68">    private String hasMediaLocalized;</span>
+
+    @Column(name = &quot;HAS_MEDIA_LANGUAGE&quot;, nullable = false)
+<span class="nc" id="L71">    private String hasMediaLanguage;</span>
+
+    @Column(name = &quot;SOURCE&quot;, nullable = false)
+<span class="fc" id="L74">    private String source;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="debug" name="LogConfiguration">
+
+    <Appenders>
+        <Console name="ConsoleAppender">
+            <PatternLayout pattern="%d %highlight{[%-5p]}{STYLE=Logback} %c - %m - %X - %hmac{key} %n" />
+        </Console>
+
+        <RollingFile
+                name="RollingFile"
+                fileName="/app/zmds-server/zmds-logs/zmds-server.log"
+                filePattern="/app/zmds-server/zmds-logs/zmds-server.%d{yyyy-MM-dd}.log.gz"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d %highlight{[%-5p]}{STYLE=Logback} %c - %m - %X - %hmac{key} %n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

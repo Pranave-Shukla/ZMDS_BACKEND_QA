@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>QLocalizedCustomerState.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model.dictionary.localized.customerstate</a> &gt; <span class="el_source">QLocalizedCustomerState.java</span></div><h1>QLocalizedCustomerState.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model.dictionary.localized.customerstate;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.processing.Generated;
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
+
+
+/**
+ * QLocalizedCustomerState is a Querydsl query type for LocalizedCustomerState
+ */
+@Generated(&quot;com.querydsl.codegen.DefaultEntitySerializer&quot;)
+public class QLocalizedCustomerState extends EntityPathBase&lt;LocalizedCustomerState&gt; {
+
+    private static final long serialVersionUID = 100326286L;
+
+<span class="fc" id="L21">    private static final PathInits INITS = PathInits.DIRECT2;</span>
+
+<span class="fc" id="L23">    public static final QLocalizedCustomerState localizedCustomerState = new QLocalizedCustomerState(&quot;localizedCustomerState&quot;);</span>
+
+    public final QLocalizedCustomerStateId id;
+
+<span class="fc" id="L27">    public final StringPath localizedState = createString(&quot;localizedState&quot;);</span>
+
+    public QLocalizedCustomerState(String variable) {
+<span class="fc" id="L30">        this(LocalizedCustomerState.class, forVariable(variable), INITS);</span>
+<span class="fc" id="L31">    }</span>
+
+    public QLocalizedCustomerState(Path&lt;? extends LocalizedCustomerState&gt; path) {
+<span class="nc" id="L34">        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));</span>
+<span class="nc" id="L35">    }</span>
+
+    public QLocalizedCustomerState(PathMetadata metadata) {
+<span class="nc" id="L38">        this(metadata, PathInits.getFor(metadata, INITS));</span>
+<span class="nc" id="L39">    }</span>
+
+    public QLocalizedCustomerState(PathMetadata metadata, PathInits inits) {
+<span class="nc" id="L42">        this(LocalizedCustomerState.class, metadata, inits);</span>
+<span class="nc" id="L43">    }</span>
+
+    public QLocalizedCustomerState(Class&lt;? extends LocalizedCustomerState&gt; type, PathMetadata metadata, PathInits inits) {
+<span class="fc" id="L46">        super(type, metadata, inits);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        this.id = inits.isInitialized(&quot;id&quot;) ? new QLocalizedCustomerStateId(forProperty(&quot;id&quot;)) : null;</span>
+<span class="fc" id="L48">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

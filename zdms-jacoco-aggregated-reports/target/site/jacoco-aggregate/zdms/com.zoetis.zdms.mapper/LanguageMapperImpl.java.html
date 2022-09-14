@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>LanguageMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">LanguageMapperImpl.java</span></div><h1>LanguageMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.LanguageDto;
+import com.zoetis.zdms.model.dictionary.Language;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L14">public class LanguageMapperImpl implements LanguageMapper {</span>
+
+    @Override
+    public Language map(LanguageDto languageDto) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if ( languageDto == null ) {</span>
+<span class="nc" id="L19">            return null;</span>
+        }
+
+        Language language;
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        switch ( languageDto ) {</span>
+<span class="nc" id="L25">            case DE: language = Language.DE;</span>
+<span class="nc" id="L26">            break;</span>
+<span class="nc" id="L27">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + languageDto );</span>
+        }
+
+<span class="nc" id="L30">        return language;</span>
+    }
+
+    @Override
+    public LanguageDto map(Language language) {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if ( language == null ) {</span>
+<span class="nc" id="L36">            return null;</span>
+        }
+
+        LanguageDto languageDto;
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        switch ( language ) {</span>
+<span class="nc" id="L42">            case DE: languageDto = LanguageDto.DE;</span>
+<span class="nc" id="L43">            break;</span>
+<span class="nc" id="L44">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + language );</span>
+        }
+
+<span class="nc" id="L47">        return languageDto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

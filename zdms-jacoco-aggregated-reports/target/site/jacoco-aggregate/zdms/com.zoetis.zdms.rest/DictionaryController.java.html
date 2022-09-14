@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>DictionaryController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.rest</a> &gt; <span class="el_source">DictionaryController.java</span></div><h1>DictionaryController.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.rest;
+
+import com.zoetis.zdms.api.dto.DictionariesResponseDto;
+import com.zoetis.zdms.api.dto.LanguageDto;
+import com.zoetis.zdms.api.rest.DictionaryApi;
+import com.zoetis.zdms.mapper.DictionariesMapper;
+import com.zoetis.zdms.mapper.LanguageMapper;
+import com.zoetis.zdms.model.dictionary.Language;
+import com.zoetis.zdms.model.dictionary.localized.booleanvalue.LocalizedBooleanValue;
+import com.zoetis.zdms.model.dictionary.localized.customerstate.LocalizedCustomerState;
+import com.zoetis.zdms.model.dictionary.localized.customerstatus.LocalizedCustomerStatus;
+import com.zoetis.zdms.model.dictionary.localized.customertype.LocalizedCustomerType;
+import com.zoetis.zdms.model.dictionary.localized.errorcode.LocalizedErrorCode;
+import com.zoetis.zdms.model.dictionary.localized.productavailability.LocalizedProductAvailability;
+import com.zoetis.zdms.model.dictionary.localized.rejectionreason.LocalizedRejectionReason;
+import com.zoetis.zdms.rest.factory.ResponseEntityFactory;
+import com.zoetis.zdms.service.DictionaryService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.List;
+
+@RestController
+<span class="fc" id="L26">@AllArgsConstructor</span>
+// @CrossOrigin(origins = &quot;*&quot;, allowedHeaders=&quot;*&quot;)
+public class DictionaryController implements DictionaryApi {
+
+    private final DictionaryService dictionaryService;
+
+    private LanguageMapper languageMapper;
+    private DictionariesMapper dictionariesMapper;
+
+    @Override
+    public ResponseEntity&lt;DictionariesResponseDto&gt; getDictionaries(LanguageDto languageDto) {
+<span class="nc" id="L37">        Language language = languageMapper.map(languageDto);</span>
+
+<span class="nc" id="L39">        List&lt;LocalizedCustomerState&gt; localizedCustomerStates = dictionaryService.getLocalizedCustomerStates(language);</span>
+<span class="nc" id="L40">        List&lt;LocalizedCustomerStatus&gt; localizedCustomerStatuses = dictionaryService.getLocalizedCustomerStatuses(language);</span>
+<span class="nc" id="L41">        List&lt;LocalizedCustomerType&gt; localizedCustomerTypes = dictionaryService.getLocalizedCustomerTypes(language);</span>
+<span class="nc" id="L42">        List&lt;LocalizedRejectionReason&gt; localizedRejectionReason = dictionaryService.getLocalizedRejectionReason(language);</span>
+<span class="nc" id="L43">        List&lt;LocalizedProductAvailability&gt; localizedProductAvailabilities = dictionaryService.getLocalizedProductAvailabilities(language);</span>
+<span class="nc" id="L44">        List&lt;LocalizedBooleanValue&gt; localizedBooleanValues = dictionaryService.getLocalizedBooleanValues(language);</span>
+<span class="nc" id="L45">        List&lt;LocalizedErrorCode&gt; localizedErrorCodes = dictionaryService.getLocalizedErrorCodes(language);</span>
+
+<span class="nc" id="L47">        DictionariesResponseDto dictionariesResponseDto = dictionariesMapper.mapDictionariesToDto(</span>
+                localizedCustomerStates,
+                localizedCustomerStatuses,
+                localizedCustomerTypes,
+                localizedRejectionReason,
+                localizedProductAvailabilities,
+                localizedBooleanValues,
+                localizedErrorCodes
+        );
+
+<span class="nc" id="L57">        return ResponseEntityFactory.buildOk(dictionariesResponseDto);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

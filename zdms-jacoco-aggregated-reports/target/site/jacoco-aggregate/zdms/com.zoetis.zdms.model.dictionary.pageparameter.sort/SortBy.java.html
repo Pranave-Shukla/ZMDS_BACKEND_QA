@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SortBy.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model.dictionary.pageparameter.sort</a> &gt; <span class="el_source">SortBy.java</span></div><h1>SortBy.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model.dictionary.pageparameter.sort;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public final class SortBy {
+
+<span class="fc" id="L10">    @AllArgsConstructor</span>
+    @Getter
+    public enum Customer {
+
+<span class="fc" id="L14">        NATIVE_STATUS(&quot;nativeStatus&quot;),</span>
+<span class="fc" id="L15">        ERP_ID(&quot;erpId&quot;),</span>
+<span class="fc" id="L16">        COMPANY_NAME(&quot;companyName&quot;),</span>
+<span class="fc" id="L17">        ADDRESS(&quot;address&quot;),</span>
+<span class="fc" id="L18">        STATE(&quot;state&quot;),</span>
+<span class="fc" id="L19">        TYPE(&quot;type&quot;),</span>
+<span class="fc" id="L20">        NATIVE_CREATED_DATE(&quot;nativeCreatedDate&quot;),</span>
+<span class="fc" id="L21">        SOURCE(&quot;source&quot;),</span>
+<span class="fc" id="L22">        REJECTION_REASON(&quot;rejectionReason&quot;);</span>
+
+<span class="nc" id="L24">        private final String value;</span>
+    }
+
+<span class="fc" id="L27">    @AllArgsConstructor</span>
+    @Getter
+    public enum Product {
+
+<span class="fc" id="L31">        IS_VISIBLE(&quot;IS_VISIBLE&quot;),</span>
+<span class="fc" id="L32">        AVAILABILITY(&quot;AVAILABILITY&quot;),</span>
+<span class="fc" id="L33">        PRODUCT_ID(&quot;PRODUCT_ID&quot;),</span>
+<span class="fc" id="L34">        DESCRIPTION(&quot;DESCRIPTION&quot;),</span>
+<span class="fc" id="L35">        MINIMUM_ORDER_QUANTITY(&quot;MINIMUM_ORDER_QUANTITY&quot;),</span>
+<span class="fc" id="L36">        MAXIMUM_ORDER_QUANTITY(&quot;MAXIMUM_ORDER_QUANTITY&quot;),</span>
+<span class="fc" id="L37">        HAS_MEDIA(&quot;HAS_MEDIA&quot;),</span>
+<span class="fc" id="L38">        SOURCE(&quot;SOURCE&quot;);</span>
+
+<span class="nc" id="L40">        private final String value;</span>
+    }
+
+<span class="fc" id="L43">    @AllArgsConstructor</span>
+    @Getter
+    public enum Audit {
+
+<span class="fc" id="L47">        DATA_SET(&quot;DATA_SET&quot;),</span>
+<span class="fc" id="L48">        HEADER(&quot;HEADER&quot;),</span>
+<span class="fc" id="L49">        MESSAGE(&quot;MESSAGE&quot;),</span>
+<span class="fc" id="L50">        INITIATOR(&quot;INITIATOR&quot;),</span>
+<span class="fc" id="L51">        DATE(&quot;DATE&quot;);</span>
+
+<span class="nc" id="L53">        private final String value;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

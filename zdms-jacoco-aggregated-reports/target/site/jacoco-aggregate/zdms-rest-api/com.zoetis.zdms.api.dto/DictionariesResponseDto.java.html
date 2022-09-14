@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>DictionariesResponseDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">DictionariesResponseDto.java</span></div><h1>DictionariesResponseDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.LocalizedBooleanValueDto;
+import com.zoetis.zdms.api.dto.LocalizedCustomerNativeStatusDto;
+import com.zoetis.zdms.api.dto.LocalizedCustomerStateDto;
+import com.zoetis.zdms.api.dto.LocalizedCustomerTypeDto;
+import com.zoetis.zdms.api.dto.LocalizedErrorCodeDto;
+import com.zoetis.zdms.api.dto.LocalizedProductAvailabilityDto;
+import com.zoetis.zdms.api.dto.LocalizedRejectionReasonDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * DictionariesResponseDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="nc" id="L30">public class DictionariesResponseDto   {</span>
+<span class="nc" id="L31">  @JsonProperty(&quot;localizedCustomerStates&quot;)</span>
+  @Valid
+  private List&lt;LocalizedCustomerStateDto&gt; localizedCustomerStates = null;
+
+<span class="nc" id="L35">  @JsonProperty(&quot;localizedCustomerNativeStatuses&quot;)</span>
+  @Valid
+  private List&lt;LocalizedCustomerNativeStatusDto&gt; localizedCustomerNativeStatuses = null;
+
+<span class="nc" id="L39">  @JsonProperty(&quot;localizedCustomerTypes&quot;)</span>
+  @Valid
+  private List&lt;LocalizedCustomerTypeDto&gt; localizedCustomerTypes = null;
+
+<span class="nc" id="L43">  @JsonProperty(&quot;localizedRejectionReasons&quot;)</span>
+  @Valid
+  private List&lt;LocalizedRejectionReasonDto&gt; localizedRejectionReasons = null;
+
+<span class="nc" id="L47">  @JsonProperty(&quot;localizedProductAvailabilities&quot;)</span>
+  @Valid
+  private List&lt;LocalizedProductAvailabilityDto&gt; localizedProductAvailabilities = null;
+
+<span class="nc" id="L51">  @JsonProperty(&quot;localizedBooleanValues&quot;)</span>
+  @Valid
+  private List&lt;LocalizedBooleanValueDto&gt; localizedBooleanValues = null;
+
+<span class="nc" id="L55">  @JsonProperty(&quot;localizedErrorCodes&quot;)</span>
+  @Valid
+  private List&lt;LocalizedErrorCodeDto&gt; localizedErrorCodes = null;
+
+  public DictionariesResponseDto localizedCustomerStates(List&lt;LocalizedCustomerStateDto&gt; localizedCustomerStates) {
+<span class="nc" id="L60">    this.localizedCustomerStates = localizedCustomerStates;</span>
+<span class="nc" id="L61">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedCustomerStatesItem(LocalizedCustomerStateDto localizedCustomerStatesItem) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    if (this.localizedCustomerStates == null) {</span>
+<span class="nc" id="L66">      this.localizedCustomerStates = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L68">    this.localizedCustomerStates.add(localizedCustomerStatesItem);</span>
+<span class="nc" id="L69">    return this;</span>
+  }
+
+  /**
+   * Get localizedCustomerStates
+   * @return localizedCustomerStates
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedCustomerStateDto&gt; getLocalizedCustomerStates() {
+<span class="nc" id="L81">    return localizedCustomerStates;</span>
+  }
+
+  public void setLocalizedCustomerStates(List&lt;LocalizedCustomerStateDto&gt; localizedCustomerStates) {
+<span class="nc" id="L85">    this.localizedCustomerStates = localizedCustomerStates;</span>
+<span class="nc" id="L86">  }</span>
+
+  public DictionariesResponseDto localizedCustomerNativeStatuses(List&lt;LocalizedCustomerNativeStatusDto&gt; localizedCustomerNativeStatuses) {
+<span class="nc" id="L89">    this.localizedCustomerNativeStatuses = localizedCustomerNativeStatuses;</span>
+<span class="nc" id="L90">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedCustomerNativeStatusesItem(LocalizedCustomerNativeStatusDto localizedCustomerNativeStatusesItem) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">    if (this.localizedCustomerNativeStatuses == null) {</span>
+<span class="nc" id="L95">      this.localizedCustomerNativeStatuses = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L97">    this.localizedCustomerNativeStatuses.add(localizedCustomerNativeStatusesItem);</span>
+<span class="nc" id="L98">    return this;</span>
+  }
+
+  /**
+   * Get localizedCustomerNativeStatuses
+   * @return localizedCustomerNativeStatuses
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedCustomerNativeStatusDto&gt; getLocalizedCustomerNativeStatuses() {
+<span class="nc" id="L110">    return localizedCustomerNativeStatuses;</span>
+  }
+
+  public void setLocalizedCustomerNativeStatuses(List&lt;LocalizedCustomerNativeStatusDto&gt; localizedCustomerNativeStatuses) {
+<span class="nc" id="L114">    this.localizedCustomerNativeStatuses = localizedCustomerNativeStatuses;</span>
+<span class="nc" id="L115">  }</span>
+
+  public DictionariesResponseDto localizedCustomerTypes(List&lt;LocalizedCustomerTypeDto&gt; localizedCustomerTypes) {
+<span class="nc" id="L118">    this.localizedCustomerTypes = localizedCustomerTypes;</span>
+<span class="nc" id="L119">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedCustomerTypesItem(LocalizedCustomerTypeDto localizedCustomerTypesItem) {
+<span class="nc bnc" id="L123" title="All 2 branches missed.">    if (this.localizedCustomerTypes == null) {</span>
+<span class="nc" id="L124">      this.localizedCustomerTypes = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L126">    this.localizedCustomerTypes.add(localizedCustomerTypesItem);</span>
+<span class="nc" id="L127">    return this;</span>
+  }
+
+  /**
+   * Get localizedCustomerTypes
+   * @return localizedCustomerTypes
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedCustomerTypeDto&gt; getLocalizedCustomerTypes() {
+<span class="nc" id="L139">    return localizedCustomerTypes;</span>
+  }
+
+  public void setLocalizedCustomerTypes(List&lt;LocalizedCustomerTypeDto&gt; localizedCustomerTypes) {
+<span class="nc" id="L143">    this.localizedCustomerTypes = localizedCustomerTypes;</span>
+<span class="nc" id="L144">  }</span>
+
+  public DictionariesResponseDto localizedRejectionReasons(List&lt;LocalizedRejectionReasonDto&gt; localizedRejectionReasons) {
+<span class="nc" id="L147">    this.localizedRejectionReasons = localizedRejectionReasons;</span>
+<span class="nc" id="L148">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedRejectionReasonsItem(LocalizedRejectionReasonDto localizedRejectionReasonsItem) {
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    if (this.localizedRejectionReasons == null) {</span>
+<span class="nc" id="L153">      this.localizedRejectionReasons = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L155">    this.localizedRejectionReasons.add(localizedRejectionReasonsItem);</span>
+<span class="nc" id="L156">    return this;</span>
+  }
+
+  /**
+   * Get localizedRejectionReasons
+   * @return localizedRejectionReasons
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedRejectionReasonDto&gt; getLocalizedRejectionReasons() {
+<span class="nc" id="L168">    return localizedRejectionReasons;</span>
+  }
+
+  public void setLocalizedRejectionReasons(List&lt;LocalizedRejectionReasonDto&gt; localizedRejectionReasons) {
+<span class="nc" id="L172">    this.localizedRejectionReasons = localizedRejectionReasons;</span>
+<span class="nc" id="L173">  }</span>
+
+  public DictionariesResponseDto localizedProductAvailabilities(List&lt;LocalizedProductAvailabilityDto&gt; localizedProductAvailabilities) {
+<span class="nc" id="L176">    this.localizedProductAvailabilities = localizedProductAvailabilities;</span>
+<span class="nc" id="L177">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedProductAvailabilitiesItem(LocalizedProductAvailabilityDto localizedProductAvailabilitiesItem) {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">    if (this.localizedProductAvailabilities == null) {</span>
+<span class="nc" id="L182">      this.localizedProductAvailabilities = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L184">    this.localizedProductAvailabilities.add(localizedProductAvailabilitiesItem);</span>
+<span class="nc" id="L185">    return this;</span>
+  }
+
+  /**
+   * Get localizedProductAvailabilities
+   * @return localizedProductAvailabilities
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedProductAvailabilityDto&gt; getLocalizedProductAvailabilities() {
+<span class="nc" id="L197">    return localizedProductAvailabilities;</span>
+  }
+
+  public void setLocalizedProductAvailabilities(List&lt;LocalizedProductAvailabilityDto&gt; localizedProductAvailabilities) {
+<span class="nc" id="L201">    this.localizedProductAvailabilities = localizedProductAvailabilities;</span>
+<span class="nc" id="L202">  }</span>
+
+  public DictionariesResponseDto localizedBooleanValues(List&lt;LocalizedBooleanValueDto&gt; localizedBooleanValues) {
+<span class="nc" id="L205">    this.localizedBooleanValues = localizedBooleanValues;</span>
+<span class="nc" id="L206">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedBooleanValuesItem(LocalizedBooleanValueDto localizedBooleanValuesItem) {
+<span class="nc bnc" id="L210" title="All 2 branches missed.">    if (this.localizedBooleanValues == null) {</span>
+<span class="nc" id="L211">      this.localizedBooleanValues = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L213">    this.localizedBooleanValues.add(localizedBooleanValuesItem);</span>
+<span class="nc" id="L214">    return this;</span>
+  }
+
+  /**
+   * Get localizedBooleanValues
+   * @return localizedBooleanValues
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedBooleanValueDto&gt; getLocalizedBooleanValues() {
+<span class="nc" id="L226">    return localizedBooleanValues;</span>
+  }
+
+  public void setLocalizedBooleanValues(List&lt;LocalizedBooleanValueDto&gt; localizedBooleanValues) {
+<span class="nc" id="L230">    this.localizedBooleanValues = localizedBooleanValues;</span>
+<span class="nc" id="L231">  }</span>
+
+  public DictionariesResponseDto localizedErrorCodes(List&lt;LocalizedErrorCodeDto&gt; localizedErrorCodes) {
+<span class="nc" id="L234">    this.localizedErrorCodes = localizedErrorCodes;</span>
+<span class="nc" id="L235">    return this;</span>
+  }
+
+  public DictionariesResponseDto addLocalizedErrorCodesItem(LocalizedErrorCodeDto localizedErrorCodesItem) {
+<span class="nc bnc" id="L239" title="All 2 branches missed.">    if (this.localizedErrorCodes == null) {</span>
+<span class="nc" id="L240">      this.localizedErrorCodes = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L242">    this.localizedErrorCodes.add(localizedErrorCodesItem);</span>
+<span class="nc" id="L243">    return this;</span>
+  }
+
+  /**
+   * Get localizedErrorCodes
+   * @return localizedErrorCodes
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public List&lt;LocalizedErrorCodeDto&gt; getLocalizedErrorCodes() {
+<span class="nc" id="L255">    return localizedErrorCodes;</span>
+  }
+
+  public void setLocalizedErrorCodes(List&lt;LocalizedErrorCodeDto&gt; localizedErrorCodes) {
+<span class="nc" id="L259">    this.localizedErrorCodes = localizedErrorCodes;</span>
+<span class="nc" id="L260">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L266">      return true;</span>
+    }
+<span class="nc bnc" id="L268" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L269">      return false;</span>
+    }
+<span class="nc" id="L271">    DictionariesResponseDto dictionariesResponse = (DictionariesResponseDto) o;</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">    return Objects.equals(this.localizedCustomerStates, dictionariesResponse.localizedCustomerStates) &amp;&amp;</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">        Objects.equals(this.localizedCustomerNativeStatuses, dictionariesResponse.localizedCustomerNativeStatuses) &amp;&amp;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        Objects.equals(this.localizedCustomerTypes, dictionariesResponse.localizedCustomerTypes) &amp;&amp;</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        Objects.equals(this.localizedRejectionReasons, dictionariesResponse.localizedRejectionReasons) &amp;&amp;</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        Objects.equals(this.localizedProductAvailabilities, dictionariesResponse.localizedProductAvailabilities) &amp;&amp;</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        Objects.equals(this.localizedBooleanValues, dictionariesResponse.localizedBooleanValues) &amp;&amp;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        Objects.equals(this.localizedErrorCodes, dictionariesResponse.localizedErrorCodes);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L283">    return Objects.hash(localizedCustomerStates, localizedCustomerNativeStatuses, localizedCustomerTypes, localizedRejectionReasons, localizedProductAvailabilities, localizedBooleanValues, localizedErrorCodes);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L288">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L289">    sb.append(&quot;class DictionariesResponseDto {\n&quot;);</span>
+    
+<span class="nc" id="L291">    sb.append(&quot;    localizedCustomerStates: &quot;).append(toIndentedString(localizedCustomerStates)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L292">    sb.append(&quot;    localizedCustomerNativeStatuses: &quot;).append(toIndentedString(localizedCustomerNativeStatuses)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L293">    sb.append(&quot;    localizedCustomerTypes: &quot;).append(toIndentedString(localizedCustomerTypes)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L294">    sb.append(&quot;    localizedRejectionReasons: &quot;).append(toIndentedString(localizedRejectionReasons)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L295">    sb.append(&quot;    localizedProductAvailabilities: &quot;).append(toIndentedString(localizedProductAvailabilities)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L296">    sb.append(&quot;    localizedBooleanValues: &quot;).append(toIndentedString(localizedBooleanValues)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L297">    sb.append(&quot;    localizedErrorCodes: &quot;).append(toIndentedString(localizedErrorCodes)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L298">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L299">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L307" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L308">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L310">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

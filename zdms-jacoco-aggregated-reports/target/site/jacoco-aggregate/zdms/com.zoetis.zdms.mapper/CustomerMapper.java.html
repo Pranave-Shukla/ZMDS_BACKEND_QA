@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">CustomerMapper.java</span></div><h1>CustomerMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.CustomerDto;
+import com.zoetis.zdms.api.dto.CustomerLookupDto;
+import com.zoetis.zdms.api.dto.CustomerLookupResponseDto;
+import com.zoetis.zdms.api.dto.CustomersResponseDto;
+import com.zoetis.zdms.model.Customer;
+import com.zoetis.zdms.model.view.CustomerLookupView;
+import com.zoetis.zdms.model.view.CustomerView;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+
+/*
+ *   Mapping iterable objects should be handled in this topic: https://github.com/mapstruct/mapstruct/issues/607
+ *   At this moment it is beta version
+ *  */
+
+@Mapper(componentModel = &quot;spring&quot;, uses = {DictionariesMapper.class, SourceSystemMapper.class})
+public interface CustomerMapper {
+
+    @Mapping(target = &quot;nativeStatus&quot;, source = &quot;localStatus&quot;)
+    @Mapping(target = &quot;sourceSystem&quot;, source = &quot;source&quot;)
+    CustomerDto customerViewToCustomerDto(CustomerView customerView);
+
+    default CustomersResponseDto pagedCustomersToGetCustomersResponseDto(Page&lt;CustomerView&gt; pagedCustomers) {
+<span class="fc" id="L29">        return pagedCustomersToGetCustomersResponseDto(pagedCustomers.getNumber(), pagedCustomers.getContent(),</span>
+<span class="fc" id="L30">                pagedCustomers.getTotalPages(), pagedCustomers.getTotalElements());</span>
+    }
+
+    @Mapping(target = &quot;pageInfo.pageNumber&quot;, source = &quot;pageNumber&quot;)
+    @Mapping(target = &quot;pageInfo.totalElements&quot;, source = &quot;totalElements&quot;)
+    @Mapping(target = &quot;pageInfo.totalPages&quot;, source = &quot;totalPages&quot;)
+    @Mapping(target = &quot;customers&quot;, source = &quot;elements&quot;)
+    CustomersResponseDto pagedCustomersToGetCustomersResponseDto(Integer pageNumber, List&lt;CustomerView&gt; elements, Integer totalPages, Long totalElements);
+
+    @Mapping(target = &quot;nativeStatus&quot;, source = &quot;status.localStatus&quot;)
+    @Mapping(target = &quot;state&quot;, source = &quot;state&quot;)
+    @Mapping(target = &quot;address&quot;, source = &quot;formattedAddress&quot;)
+    @Mapping(target = &quot;companyName&quot;, source = &quot;formattedCompanyName&quot;)
+    @Mapping(target = &quot;rejectionReason&quot;, source = &quot;status.rejectionReason&quot;)
+    @Mapping(target = &quot;sourceSystem&quot;, source = &quot;source&quot;)
+    CustomerDto customerToCustomerDto(Customer customer);
+
+    @Mapping(target = &quot;erpId&quot;, source = &quot;id&quot;)
+    @Mapping(target = &quot;type&quot;, source = &quot;accountType&quot;)
+    CustomerLookupDto customerLookupViewToDto(CustomerLookupView customerLookupView);
+
+    @Mapping(target = &quot;customerLookup&quot;, source = &quot;customerLookupView&quot;)
+    CustomerLookupResponseDto customerLookupViewToResponseDto(CustomerLookupView customerLookupView);
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

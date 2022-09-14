@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>zdms-master</artifactId>
+        <groupId>com.zoetis</groupId>
+        <version>1.0.25-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>zdms-jacoco-aggregated-reports</artifactId>
+
+    <properties>
+        <zdms.version>1.0.25-SNAPSHOT</zdms.version>
+        <zdms-rest-api.version>1.0.25-SNAPSHOT</zdms-rest-api.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zoetis</groupId>
+            <artifactId>zdms</artifactId>
+            <version>${zdms.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zoetis</groupId>
+            <artifactId>zdms-rest-api</artifactId>
+            <version>${zdms-rest-api.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

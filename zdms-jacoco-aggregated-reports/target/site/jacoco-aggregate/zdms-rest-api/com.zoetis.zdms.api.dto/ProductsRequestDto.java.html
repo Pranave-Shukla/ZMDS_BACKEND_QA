@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductsRequestDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">ProductsRequestDto.java</span></div><h1>ProductsRequestDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.zoetis.zdms.api.dto.LanguageDto;
+import com.zoetis.zdms.api.dto.SearchProductsByDto;
+import com.zoetis.zdms.api.dto.SortDirectionDto;
+import com.zoetis.zdms.api.dto.SortProductsByDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * ProductsRequestDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="nc" id="L29">public class ProductsRequestDto   {</span>
+<span class="nc" id="L30">  @JsonProperty(&quot;pageSize&quot;)</span>
+<span class="nc" id="L31">  private Integer pageSize = 10;</span>
+
+<span class="nc" id="L33">  @JsonProperty(&quot;pageNumber&quot;)</span>
+<span class="nc" id="L34">  private Integer pageNumber = 0;</span>
+
+  @JsonProperty(&quot;sortBy&quot;)
+  private SortProductsByDto sortBy;
+
+  @JsonProperty(&quot;sortDirection&quot;)
+  private SortDirectionDto sortDirection;
+
+<span class="nc" id="L42">  @JsonProperty(&quot;filters&quot;)</span>
+  @Valid
+  private Set&lt;SearchProductsByDto&gt; filters = null;
+
+  @JsonProperty(&quot;language&quot;)
+  private LanguageDto language;
+
+  public ProductsRequestDto pageSize(Integer pageSize) {
+<span class="nc" id="L50">    this.pageSize = pageSize;</span>
+<span class="nc" id="L51">    return this;</span>
+  }
+
+  /**
+   * Get pageSize
+   * minimum: 0
+   * @return pageSize
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+@Min(0) 
+  public Integer getPageSize() {
+<span class="nc" id="L63">    return pageSize;</span>
+  }
+
+  public void setPageSize(Integer pageSize) {
+<span class="nc" id="L67">    this.pageSize = pageSize;</span>
+<span class="nc" id="L68">  }</span>
+
+  public ProductsRequestDto pageNumber(Integer pageNumber) {
+<span class="nc" id="L71">    this.pageNumber = pageNumber;</span>
+<span class="nc" id="L72">    return this;</span>
+  }
+
+  /**
+   * Get pageNumber
+   * minimum: 0
+   * @return pageNumber
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+@Min(0) 
+  public Integer getPageNumber() {
+<span class="nc" id="L84">    return pageNumber;</span>
+  }
+
+  public void setPageNumber(Integer pageNumber) {
+<span class="nc" id="L88">    this.pageNumber = pageNumber;</span>
+<span class="nc" id="L89">  }</span>
+
+  public ProductsRequestDto sortBy(SortProductsByDto sortBy) {
+<span class="nc" id="L92">    this.sortBy = sortBy;</span>
+<span class="nc" id="L93">    return this;</span>
+  }
+
+  /**
+   * Get sortBy
+   * @return sortBy
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+  @Valid
+
+  public SortProductsByDto getSortBy() {
+<span class="nc" id="L106">    return sortBy;</span>
+  }
+
+  public void setSortBy(SortProductsByDto sortBy) {
+<span class="nc" id="L110">    this.sortBy = sortBy;</span>
+<span class="nc" id="L111">  }</span>
+
+  public ProductsRequestDto sortDirection(SortDirectionDto sortDirection) {
+<span class="nc" id="L114">    this.sortDirection = sortDirection;</span>
+<span class="nc" id="L115">    return this;</span>
+  }
+
+  /**
+   * Get sortDirection
+   * @return sortDirection
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+  @Valid
+
+  public SortDirectionDto getSortDirection() {
+<span class="nc" id="L128">    return sortDirection;</span>
+  }
+
+  public void setSortDirection(SortDirectionDto sortDirection) {
+<span class="nc" id="L132">    this.sortDirection = sortDirection;</span>
+<span class="nc" id="L133">  }</span>
+
+  public ProductsRequestDto filters(Set&lt;SearchProductsByDto&gt; filters) {
+<span class="nc" id="L136">    this.filters = filters;</span>
+<span class="nc" id="L137">    return this;</span>
+  }
+
+  public ProductsRequestDto addFiltersItem(SearchProductsByDto filtersItem) {
+<span class="nc bnc" id="L141" title="All 2 branches missed.">    if (this.filters == null) {</span>
+<span class="nc" id="L142">      this.filters = new LinkedHashSet&lt;&gt;();</span>
+    }
+<span class="nc" id="L144">    this.filters.add(filtersItem);</span>
+<span class="nc" id="L145">    return this;</span>
+  }
+
+  /**
+   * Get filters
+   * @return filters
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public Set&lt;SearchProductsByDto&gt; getFilters() {
+<span class="nc" id="L157">    return filters;</span>
+  }
+
+  @JsonDeserialize(as = LinkedHashSet.class)
+  public void setFilters(Set&lt;SearchProductsByDto&gt; filters) {
+<span class="nc" id="L162">    this.filters = filters;</span>
+<span class="nc" id="L163">  }</span>
+
+  public ProductsRequestDto language(LanguageDto language) {
+<span class="nc" id="L166">    this.language = language;</span>
+<span class="nc" id="L167">    return this;</span>
+  }
+
+  /**
+   * Get language
+   * @return language
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+  @Valid
+
+  public LanguageDto getLanguage() {
+<span class="nc" id="L180">    return language;</span>
+  }
+
+  public void setLanguage(LanguageDto language) {
+<span class="nc" id="L184">    this.language = language;</span>
+<span class="nc" id="L185">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L190" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L191">      return true;</span>
+    }
+<span class="nc bnc" id="L193" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L194">      return false;</span>
+    }
+<span class="nc" id="L196">    ProductsRequestDto productsRequest = (ProductsRequestDto) o;</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">    return Objects.equals(this.pageSize, productsRequest.pageSize) &amp;&amp;</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        Objects.equals(this.pageNumber, productsRequest.pageNumber) &amp;&amp;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        Objects.equals(this.sortBy, productsRequest.sortBy) &amp;&amp;</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        Objects.equals(this.sortDirection, productsRequest.sortDirection) &amp;&amp;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        Objects.equals(this.filters, productsRequest.filters) &amp;&amp;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        Objects.equals(this.language, productsRequest.language);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L207">    return Objects.hash(pageSize, pageNumber, sortBy, sortDirection, filters, language);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L212">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L213">    sb.append(&quot;class ProductsRequestDto {\n&quot;);</span>
+    
+<span class="nc" id="L215">    sb.append(&quot;    pageSize: &quot;).append(toIndentedString(pageSize)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L216">    sb.append(&quot;    pageNumber: &quot;).append(toIndentedString(pageNumber)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L217">    sb.append(&quot;    sortBy: &quot;).append(toIndentedString(sortBy)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L218">    sb.append(&quot;    sortDirection: &quot;).append(toIndentedString(sortDirection)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L219">    sb.append(&quot;    filters: &quot;).append(toIndentedString(filters)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L220">    sb.append(&quot;    language: &quot;).append(toIndentedString(language)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L221">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L222">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L230" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L231">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L233">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

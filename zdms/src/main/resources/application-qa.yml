@@ -1,0 +1,40 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: zmds-qa.corp.zoetis.com
+    key-store: classpath:ssl/zmds-qa.corp.zoetis.com.jks
+    key-store-password: ENC(iDs62NRv02B3N8m3Zxqn0xenJFas29cEmHpmX6PcYO8cKIA1vSOwPzSFZeO4j4bC)
+    key-password: ENC(iDs62NRv02B3N8m3Zxqn0xenJFas29cEmHpmX6PcYO8cKIA1vSOwPzSFZeO4j4bC)
+
+spring:
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.OracleDialect
+  datasource:
+    url: jdbc:oracle:thin:@kzdl3120.corp.zoetis.com:61000/ZMDRQ.corp.zoetis.com
+    username: ENC(HD0mFVWwedJFx/lZd2rYJdPXcEtjnkHha7ye92xw0v/N3U82M7ve6HKO1hRz66I6)
+    password: ENC(wgQRU6xsepyMIZKUziTKG0BHTHvlBCzkW/442Ye5Z1Fngq44OzBhCk7dPvmhrbXK)
+    driver:
+      class: oracle.jdbc.driver.OracleDrive
+  security:
+    saml2:
+      relyingparty:
+        registration:
+          ad:
+            entity-id: "https://zmds-qa.corp.zoetis.com"
+            acs:
+              location: "{baseUrl}/api/v1/login/saml2/sso/ad"
+            signing.credentials:
+              - private-key-location: "classpath:ssl/zmds-qa.corp.zoetis.com.key"
+                certificate-location: "classpath:ssl/zmds-qa.corp.zoetis.com.cer"
+            identity-provider:
+              entity-id: "https://sts.windows.net/a10ba484-6331-40ee-b0ab-cb737ca60a80/"
+              verification.credentials:
+                - certificate-location: "classpath:azure-ad/zmds-qa.azure-ad.cer"
+              singlesignon.url: "https://login.microsoftonline.com/a10ba484-6331-40ee-b0ab-cb737ca60a80/saml2"
+              singlesignon.sign-request: true
+              singlesignon.binding: "POST"
+      login.processing-url: "/api/v1/login/saml2/sso/"
+      handler:
+        success.default-url: "https://zmds-qa.corp.zoetis.com/"

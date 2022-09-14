@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>PageFactory.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.service.impl.factory</a> &gt; <span class="el_source">PageFactory.java</span></div><h1>PageFactory.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.service.impl.factory;
+
+import com.querydsl.core.types.Path;
+import com.zoetis.zdms.model.QAudit;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortDirection;
+import com.zoetis.zdms.model.view.QCustomerView;
+import com.zoetis.zdms.model.view.QProductView;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
+
+import java.util.*;
+
+@Component
+<span class="fc" id="L18">public class PageFactory {</span>
+
+<span class="fc" id="L20">    public static final Map&lt;SortBy.Customer, List&lt;String&gt;&gt; CUSTOMER_SORT_KEYS = new EnumMap&lt;&gt;(SortBy.Customer.class);</span>
+<span class="fc" id="L21">    private static final Map&lt;SortBy.Product, List&lt;String&gt;&gt; PRODUCT_SORT_KEYS = new EnumMap&lt;&gt;(SortBy.Product.class);</span>
+<span class="fc" id="L22">    private static final Map&lt;SortBy.Audit, List&lt;String&gt;&gt; AUDITS_SORT_KEYS = new EnumMap&lt;&gt;(SortBy.Audit.class);</span>
+
+    static {
+        /*
+            erpId has been added to keep the order of retrieved data consistent when paged
+         */
+<span class="fc" id="L28">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.STATE, Arrays.asList(getFieldNameFor(QCustomerView.customerView.stateNativeLocalized), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L29">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.ERP_ID, Collections.singletonList(getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L30">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.COMPANY_NAME, Arrays.asList(getFieldNameFor(QCustomerView.customerView.companyName), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L31">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.ADDRESS, Arrays.asList(getFieldNameFor(QCustomerView.customerView.address), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L32">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.NATIVE_STATUS, Arrays.asList(getFieldNameFor(QCustomerView.customerView.localStatusLocalized), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L33">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.TYPE, Arrays.asList(getFieldNameFor(QCustomerView.customerView.typeLocalized), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L34">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.NATIVE_CREATED_DATE, Arrays.asList(getFieldNameFor(QCustomerView.customerView.nativeCreatedDate), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L35">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.SOURCE, Arrays.asList(getFieldNameFor(QCustomerView.customerView.source), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+<span class="fc" id="L36">        CUSTOMER_SORT_KEYS.put(SortBy.Customer.REJECTION_REASON, Arrays.asList(getFieldNameFor(QCustomerView.customerView.rejectionReason), getFieldNameFor(QCustomerView.customerView.erpId)));</span>
+
+        /*
+            productId has been added to keep the order of retrieved data consistent when paged
+         */
+<span class="fc" id="L41">        PRODUCT_SORT_KEYS.put(SortBy.Product.IS_VISIBLE, Arrays.asList(getFieldNameFor(QProductView.productView.isVisibleLocalized), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L42">        PRODUCT_SORT_KEYS.put(SortBy.Product.AVAILABILITY, Arrays.asList(getFieldNameFor(QProductView.productView.availability), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L43">        PRODUCT_SORT_KEYS.put(SortBy.Product.PRODUCT_ID, Collections.singletonList(getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L44">        PRODUCT_SORT_KEYS.put(SortBy.Product.DESCRIPTION, Arrays.asList(getFieldNameFor(QProductView.productView.description), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L45">        PRODUCT_SORT_KEYS.put(SortBy.Product.MINIMUM_ORDER_QUANTITY, Arrays.asList(getFieldNameFor(QProductView.productView.minimumOrderQuantity), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L46">        PRODUCT_SORT_KEYS.put(SortBy.Product.MAXIMUM_ORDER_QUANTITY, Arrays.asList(getFieldNameFor(QProductView.productView.maximumOrderQuantity), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L47">        PRODUCT_SORT_KEYS.put(SortBy.Product.HAS_MEDIA, Arrays.asList(getFieldNameFor(QProductView.productView.hasMediaLocalized), getFieldNameFor(QProductView.productView.productId)));</span>
+<span class="fc" id="L48">        PRODUCT_SORT_KEYS.put(SortBy.Product.SOURCE, Arrays.asList(getFieldNameFor(QProductView.productView.source), getFieldNameFor(QProductView.productView.productId)));</span>
+
+        /*
+            id has been added to keep the order of retrieved data consistent when paged
+         */
+<span class="fc" id="L53">        AUDITS_SORT_KEYS.put(SortBy.Audit.DATA_SET, Arrays.asList(getFieldNameFor(QAudit.audit.dataSet), getFieldNameFor(QAudit.audit.id)));</span>
+<span class="fc" id="L54">        AUDITS_SORT_KEYS.put(SortBy.Audit.HEADER, Arrays.asList(getFieldNameFor(QAudit.audit.transactionHeader), getFieldNameFor(QAudit.audit.id)));</span>
+<span class="fc" id="L55">        AUDITS_SORT_KEYS.put(SortBy.Audit.MESSAGE, Arrays.asList(getFieldNameFor(QAudit.audit.transactionMessage), getFieldNameFor(QAudit.audit.id)));</span>
+<span class="fc" id="L56">        AUDITS_SORT_KEYS.put(SortBy.Audit.DATE, Arrays.asList(getFieldNameFor(QAudit.audit.logTime), getFieldNameFor(QAudit.audit.id)));</span>
+<span class="fc" id="L57">        AUDITS_SORT_KEYS.put(SortBy.Audit.INITIATOR, Arrays.asList(getFieldNameFor(QAudit.audit.logBy), getFieldNameFor(QAudit.audit.id)));</span>
+<span class="fc" id="L58">    }</span>
+
+    private static String getFieldNameFor(Path&lt;?&gt; path) {
+<span class="fc" id="L61">        return path.toString().replaceFirst(path.getRoot() + &quot;.&quot;, StringUtils.EMPTY);</span>
+    }
+
+    public Pageable buildCustomerPageRequest(Long elementsCounts, Integer pageNumber, Integer pageSize, SortDirection sortDirection, SortBy.Customer sortBy) {
+<span class="fc" id="L65">        int maximumPageNumber = getMaximumPageNumber(elementsCounts, pageSize);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        int limitedPageNumber = pageNumber &gt; maximumPageNumber ? maximumPageNumber : pageNumber;</span>
+
+<span class="fc" id="L68">        return PageRequest.of(limitedPageNumber, pageSize, Sort.by(Sort.Direction.fromString(sortDirection.getValue()), CUSTOMER_SORT_KEYS.get(sortBy).toArray(new String[0])));</span>
+    }
+
+    public Pageable buildProductPageRequest(Long elementsCounts, Integer pageNumber, Integer pageSize, SortDirection sortDirection, SortBy.Product sortBy) {
+<span class="fc" id="L72">        int maximumPageNumber = getMaximumPageNumber(elementsCounts, pageSize);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        int limitedPageNumber = pageNumber &gt; maximumPageNumber ? maximumPageNumber : pageNumber;</span>
+
+<span class="fc" id="L75">        return PageRequest.of(limitedPageNumber, pageSize, Sort.by(Sort.Direction.fromString(sortDirection.getValue()), PRODUCT_SORT_KEYS.get(sortBy).toArray(new String[0])));</span>
+    }
+
+    public Pageable buildAuditPageRequest(Long elementsCounts, Integer pageNumber, Integer pageSize, SortDirection sortDirection, SortBy.Audit sortBy) {
+<span class="fc" id="L79">        int maximumPageNumber = getMaximumPageNumber(elementsCounts, pageSize);</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        int limitedPageNumber = pageNumber &gt; maximumPageNumber ? maximumPageNumber : pageNumber;</span>
+
+<span class="fc" id="L82">        return PageRequest.of(limitedPageNumber, pageSize, Sort.by(Sort.Direction.fromString(sortDirection.getValue()), AUDITS_SORT_KEYS.get(sortBy).toArray(new String[0])));</span>
+    }
+
+    /* 1 has to be subtracted due to paging */
+    private int getMaximumPageNumber(long elementsCount, int pageSize) {
+<span class="fc" id="L87">        int maximumPageNumber =  (int)Math.ceil((double)elementsCount / (double)pageSize) - 1;</span>
+
+        /* if maximumPageNumber is negative set default 0 page */
+<span class="fc" id="L90">        return Math.max(maximumPageNumber, 0);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductStatus.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">ProductStatus.java</span></div><h1>ProductStatus.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import com.zoetis.zdms.converter.BooleanValueToStringConverter;
+import com.zoetis.zdms.model.dictionary.Availability;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+import java.util.Set;
+
+@Entity
+@Table(name = &quot;ZMDS_PRODUCT_STATUS&quot;, schema = &quot;ZMDS_ODS&quot;)
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L21">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L22">@NoArgsConstructor</span>
+@Getter
+<span class="nc" id="L24">@Setter</span>
+public class ProductStatus implements Serializable {
+
+    @Id
+    @Column(name = &quot;ID&quot;, insertable = false, nullable = false)
+<span class="nc" id="L29">    private Integer id;</span>
+
+    @Column(name = &quot;PRODUCT_ID&quot;, insertable = false, nullable = false)
+<span class="nc" id="L32">    private Integer productId;</span>
+
+    @ManyToOne
+    @JoinColumn(name = &quot;PRODUCT_ID&quot;, insertable = false, updatable = false, nullable = false)
+<span class="nc" id="L36">    private Product product;</span>
+
+    @OneToMany(mappedBy = &quot;productStatus&quot;, cascade = CascadeType.ALL)
+<span class="nc" id="L39">    private Set&lt;ProductMediaFile&gt; productMediaFiles;</span>
+
+    @ManyToOne
+    @JoinColumn(name = &quot;SYSTEM_ID&quot;, insertable = false, updatable = false, nullable = false)
+<span class="nc" id="L43">    private SourceSystem sourceSystem;</span>
+
+    @Column(name = &quot;MIN_ORDER_QUANTITY&quot;, insertable = false)
+<span class="nc" id="L46">    private Integer minimumOrderQuantity;</span>
+
+    @Column(name = &quot;MAX_ORDER_QUANTITY&quot;, insertable = false)
+<span class="nc" id="L49">    private Integer maximumOrderQuantity;</span>
+
+    @Column(name = &quot;ASSOC_PRODUCTS&quot;, insertable = false)
+<span class="nc" id="L52">    private String associatedProducts;</span>
+
+    @Column(name = &quot;IS_VISIBLE&quot;, insertable = false, nullable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L56">    private BooleanValue isVisible;</span>
+
+    @Column(name = &quot;AVAILABILITY&quot;, insertable = false, nullable = false)
+    @Enumerated(EnumType.STRING)
+<span class="nc" id="L60">    private Availability availability;</span>
+
+    @Column(name = &quot;UPDATED_DATE&quot;, insertable = false, nullable = false)
+<span class="nc" id="L63">    private OffsetDateTime updatedDate;</span>
+
+    @Column(name = &quot;UPDATED_BY&quot;, insertable = false, length = 10)
+<span class="nc" id="L66">    private String updatedBy;</span>
+
+    @Column(name = &quot;PROCESSED_ETL&quot;, insertable = false, updatable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L70">    private BooleanValue etlProcessed;</span>
+
+    @Column(name = &quot;PROCESSED_APP&quot;)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L74">    private BooleanValue appProcessed;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

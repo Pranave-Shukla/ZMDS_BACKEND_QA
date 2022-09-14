@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>AuditController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.rest</a> &gt; <span class="el_source">AuditController.java</span></div><h1>AuditController.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.rest;
+
+import com.zoetis.zdms.api.dto.AuditsRequestDto;
+import com.zoetis.zdms.api.dto.AuditsResponseDto;
+import com.zoetis.zdms.api.rest.AuditApi;
+import com.zoetis.zdms.mapper.AuditMapper;
+import com.zoetis.zdms.mapper.SearchByMapper;
+import com.zoetis.zdms.mapper.SortByMapper;
+import com.zoetis.zdms.mapper.SortDirectionMapper;
+import com.zoetis.zdms.model.Audit;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortBy;
+import com.zoetis.zdms.model.dictionary.pageparameter.sort.SortDirection;
+import com.zoetis.zdms.rest.factory.ResponseEntityFactory;
+import com.zoetis.zdms.service.AuditService;
+import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.SetUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
+@RestController
+<span class="fc" id="L29">@AllArgsConstructor</span>
+// @CrossOrigin(origins = &quot;*&quot;, allowedHeaders=&quot;*&quot;)
+public class AuditController implements AuditApi {
+
+    private final AuditService auditService;
+
+    private final SortByMapper sortByMapper;
+    private final SearchByMapper searchByMapper;
+    private final SortDirectionMapper sortDirectionMapper;
+    private final AuditMapper auditMapper;
+
+    @Override
+    public ResponseEntity&lt;AuditsResponseDto&gt; getAudits(AuditsRequestDto auditsRequestDto) {
+<span class="nc" id="L42">        SortDirection sortDirection = sortDirectionMapper.map(auditsRequestDto.getSortDirection());</span>
+<span class="nc" id="L43">        SortBy.Audit sortBy = sortByMapper.mapSortAuditsDto(auditsRequestDto.getSortBy());</span>
+<span class="nc" id="L44">        Integer pageNumber = auditsRequestDto.getPageNumber();</span>
+<span class="nc" id="L45">        Integer pageSize = auditsRequestDto.getPageSize();</span>
+
+
+<span class="nc" id="L48">        Set&lt;SearchBy&lt;SearchByField.Audit&gt;&gt; searchBySet = SetUtils.emptyIfNull(auditsRequestDto.getFilters())</span>
+<span class="nc" id="L49">                .stream()</span>
+<span class="nc" id="L50">                .map(searchByMapper::mapAuditSearchByField)</span>
+<span class="nc" id="L51">                .collect(Collectors.toSet());</span>
+
+<span class="nc" id="L53">        Page&lt;Audit&gt; audits = auditService.getAudits(pageNumber, pageSize, sortDirection, sortBy, searchBySet);</span>
+
+<span class="nc" id="L55">        AuditsResponseDto auditsDto = auditMapper.pagedAuditsToGetAuditsResponseDto(audits);</span>
+
+<span class="nc" id="L57">        return ResponseEntityFactory.buildOk(auditsDto);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

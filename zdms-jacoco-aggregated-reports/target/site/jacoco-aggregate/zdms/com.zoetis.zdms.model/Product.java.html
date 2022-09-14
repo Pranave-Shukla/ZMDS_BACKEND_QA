@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Product.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">Product.java</span></div><h1>Product.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import com.zoetis.zdms.converter.BooleanValueToStringConverter;
+import com.zoetis.zdms.model.dictionary.BooleanValue;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+import java.util.Set;
+
+@Entity
+@Table(name = &quot;ZMDS_PRODUCT_IN&quot;, schema = &quot;ZMDS_ODS&quot;)
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Immutable
+<span class="nc" id="L22">@AllArgsConstructor(staticName = &quot;of&quot;)</span>
+<span class="nc" id="L23">@NoArgsConstructor</span>
+@Getter
+<span class="nc" id="L25">@Setter</span>
+public class Product implements Serializable {
+
+    @Id
+    @Column(name = &quot;PRODUCT_ID&quot;, insertable = false, nullable = false)
+<span class="nc" id="L30">    private Integer id;</span>
+
+    @Column(name = &quot;PRODUCT_LOCAL_NAME&quot;, insertable = false, nullable = false)
+<span class="nc" id="L33">    private String localName;</span>
+
+    @Column(name = &quot;PRODUCT_GLOBAL_NAME&quot;, insertable = false)
+<span class="nc" id="L36">    private String globalName;</span>
+
+    @Column(name = &quot;PRODUCT_LOCAL_DESC&quot;, insertable = false)
+<span class="nc" id="L39">    private String localDescription;</span>
+
+    @Column(name = &quot;PRODUCT_GLOBAL_DESC&quot;, insertable = false)
+<span class="nc" id="L42">    private String globalDescription;</span>
+
+    @Column(name = &quot;PRICE&quot;, insertable = false, nullable = false, precision = 2)
+<span class="nc" id="L45">    private Double price;</span>
+
+    @Column(name = &quot;PRICE_UNIT_OF_MEASURE&quot;, insertable = false, nullable = false, length = 3)
+<span class="nc" id="L48">    private String priceUnitOfMeasure;</span>
+
+    @Column(name = &quot;UPDATED_DATE_NATIVE&quot;, insertable = false, nullable = false)
+<span class="nc" id="L51">    private OffsetDateTime nativeUpdatedDate;</span>
+
+    @Column(name = &quot;UPDATED_DATE_LOCAL&quot;, insertable = false)
+<span class="nc" id="L54">    private OffsetDateTime localUpdatedDate;</span>
+
+    @Column(name = &quot;UPDATED_BY_RUNID&quot;, insertable = false, nullable = false)
+<span class="nc" id="L57">    private Integer updatedByRunId;</span>
+
+    @Column(name = &quot;PROCESSED_ETL&quot;, insertable = false, nullable = false)
+    @Convert(converter = BooleanValueToStringConverter.class)
+<span class="nc" id="L61">    private BooleanValue etlProcessed;</span>
+
+    @OneToMany(mappedBy = &quot;product&quot;, cascade = CascadeType.ALL)
+<span class="nc" id="L64">    private Set&lt;ProductStatus&gt; productStatuses;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

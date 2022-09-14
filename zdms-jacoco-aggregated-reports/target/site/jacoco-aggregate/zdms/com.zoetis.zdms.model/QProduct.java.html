@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>QProduct.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model</a> &gt; <span class="el_source">QProduct.java</span></div><h1>QProduct.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.processing.Generated;
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
+
+
+/**
+ * QProduct is a Querydsl query type for Product
+ */
+@Generated(&quot;com.querydsl.codegen.DefaultEntitySerializer&quot;)
+public class QProduct extends EntityPathBase&lt;Product&gt; {
+
+    private static final long serialVersionUID = -257688353L;
+
+<span class="fc" id="L21">    public static final QProduct product = new QProduct(&quot;product&quot;);</span>
+
+<span class="pc" id="L23">    public final EnumPath&lt;com.zoetis.zdms.model.dictionary.BooleanValue&gt; etlProcessed = createEnum(&quot;etlProcessed&quot;, com.zoetis.zdms.model.dictionary.BooleanValue.class);</span>
+
+<span class="pc" id="L25">    public final StringPath globalDescription = createString(&quot;globalDescription&quot;);</span>
+
+<span class="pc" id="L27">    public final StringPath globalName = createString(&quot;globalName&quot;);</span>
+
+<span class="pc" id="L29">    public final NumberPath&lt;Integer&gt; id = createNumber(&quot;id&quot;, Integer.class);</span>
+
+<span class="pc" id="L31">    public final StringPath localDescription = createString(&quot;localDescription&quot;);</span>
+
+<span class="pc" id="L33">    public final StringPath localName = createString(&quot;localName&quot;);</span>
+
+<span class="pc" id="L35">    public final DateTimePath&lt;java.time.OffsetDateTime&gt; localUpdatedDate = createDateTime(&quot;localUpdatedDate&quot;, java.time.OffsetDateTime.class);</span>
+
+<span class="pc" id="L37">    public final DateTimePath&lt;java.time.OffsetDateTime&gt; nativeUpdatedDate = createDateTime(&quot;nativeUpdatedDate&quot;, java.time.OffsetDateTime.class);</span>
+
+<span class="pc" id="L39">    public final NumberPath&lt;Double&gt; price = createNumber(&quot;price&quot;, Double.class);</span>
+
+<span class="pc" id="L41">    public final StringPath priceUnitOfMeasure = createString(&quot;priceUnitOfMeasure&quot;);</span>
+
+<span class="pc" id="L43">    public final SetPath&lt;ProductStatus, QProductStatus&gt; productStatuses = this.&lt;ProductStatus, QProductStatus&gt;createSet(&quot;productStatuses&quot;, ProductStatus.class, QProductStatus.class, PathInits.DIRECT2);</span>
+
+<span class="pc" id="L45">    public final NumberPath&lt;Integer&gt; updatedByRunId = createNumber(&quot;updatedByRunId&quot;, Integer.class);</span>
+
+    public QProduct(String variable) {
+<span class="fc" id="L48">        super(Product.class, forVariable(variable));</span>
+<span class="fc" id="L49">    }</span>
+
+    public QProduct(Path&lt;? extends Product&gt; path) {
+<span class="nc" id="L52">        super(path.getType(), path.getMetadata());</span>
+<span class="nc" id="L53">    }</span>
+
+    public QProduct(PathMetadata metadata) {
+<span class="fc" id="L56">        super(Product.class, metadata);</span>
+<span class="fc" id="L57">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

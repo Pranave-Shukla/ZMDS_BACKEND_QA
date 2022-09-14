@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>DictionariesMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">DictionariesMapper.java</span></div><h1>DictionariesMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.*;
+import com.zoetis.zdms.model.dictionary.AccountType;
+import com.zoetis.zdms.model.dictionary.CustomerStatus;
+import com.zoetis.zdms.model.dictionary.localized.booleanvalue.LocalizedBooleanValue;
+import com.zoetis.zdms.model.dictionary.localized.customerstate.LocalizedCustomerState;
+import com.zoetis.zdms.model.dictionary.localized.customerstatus.LocalizedCustomerStatus;
+import com.zoetis.zdms.model.dictionary.localized.customertype.LocalizedCustomerType;
+import com.zoetis.zdms.model.dictionary.localized.errorcode.LocalizedErrorCode;
+import com.zoetis.zdms.model.dictionary.localized.productavailability.LocalizedProductAvailability;
+import com.zoetis.zdms.model.dictionary.localized.rejectionreason.LocalizedRejectionReason;
+import org.apache.commons.lang3.ObjectUtils;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ValueMapping;
+
+import java.util.List;
+import java.util.Objects;
+
+@Mapper(componentModel = &quot;spring&quot;)
+public interface DictionariesMapper {
+
+    @ValueMapping(source = &quot;VET_PRACTICE&quot;, target = &quot;VET_PRACTICE&quot;)
+    @ValueMapping(source = MappingConstants.ANY_UNMAPPED, target = &quot;OTHER&quot;)
+    CustomerTypeDto accountTypeToCustomerTypeDto(AccountType accountType);
+
+    @Mapping(target = &quot;value&quot;, source = &quot;id.value&quot;)
+    @Mapping(target = &quot;localizedValue&quot;, source = &quot;localizedValue&quot;)
+    LocalizedBooleanValueDto mapLocalizedBooleanValueToDto(LocalizedBooleanValue localizedBooleanValue);
+
+    List&lt;LocalizedBooleanValueDto&gt; mapLocalizedBooleanValuesToDto(List&lt;LocalizedBooleanValue&gt; localizedBooleanValues);
+
+    @Mapping(target = &quot;errorCode&quot;, source = &quot;id.errorCode&quot;)
+    @Mapping(target = &quot;localizedErrorCode&quot;, source = &quot;localizedErrorCode&quot;)
+    LocalizedErrorCodeDto mapLocalizedErrorCodeToDto(LocalizedErrorCode localizedErrorCode);
+
+    List&lt;LocalizedErrorCodeDto&gt; mapLocalizedErrorCodesToDto(List&lt;LocalizedErrorCode&gt; localizedErrorCodes);
+
+    @Mapping(target = &quot;state&quot;, source = &quot;id.state&quot;)
+    @Mapping(target = &quot;localizedState&quot;, source = &quot;localizedState&quot;)
+    LocalizedCustomerStateDto mapLocalizedCustomerStateToDto(LocalizedCustomerState localizedCustomerState);
+
+    List&lt;LocalizedCustomerStateDto&gt; mapLocalizedCustomerStatesToDto(List&lt;LocalizedCustomerState&gt; localizedCustomerStates);
+
+    @Mapping(target = &quot;nativeStatus&quot;, source = &quot;id.status&quot;)
+    @Mapping(target = &quot;localizedNativeStatus&quot;, source = &quot;localizedStatus&quot;)
+    LocalizedCustomerNativeStatusDto mapLocalizedCustomerStatusToDto(LocalizedCustomerStatus localizedCustomerStatus);
+
+    List&lt;LocalizedCustomerNativeStatusDto&gt; mapLocalizedCustomerStatusesToDto(List&lt;LocalizedCustomerStatus&gt; localizedCustomerStatuses);
+
+    @Mapping(target = &quot;type&quot;, source = &quot;id.type&quot;)
+    @Mapping(target = &quot;localizedType&quot;, source = &quot;localizedType&quot;)
+    LocalizedCustomerTypeDto mapLocalizedCustomerTypeToDto(LocalizedCustomerType localizedCustomerType);
+
+    List&lt;LocalizedCustomerTypeDto&gt; mapLocalizedCustomerTypesToDto(List&lt;LocalizedCustomerType&gt; localizedCustomerTypes);
+
+    @Mapping(target = &quot;availability&quot;, source = &quot;id.availability&quot;)
+    @Mapping(target = &quot;localizedAvailability&quot;, source = &quot;localizedAvailability&quot;)
+    LocalizedProductAvailabilityDto mapLocalizedProductAvailabilityToDto(LocalizedProductAvailability localizedProductAvailability);
+
+    List&lt;LocalizedProductAvailabilityDto&gt; mapLocalizedProductAvailabilitiesToDto(List&lt;LocalizedProductAvailability&gt; localizedProductAvailabilities);
+
+    @Mapping(target = &quot;rejectionReason&quot;, source = &quot;id.rejectionReason&quot;)
+    @Mapping(target = &quot;localizedRejectionReason&quot;, source = &quot;localizedRejectionReason&quot;)
+    LocalizedRejectionReasonDto mapLocalizedRejectionReasonToDto(LocalizedRejectionReason rejectionReason);
+
+    List&lt;LocalizedRejectionReasonDto&gt; mapLocalizedRejectionReasonsToDto(List&lt;LocalizedRejectionReason&gt; rejectionReasons);
+
+    default DictionariesResponseDto mapDictionariesToDto(
+            List&lt;LocalizedCustomerState&gt; localizedCustomerStates,
+            List&lt;LocalizedCustomerStatus&gt; localizedCustomerStatuses,
+            List&lt;LocalizedCustomerType&gt; localizedCustomerTypes,
+            List&lt;LocalizedRejectionReason&gt; localizedRejectionReasons,
+            List&lt;LocalizedProductAvailability&gt; localizedProductAvailabilities,
+            List&lt;LocalizedBooleanValue&gt; localizedBooleanValues,
+            List&lt;LocalizedErrorCode&gt; localizedErrorCodes) {
+<span class="nc" id="L79">        return new DictionariesResponseDto()</span>
+<span class="nc" id="L80">                .localizedCustomerStates(mapLocalizedCustomerStatesToDto(localizedCustomerStates))</span>
+<span class="nc" id="L81">                .localizedCustomerNativeStatuses(mapLocalizedCustomerStatusesToDto(localizedCustomerStatuses))</span>
+<span class="nc" id="L82">                .localizedCustomerTypes(mapLocalizedCustomerTypesToDto(localizedCustomerTypes))</span>
+<span class="nc" id="L83">                .localizedRejectionReasons(mapLocalizedRejectionReasonsToDto(localizedRejectionReasons))</span>
+<span class="nc" id="L84">                .localizedProductAvailabilities(mapLocalizedProductAvailabilitiesToDto(localizedProductAvailabilities))</span>
+<span class="nc" id="L85">                .localizedBooleanValues(mapLocalizedBooleanValuesToDto(localizedBooleanValues))</span>
+<span class="nc" id="L86">                .localizedErrorCodes(mapLocalizedErrorCodesToDto(localizedErrorCodes));</span>
+    }
+
+    default CustomerNativeStatusDto statusListToCustomerNativeStatusDto(com.zoetis.zdms.model.dictionary.CustomerStatus[] customerStatuses) {
+<span class="nc" id="L90">        CustomerStatus nativeStatus = ObjectUtils.firstNonNull(customerStatuses);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        return Objects.nonNull(nativeStatus) ? CustomerNativeStatusDto.valueOf(nativeStatus.getValue()) : null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

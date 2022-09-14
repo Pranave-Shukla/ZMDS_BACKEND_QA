@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ErrorDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">ErrorDto.java</span></div><h1>ErrorDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.ErrorCodeDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * ErrorDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="fc" id="L23">public class ErrorDto   {</span>
+  @JsonProperty(&quot;date&quot;)
+  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime date;
+
+  @JsonProperty(&quot;code&quot;)
+  private ErrorCodeDto code;
+
+  @JsonProperty(&quot;message&quot;)
+  private String message;
+
+  public ErrorDto date(OffsetDateTime date) {
+<span class="nc" id="L35">    this.date = date;</span>
+<span class="nc" id="L36">    return this;</span>
+  }
+
+  /**
+   * Get date
+   * @return date
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+  @Valid
+
+  public OffsetDateTime getDate() {
+<span class="nc" id="L49">    return date;</span>
+  }
+
+  public void setDate(OffsetDateTime date) {
+<span class="fc" id="L53">    this.date = date;</span>
+<span class="fc" id="L54">  }</span>
+
+  public ErrorDto code(ErrorCodeDto code) {
+<span class="nc" id="L57">    this.code = code;</span>
+<span class="nc" id="L58">    return this;</span>
+  }
+
+  /**
+   * Get code
+   * @return code
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+  @Valid
+
+  public ErrorCodeDto getCode() {
+<span class="fc" id="L71">    return code;</span>
+  }
+
+  public void setCode(ErrorCodeDto code) {
+<span class="fc" id="L75">    this.code = code;</span>
+<span class="fc" id="L76">  }</span>
+
+  public ErrorDto message(String message) {
+<span class="nc" id="L79">    this.message = message;</span>
+<span class="nc" id="L80">    return this;</span>
+  }
+
+  /**
+   * Get message
+   * @return message
+  */
+  @ApiModelProperty(required = true, value = &quot;&quot;)
+  @NotNull
+
+
+  public String getMessage() {
+<span class="fc" id="L92">    return message;</span>
+  }
+
+  public void setMessage(String message) {
+<span class="fc" id="L96">    this.message = message;</span>
+<span class="fc" id="L97">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L103">      return true;</span>
+    }
+<span class="nc bnc" id="L105" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L106">      return false;</span>
+    }
+<span class="nc" id="L108">    ErrorDto error = (ErrorDto) o;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">    return Objects.equals(this.date, error.date) &amp;&amp;</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        Objects.equals(this.code, error.code) &amp;&amp;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        Objects.equals(this.message, error.message);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L116">    return Objects.hash(date, code, message);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L121">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L122">    sb.append(&quot;class ErrorDto {\n&quot;);</span>
+    
+<span class="nc" id="L124">    sb.append(&quot;    date: &quot;).append(toIndentedString(date)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L125">    sb.append(&quot;    code: &quot;).append(toIndentedString(code)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L126">    sb.append(&quot;    message: &quot;).append(toIndentedString(message)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L127">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L128">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L137">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L139">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

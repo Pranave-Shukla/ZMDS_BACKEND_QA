@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>DictionaryServiceImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.service.impl</a> &gt; <span class="el_source">DictionaryServiceImpl.java</span></div><h1>DictionaryServiceImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.service.impl;
+
+import com.zoetis.zdms.dao.repository.*;
+import com.zoetis.zdms.model.dictionary.Language;
+import com.zoetis.zdms.model.dictionary.localized.booleanvalue.LocalizedBooleanValue;
+import com.zoetis.zdms.model.dictionary.localized.booleanvalue.QLocalizedBooleanValue;
+import com.zoetis.zdms.model.dictionary.localized.customerstate.LocalizedCustomerState;
+import com.zoetis.zdms.model.dictionary.localized.customerstate.QLocalizedCustomerState;
+import com.zoetis.zdms.model.dictionary.localized.customerstatus.LocalizedCustomerStatus;
+import com.zoetis.zdms.model.dictionary.localized.customerstatus.QLocalizedCustomerStatus;
+import com.zoetis.zdms.model.dictionary.localized.customertype.LocalizedCustomerType;
+import com.zoetis.zdms.model.dictionary.localized.customertype.QLocalizedCustomerType;
+import com.zoetis.zdms.model.dictionary.localized.errorcode.LocalizedErrorCode;
+import com.zoetis.zdms.model.dictionary.localized.errorcode.QLocalizedErrorCode;
+import com.zoetis.zdms.model.dictionary.localized.productavailability.LocalizedProductAvailability;
+import com.zoetis.zdms.model.dictionary.localized.productavailability.QLocalizedProductAvailability;
+import com.zoetis.zdms.model.dictionary.localized.rejectionreason.LocalizedRejectionReason;
+import com.zoetis.zdms.model.dictionary.localized.rejectionreason.QLocalizedRejectionReason;
+import com.zoetis.zdms.service.DictionaryService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+@Service
+<span class="fc" id="L30">@AllArgsConstructor</span>
+<span class="fc" id="L31">@Slf4j</span>
+public class DictionaryServiceImpl implements DictionaryService {
+
+    private final LocalizedBooleanValueRepository localizedBooleanValueRepository;
+    private final LocalizedCustomerStateRepository localizedCustomerStateRepository;
+    private final LocalizedCustomerStatusRepository localizedCustomerStatusRepository;
+    private final LocalizedCustomerTypeRepository localizedCustomerTypeRepository;
+    private final LocalizedProductAvailabilityRepository localizedProductAvailabilityRepository;
+    private final LocalizedRejectionReasonRepository localizedRejectionReasonRepository;
+    private final LocalizedErrorCodesRepository localizedErrorCodesRepository;
+
+    @Override
+    @Cacheable(&quot;getLocalizedBooleanValues&quot;)
+    public List&lt;LocalizedBooleanValue&gt; getLocalizedBooleanValues(Language language) {
+<span class="nc" id="L45">        log.info(&quot;[getLocalizedBooleanValues] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L46">        return StreamSupport</span>
+<span class="nc" id="L47">                .stream(localizedBooleanValueRepository.findAll(QLocalizedBooleanValue.localizedBooleanValue.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L48">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedCustomerStates&quot;)
+    public List&lt;LocalizedCustomerState&gt; getLocalizedCustomerStates(Language language) {
+<span class="nc" id="L54">        log.info(&quot;[getLocalizedCustomerStates] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L55">        return StreamSupport</span>
+<span class="nc" id="L56">                .stream(localizedCustomerStateRepository.findAll(QLocalizedCustomerState.localizedCustomerState.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L57">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedCustomerStatuses&quot;)
+    public List&lt;LocalizedCustomerStatus&gt; getLocalizedCustomerStatuses(Language language) {
+<span class="nc" id="L63">        log.info(&quot;[getLocalizedCustomerStatuses] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L64">        return StreamSupport</span>
+<span class="nc" id="L65">                .stream(localizedCustomerStatusRepository.findAll(QLocalizedCustomerStatus.localizedCustomerStatus.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L66">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedCustomerTypes&quot;)
+    public List&lt;LocalizedCustomerType&gt; getLocalizedCustomerTypes(Language language) {
+<span class="nc" id="L72">        log.info(&quot;[getLocalizedCustomerTypes] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L73">        return StreamSupport</span>
+<span class="nc" id="L74">                .stream(localizedCustomerTypeRepository.findAll(QLocalizedCustomerType.localizedCustomerType.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L75">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedProductAvailabilities&quot;)
+    public List&lt;LocalizedProductAvailability&gt; getLocalizedProductAvailabilities(Language language) {
+<span class="nc" id="L81">        log.info(&quot;[getLocalizedProductAvailabilities] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L82">        return StreamSupport</span>
+<span class="nc" id="L83">                .stream(localizedProductAvailabilityRepository.findAll(QLocalizedProductAvailability.localizedProductAvailability.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L84">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedRejectionReason&quot;)
+    public List&lt;LocalizedRejectionReason&gt; getLocalizedRejectionReason(Language language) {
+<span class="nc" id="L90">        log.info(&quot;[getLocalizedRejectionReason] started processing with parameters [language = {}]}&quot;, language);</span>
+<span class="nc" id="L91">        return StreamSupport</span>
+<span class="nc" id="L92">                .stream(localizedRejectionReasonRepository.findAll(QLocalizedRejectionReason.localizedRejectionReason1.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L93">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    @Cacheable(&quot;getLocalizedErrorCodes&quot;)
+    public List&lt;LocalizedErrorCode&gt; getLocalizedErrorCodes(Language language) {
+<span class="nc" id="L99">        return StreamSupport</span>
+<span class="nc" id="L100">                .stream(localizedErrorCodesRepository.findAll(QLocalizedErrorCode.localizedErrorCode1.id.language.equalsIgnoreCase(language.getValue())).spliterator(), true)</span>
+<span class="nc" id="L101">                .collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

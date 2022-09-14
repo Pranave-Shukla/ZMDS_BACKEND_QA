@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProductPartialMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">ProductPartialMapperImpl.java</span></div><h1>ProductPartialMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.ProductPartialDto;
+import com.zoetis.zdms.model.ProductPartial;
+import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L15">public class ProductPartialMapperImpl implements ProductPartialMapper {</span>
+
+    @Autowired
+    private NullableMapper nullableMapper;
+
+    @Override
+    public ProductPartial mapProductPartialToDto(ProductPartialDto productPartialDto) {
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if ( productPartialDto == null ) {</span>
+<span class="nc" id="L23">            return null;</span>
+        }
+
+<span class="nc" id="L26">        ProductPartial productPartial = new ProductPartial();</span>
+
+<span class="nc" id="L28">        productPartial.setImageBase64( nullableMapper.unwrap( productPartialDto.getImage() ) );</span>
+<span class="nc" id="L29">        productPartial.setIsVisible( nullableMapper.unwrapNullableBooleanValueDto( productPartialDto.getIsVisible() ) );</span>
+<span class="nc" id="L30">        productPartial.setAvailability( nullableMapper.unwrapNullableProductAvailabilityDto( productPartialDto.getAvailability() ) );</span>
+<span class="nc" id="L31">        productPartial.setMinimumOrderQuantity( nullableMapper.unwrap( productPartialDto.getMinimumOrderQuantity() ) );</span>
+<span class="nc" id="L32">        productPartial.setMaximumOrderQuantity( nullableMapper.unwrap( productPartialDto.getMaximumOrderQuantity() ) );</span>
+<span class="nc" id="L33">        productPartial.setAssociatedProducts( nullableMapper.unwrap( productPartialDto.getAssociatedProducts() ) );</span>
+<span class="nc" id="L34">        productPartial.setImageFilename( nullableMapper.unwrap( productPartialDto.getImageFilename() ) );</span>
+
+<span class="nc" id="L36">        return productPartial;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

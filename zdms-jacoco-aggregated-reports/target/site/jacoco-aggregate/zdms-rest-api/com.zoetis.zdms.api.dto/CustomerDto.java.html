@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">CustomerDto.java</span></div><h1>CustomerDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.CustomerNativeStatusDto;
+import com.zoetis.zdms.api.dto.CustomerStateDto;
+import com.zoetis.zdms.api.dto.CustomerTypeDto;
+import com.zoetis.zdms.api.dto.RejectionReasonDto;
+import com.zoetis.zdms.api.dto.SourceSystemDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * CustomerDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="fc" id="L27">public class CustomerDto   {</span>
+  @JsonProperty(&quot;id&quot;)
+  private String id;
+
+  @JsonProperty(&quot;erpId&quot;)
+  private String erpId;
+
+  @JsonProperty(&quot;type&quot;)
+  private CustomerTypeDto type;
+
+  @JsonProperty(&quot;nativeStatus&quot;)
+  private CustomerNativeStatusDto nativeStatus;
+
+  @JsonProperty(&quot;companyName&quot;)
+  private String companyName;
+
+  @JsonProperty(&quot;address&quot;)
+  private String address;
+
+  @JsonProperty(&quot;state&quot;)
+  private CustomerStateDto state;
+
+  @JsonProperty(&quot;nativeCreatedDate&quot;)
+  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime nativeCreatedDate;
+
+  @JsonProperty(&quot;sourceSystem&quot;)
+  private SourceSystemDto sourceSystem;
+
+  @JsonProperty(&quot;rejectionReason&quot;)
+  private RejectionReasonDto rejectionReason;
+
+  public CustomerDto id(String id) {
+<span class="nc" id="L60">    this.id = id;</span>
+<span class="nc" id="L61">    return this;</span>
+  }
+
+  /**
+   * Get id
+   * @return id
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getId() {
+<span class="fc" id="L72">    return id;</span>
+  }
+
+  public void setId(String id) {
+<span class="fc" id="L76">    this.id = id;</span>
+<span class="fc" id="L77">  }</span>
+
+  public CustomerDto erpId(String erpId) {
+<span class="nc" id="L80">    this.erpId = erpId;</span>
+<span class="nc" id="L81">    return this;</span>
+  }
+
+  /**
+   * Get erpId
+   * @return erpId
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getErpId() {
+<span class="fc" id="L92">    return erpId;</span>
+  }
+
+  public void setErpId(String erpId) {
+<span class="fc" id="L96">    this.erpId = erpId;</span>
+<span class="fc" id="L97">  }</span>
+
+  public CustomerDto type(CustomerTypeDto type) {
+<span class="nc" id="L100">    this.type = type;</span>
+<span class="nc" id="L101">    return this;</span>
+  }
+
+  /**
+   * Get type
+   * @return type
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public CustomerTypeDto getType() {
+<span class="fc" id="L113">    return type;</span>
+  }
+
+  public void setType(CustomerTypeDto type) {
+<span class="fc" id="L117">    this.type = type;</span>
+<span class="fc" id="L118">  }</span>
+
+  public CustomerDto nativeStatus(CustomerNativeStatusDto nativeStatus) {
+<span class="nc" id="L121">    this.nativeStatus = nativeStatus;</span>
+<span class="nc" id="L122">    return this;</span>
+  }
+
+  /**
+   * Get nativeStatus
+   * @return nativeStatus
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public CustomerNativeStatusDto getNativeStatus() {
+<span class="fc" id="L134">    return nativeStatus;</span>
+  }
+
+  public void setNativeStatus(CustomerNativeStatusDto nativeStatus) {
+<span class="fc" id="L138">    this.nativeStatus = nativeStatus;</span>
+<span class="fc" id="L139">  }</span>
+
+  public CustomerDto companyName(String companyName) {
+<span class="nc" id="L142">    this.companyName = companyName;</span>
+<span class="nc" id="L143">    return this;</span>
+  }
+
+  /**
+   * Get companyName
+   * @return companyName
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getCompanyName() {
+<span class="fc" id="L154">    return companyName;</span>
+  }
+
+  public void setCompanyName(String companyName) {
+<span class="fc" id="L158">    this.companyName = companyName;</span>
+<span class="fc" id="L159">  }</span>
+
+  public CustomerDto address(String address) {
+<span class="nc" id="L162">    this.address = address;</span>
+<span class="nc" id="L163">    return this;</span>
+  }
+
+  /**
+   * Get address
+   * @return address
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getAddress() {
+<span class="fc" id="L174">    return address;</span>
+  }
+
+  public void setAddress(String address) {
+<span class="fc" id="L178">    this.address = address;</span>
+<span class="fc" id="L179">  }</span>
+
+  public CustomerDto state(CustomerStateDto state) {
+<span class="nc" id="L182">    this.state = state;</span>
+<span class="nc" id="L183">    return this;</span>
+  }
+
+  /**
+   * Get state
+   * @return state
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public CustomerStateDto getState() {
+<span class="fc" id="L195">    return state;</span>
+  }
+
+  public void setState(CustomerStateDto state) {
+<span class="fc" id="L199">    this.state = state;</span>
+<span class="fc" id="L200">  }</span>
+
+  public CustomerDto nativeCreatedDate(OffsetDateTime nativeCreatedDate) {
+<span class="nc" id="L203">    this.nativeCreatedDate = nativeCreatedDate;</span>
+<span class="nc" id="L204">    return this;</span>
+  }
+
+  /**
+   * Get nativeCreatedDate
+   * @return nativeCreatedDate
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public OffsetDateTime getNativeCreatedDate() {
+<span class="fc" id="L216">    return nativeCreatedDate;</span>
+  }
+
+  public void setNativeCreatedDate(OffsetDateTime nativeCreatedDate) {
+<span class="fc" id="L220">    this.nativeCreatedDate = nativeCreatedDate;</span>
+<span class="fc" id="L221">  }</span>
+
+  public CustomerDto sourceSystem(SourceSystemDto sourceSystem) {
+<span class="nc" id="L224">    this.sourceSystem = sourceSystem;</span>
+<span class="nc" id="L225">    return this;</span>
+  }
+
+  /**
+   * Get sourceSystem
+   * @return sourceSystem
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public SourceSystemDto getSourceSystem() {
+<span class="fc" id="L237">    return sourceSystem;</span>
+  }
+
+  public void setSourceSystem(SourceSystemDto sourceSystem) {
+<span class="fc" id="L241">    this.sourceSystem = sourceSystem;</span>
+<span class="fc" id="L242">  }</span>
+
+  public CustomerDto rejectionReason(RejectionReasonDto rejectionReason) {
+<span class="nc" id="L245">    this.rejectionReason = rejectionReason;</span>
+<span class="nc" id="L246">    return this;</span>
+  }
+
+  /**
+   * Get rejectionReason
+   * @return rejectionReason
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public RejectionReasonDto getRejectionReason() {
+<span class="fc" id="L258">    return rejectionReason;</span>
+  }
+
+  public void setRejectionReason(RejectionReasonDto rejectionReason) {
+<span class="fc" id="L262">    this.rejectionReason = rejectionReason;</span>
+<span class="fc" id="L263">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L268" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L269">      return true;</span>
+    }
+<span class="nc bnc" id="L271" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L272">      return false;</span>
+    }
+<span class="nc" id="L274">    CustomerDto customer = (CustomerDto) o;</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">    return Objects.equals(this.id, customer.id) &amp;&amp;</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        Objects.equals(this.erpId, customer.erpId) &amp;&amp;</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        Objects.equals(this.type, customer.type) &amp;&amp;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        Objects.equals(this.nativeStatus, customer.nativeStatus) &amp;&amp;</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        Objects.equals(this.companyName, customer.companyName) &amp;&amp;</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        Objects.equals(this.address, customer.address) &amp;&amp;</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">        Objects.equals(this.state, customer.state) &amp;&amp;</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        Objects.equals(this.nativeCreatedDate, customer.nativeCreatedDate) &amp;&amp;</span>
+<span class="nc bnc" id="L283" title="All 2 branches missed.">        Objects.equals(this.sourceSystem, customer.sourceSystem) &amp;&amp;</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        Objects.equals(this.rejectionReason, customer.rejectionReason);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L289">    return Objects.hash(id, erpId, type, nativeStatus, companyName, address, state, nativeCreatedDate, sourceSystem, rejectionReason);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L294">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L295">    sb.append(&quot;class CustomerDto {\n&quot;);</span>
+    
+<span class="nc" id="L297">    sb.append(&quot;    id: &quot;).append(toIndentedString(id)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L298">    sb.append(&quot;    erpId: &quot;).append(toIndentedString(erpId)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L299">    sb.append(&quot;    type: &quot;).append(toIndentedString(type)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L300">    sb.append(&quot;    nativeStatus: &quot;).append(toIndentedString(nativeStatus)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L301">    sb.append(&quot;    companyName: &quot;).append(toIndentedString(companyName)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L302">    sb.append(&quot;    address: &quot;).append(toIndentedString(address)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L303">    sb.append(&quot;    state: &quot;).append(toIndentedString(state)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L304">    sb.append(&quot;    nativeCreatedDate: &quot;).append(toIndentedString(nativeCreatedDate)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L305">    sb.append(&quot;    sourceSystem: &quot;).append(toIndentedString(sourceSystem)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L306">    sb.append(&quot;    rejectionReason: &quot;).append(toIndentedString(rejectionReason)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L307">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L308">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L316" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L317">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L319">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>QCustomerLookupView.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.model.view</a> &gt; <span class="el_source">QCustomerLookupView.java</span></div><h1>QCustomerLookupView.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.model.view;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.processing.Generated;
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
+
+
+/**
+ * QCustomerLookupView is a Querydsl query type for CustomerLookupView
+ */
+@Generated(&quot;com.querydsl.codegen.DefaultEntitySerializer&quot;)
+public class QCustomerLookupView extends EntityPathBase&lt;CustomerLookupView&gt; {
+
+    private static final long serialVersionUID = 422125526L;
+
+<span class="nc" id="L21">    private static final PathInits INITS = PathInits.DIRECT2;</span>
+
+<span class="nc" id="L23">    public static final QCustomerLookupView customerLookupView = new QCustomerLookupView(&quot;customerLookupView&quot;);</span>
+
+<span class="nc" id="L25">    public final EnumPath&lt;com.zoetis.zdms.model.dictionary.AccountType&gt; accountType = createEnum(&quot;accountType&quot;, com.zoetis.zdms.model.dictionary.AccountType.class);</span>
+
+<span class="nc" id="L27">    public final StringPath city = createString(&quot;city&quot;);</span>
+
+    public final com.zoetis.zdms.model.QContactDetails contactDetails;
+
+<span class="nc" id="L31">    public final StringPath countryCode = createString(&quot;countryCode&quot;);</span>
+
+<span class="nc" id="L33">    public final StringPath id = createString(&quot;id&quot;);</span>
+
+<span class="nc" id="L35">    public final EnumPath&lt;com.zoetis.zdms.model.dictionary.BooleanValue&gt; isdDeleted = createEnum(&quot;isdDeleted&quot;, com.zoetis.zdms.model.dictionary.BooleanValue.class);</span>
+
+<span class="nc" id="L37">    public final StringPath name1 = createString(&quot;name1&quot;);</span>
+
+<span class="nc" id="L39">    public final StringPath name2 = createString(&quot;name2&quot;);</span>
+
+<span class="nc" id="L41">    public final StringPath name3 = createString(&quot;name3&quot;);</span>
+
+<span class="nc" id="L43">    public final StringPath name4 = createString(&quot;name4&quot;);</span>
+
+<span class="nc" id="L45">    public final StringPath postalCode = createString(&quot;postalCode&quot;);</span>
+
+<span class="nc" id="L47">    public final StringPath streetAddress = createString(&quot;streetAddress&quot;);</span>
+
+<span class="nc" id="L49">    public final StringPath title = createString(&quot;title&quot;);</span>
+
+    public QCustomerLookupView(String variable) {
+<span class="nc" id="L52">        this(CustomerLookupView.class, forVariable(variable), INITS);</span>
+<span class="nc" id="L53">    }</span>
+
+    public QCustomerLookupView(Path&lt;? extends CustomerLookupView&gt; path) {
+<span class="nc" id="L56">        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));</span>
+<span class="nc" id="L57">    }</span>
+
+    public QCustomerLookupView(PathMetadata metadata) {
+<span class="nc" id="L60">        this(metadata, PathInits.getFor(metadata, INITS));</span>
+<span class="nc" id="L61">    }</span>
+
+    public QCustomerLookupView(PathMetadata metadata, PathInits inits) {
+<span class="nc" id="L64">        this(CustomerLookupView.class, metadata, inits);</span>
+<span class="nc" id="L65">    }</span>
+
+    public QCustomerLookupView(Class&lt;? extends CustomerLookupView&gt; type, PathMetadata metadata, PathInits inits) {
+<span class="nc" id="L68">        super(type, metadata, inits);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        this.contactDetails = inits.isInitialized(&quot;contactDetails&quot;) ? new com.zoetis.zdms.model.QContactDetails(forProperty(&quot;contactDetails&quot;)) : null;</span>
+<span class="nc" id="L70">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

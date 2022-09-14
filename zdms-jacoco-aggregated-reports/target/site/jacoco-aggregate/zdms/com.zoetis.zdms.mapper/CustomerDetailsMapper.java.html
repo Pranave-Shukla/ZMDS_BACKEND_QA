@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CustomerDetailsMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">CustomerDetailsMapper.java</span></div><h1>CustomerDetailsMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.CustomerDetailsDto;
+import com.zoetis.zdms.api.dto.CustomerDetailsResponseDto;
+import com.zoetis.zdms.model.Customer;
+import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = &quot;spring&quot;, uses = {DictionariesMapper.class, RejectionReasonMapper.class, SourceSystemMapper.class})
+public interface CustomerDetailsMapper {
+
+    @Mapping(target = &quot;customer&quot;, source = &quot;customer&quot;)
+    CustomerDetailsResponseDto mapCustomerToCustomerDetailsResponseDto(Customer customer);
+
+    @Mapping(target = &quot;freeText&quot;, source = &quot;customer.status.freeText&quot;)
+    @Mapping(target = &quot;nativeStatus&quot;, source = &quot;customer.status.localStatus&quot;)
+    @Mapping(target = &quot;rejectionReason&quot;, source = &quot;customer.status.rejectionReason&quot;)
+    @Mapping(target = &quot;city&quot;, source = &quot;customer.address.city&quot;)
+    @Mapping(target = &quot;countryCode&quot;, source = &quot;customer.address.countryCode&quot;)
+    @Mapping(target = &quot;postalCode&quot;, source = &quot;customer.address.postalCode&quot;)
+    @Mapping(target = &quot;streetAddress&quot;, expression = &quot;java(streetAndStreetNumberToStreetAddress(customer.getAddress().getStreet(), customer.getAddress().getStreetNumber()))&quot;)
+    @Mapping(target = &quot;sourceSystem.name&quot;, source = &quot;customer.source&quot;)
+    CustomerDetailsDto mapCustomerToCustomerDetailsDto(Customer customer);
+
+    default String streetAndStreetNumberToStreetAddress(String street, String streetNumber) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        return StringUtils.isNotEmpty(streetNumber) ? street + &quot; &quot; + streetNumber : street;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

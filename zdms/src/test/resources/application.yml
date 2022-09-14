@@ -1,0 +1,42 @@
+server:
+  port: 8081
+  ssl:
+    enabled: false
+  forward-headers-strategy: framework
+hibernate:
+  cache:
+    use_second_level_cache: true
+    region:
+      factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+spring:
+  profiles:
+    active: noSecurity
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver:
+      class: org.h2.Driver
+  cache:
+    names: getLocalizedCustomerStatuses,getLocalizedCustomerStates,getLocalizedRejectionReason,getLocalizedCustomerTypes,getLocalizedBooleanValues,getLocalizedProductAvailabilities,getSourceSystemNames
+  caffeine:
+    spec: maximumSize=500,expireAfterAccess=3600s
+jasypt:
+  encryptor:
+    bean: jasyptEncryptor
+media:
+  file:
+    storage:
+      base-path: /app/zmds-media-files
+    api:
+      products:
+        base-path: /public/images/products
+logging:
+  level:
+    root: info

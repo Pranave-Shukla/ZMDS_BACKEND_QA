@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SearchProductsByDto.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms-rest-api</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.api.dto</a> &gt; <span class="el_source">SearchProductsByDto.java</span></div><h1>SearchProductsByDto.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.api.dto;
+
+import java.net.URI;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.zoetis.zdms.api.dto.SearchByOperationDto;
+import com.zoetis.zdms.api.dto.SearchProductsByFieldDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
+
+import java.util.*;
+
+/**
+ * SearchProductsByDto
+ */
+@javax.annotation.Generated(value = &quot;org.openapitools.codegen.languages.SpringCodegen&quot;, date = &quot;2022-08-04T03:22:40.789872100-04:00[America/New_York]&quot;)
+<span class="nc" id="L25">public class SearchProductsByDto   {</span>
+  @JsonProperty(&quot;field&quot;)
+  private SearchProductsByFieldDto field;
+
+  @JsonProperty(&quot;operation&quot;)
+  private SearchByOperationDto operation;
+
+<span class="nc" id="L32">  @JsonProperty(&quot;values&quot;)</span>
+  @Valid
+  private List&lt;String&gt; values = null;
+
+  public SearchProductsByDto field(SearchProductsByFieldDto field) {
+<span class="nc" id="L37">    this.field = field;</span>
+<span class="nc" id="L38">    return this;</span>
+  }
+
+  /**
+   * Get field
+   * @return field
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public SearchProductsByFieldDto getField() {
+<span class="nc" id="L50">    return field;</span>
+  }
+
+  public void setField(SearchProductsByFieldDto field) {
+<span class="nc" id="L54">    this.field = field;</span>
+<span class="nc" id="L55">  }</span>
+
+  public SearchProductsByDto operation(SearchByOperationDto operation) {
+<span class="nc" id="L58">    this.operation = operation;</span>
+<span class="nc" id="L59">    return this;</span>
+  }
+
+  /**
+   * Get operation
+   * @return operation
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+  @Valid
+
+  public SearchByOperationDto getOperation() {
+<span class="nc" id="L71">    return operation;</span>
+  }
+
+  public void setOperation(SearchByOperationDto operation) {
+<span class="nc" id="L75">    this.operation = operation;</span>
+<span class="nc" id="L76">  }</span>
+
+  public SearchProductsByDto values(List&lt;String&gt; values) {
+<span class="nc" id="L79">    this.values = values;</span>
+<span class="nc" id="L80">    return this;</span>
+  }
+
+  public SearchProductsByDto addValuesItem(String valuesItem) {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">    if (this.values == null) {</span>
+<span class="nc" id="L85">      this.values = new ArrayList&lt;&gt;();</span>
+    }
+<span class="nc" id="L87">    this.values.add(valuesItem);</span>
+<span class="nc" id="L88">    return this;</span>
+  }
+
+  /**
+   * Get values
+   * @return values
+  */
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public List&lt;String&gt; getValues() {
+<span class="nc" id="L99">    return values;</span>
+  }
+
+  public void setValues(List&lt;String&gt; values) {
+<span class="nc" id="L103">    this.values = values;</span>
+<span class="nc" id="L104">  }</span>
+
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L110">      return true;</span>
+    }
+<span class="nc bnc" id="L112" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L113">      return false;</span>
+    }
+<span class="nc" id="L115">    SearchProductsByDto searchProductsBy = (SearchProductsByDto) o;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    return Objects.equals(this.field, searchProductsBy.field) &amp;&amp;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        Objects.equals(this.operation, searchProductsBy.operation) &amp;&amp;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        Objects.equals(this.values, searchProductsBy.values);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L123">    return Objects.hash(field, operation, values);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L128">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L129">    sb.append(&quot;class SearchProductsByDto {\n&quot;);</span>
+    
+<span class="nc" id="L131">    sb.append(&quot;    field: &quot;).append(toIndentedString(field)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L132">    sb.append(&quot;    operation: &quot;).append(toIndentedString(operation)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L133">    sb.append(&quot;    values: &quot;).append(toIndentedString(values)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L134">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L135">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L144">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L146">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

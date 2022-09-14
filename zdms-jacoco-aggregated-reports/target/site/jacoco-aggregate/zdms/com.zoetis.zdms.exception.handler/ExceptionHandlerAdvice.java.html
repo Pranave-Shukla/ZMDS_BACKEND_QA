@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ExceptionHandlerAdvice.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.exception.handler</a> &gt; <span class="el_source">ExceptionHandlerAdvice.java</span></div><h1>ExceptionHandlerAdvice.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.exception.handler;
+
+import com.zoetis.zdms.api.dto.ErrorCodeDto;
+import com.zoetis.zdms.api.dto.ErrorDto;
+import com.zoetis.zdms.exception.IncorrectFreeTextValueException;
+import com.zoetis.zdms.exception.common.BadRequestException;
+import com.zoetis.zdms.exception.common.InternalServerException;
+import com.zoetis.zdms.exception.status.ResponseStatus;
+import com.zoetis.zdms.exception.status.ErrorMessage;
+import com.zoetis.zdms.model.dictionary.ErrorCode;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.OffsetDateTime;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+
+import static org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation;
+
+@ControllerAdvice
+<span class="fc" id="L28">@Slf4j</span>
+<span class="fc" id="L29">public class ExceptionHandlerAdvice {</span>
+
+<span class="fc" id="L31">    private final Map&lt;String, Function&lt;String, Exception&gt;&gt; FIELD_TO_EXCEPTION_MAP = Map.of(</span>
+            &quot;customerPartial.freeText&quot;, IncorrectFreeTextValueException::of
+    );
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public ResponseEntity&lt;ErrorDto&gt; handleValidationExceptions(MethodArgumentNotValidException ex) {
+<span class="nc" id="L38">        Exception exception = ex.getBindingResult()</span>
+<span class="nc" id="L39">                .getAllErrors()</span>
+<span class="nc" id="L40">                .stream().findFirst()</span>
+<span class="nc" id="L41">                .map((error) -&gt; {</span>
+<span class="nc" id="L42">                    String fieldName = ((FieldError) error).getField();</span>
+<span class="nc" id="L43">                    String errorMessage = error.getDefaultMessage();</span>
+
+<span class="nc" id="L45">                    Optional&lt;Function&lt;String, Exception&gt;&gt; optionalIncorrectFieldException = Optional.ofNullable(FIELD_TO_EXCEPTION_MAP.get(fieldName));</span>
+<span class="nc" id="L46">                    return optionalIncorrectFieldException</span>
+<span class="nc" id="L47">                            .map(incorrectFieldException -&gt; incorrectFieldException.apply(errorMessage))</span>
+<span class="nc" id="L48">                            .orElse(BadRequestException.of(&quot;Incorrect field value.&quot;));</span>
+                })
+<span class="nc" id="L50">                .orElse(InternalServerException.of(&quot;No validation errors found.&quot;));</span>
+
+<span class="nc" id="L52">        return handle(exception);</span>
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    public ResponseEntity&lt;ErrorDto&gt; handle(Exception exception) {
+<span class="fc" id="L58">        ErrorDto body = new ErrorDto();</span>
+<span class="fc" id="L59">        Optional&lt;ResponseStatus&gt; responseStatus = resolveAnnotatedResponseStatus(exception);</span>
+
+<span class="fc" id="L61">        HttpStatus httpStatus = getHttpStatus(responseStatus);</span>
+<span class="fc" id="L62">        ErrorCode errorCode = getErrorCode(responseStatus);</span>
+<span class="fc" id="L63">        ErrorMessage errorMessage = getErrorMessage(responseStatus);</span>
+
+<span class="fc" id="L65">        body.setDate(OffsetDateTime.now());</span>
+<span class="fc" id="L66">        body.setCode(ErrorCodeDto.fromValue(errorCode.getValue()));</span>
+<span class="fc" id="L67">        body.setMessage(errorMessage.getValue());</span>
+
+<span class="fc" id="L69">        log.error(&quot;Processing request raised exception: [{}].&quot;, exception.getMessage());</span>
+<span class="fc" id="L70">        log.error(&quot;Stack trace:&quot;, exception);</span>
+
+<span class="fc" id="L72">        return new ResponseEntity&lt;&gt;(body, httpStatus);</span>
+    }
+
+    private Optional&lt;ResponseStatus&gt; resolveAnnotatedResponseStatus(Exception exception) {
+<span class="fc" id="L76">        return Optional.ofNullable(findMergedAnnotation(exception.getClass(), ResponseStatus.class));</span>
+    }
+
+    private HttpStatus getHttpStatus(Optional&lt;ResponseStatus&gt; optionalResponseStatus) {
+<span class="fc" id="L80">        return optionalResponseStatus</span>
+<span class="fc" id="L81">                .map(ResponseStatus::value)</span>
+<span class="fc" id="L82">                .orElse(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+    }
+
+    private ErrorCode getErrorCode(Optional&lt;ResponseStatus&gt; optionalResponseStatus) {
+<span class="fc" id="L86">        return optionalResponseStatus</span>
+<span class="fc" id="L87">                .map(ResponseStatus::code)</span>
+<span class="fc" id="L88">                .orElse(ErrorCode.INTERNAL_SERVER_ERROR);</span>
+    }
+
+    private ErrorMessage getErrorMessage(Optional&lt;ResponseStatus&gt; optionalResponseStatus) {
+<span class="fc" id="L92">        return optionalResponseStatus</span>
+<span class="fc" id="L93">                .map(ResponseStatus::message)</span>
+<span class="fc" id="L94">                .orElse(ErrorMessage.INTERNAL_SERVER_ERROR);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

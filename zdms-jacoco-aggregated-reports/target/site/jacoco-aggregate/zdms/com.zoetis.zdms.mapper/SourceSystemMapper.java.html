@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SourceSystemMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">SourceSystemMapper.java</span></div><h1>SourceSystemMapper.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.SourceSystemDto;
+import com.zoetis.zdms.api.dto.SourceSystemsResponseDto;
+import com.zoetis.zdms.model.SourceSystem;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Mapper(componentModel = &quot;spring&quot;)
+public interface SourceSystemMapper {
+
+    @Mapping(target = &quot;name&quot;, source = &quot;sourceSystem.name&quot;)
+    SourceSystemDto mapSourceSystemToDto(SourceSystem sourceSystem);
+
+    @Mapping(target = &quot;name&quot;, source = &quot;sourceSystem&quot;)
+    SourceSystemDto mapSourceSystemNameToDto(String sourceSystem);
+
+    default SourceSystemsResponseDto mapSourceSystemNamesToDto(Set&lt;String&gt; sourceSystemNames) {
+<span class="nc" id="L23">        List&lt;SourceSystemDto&gt; sourceSystemDtoList = sourceSystemNames.stream()</span>
+<span class="nc" id="L24">                .map(this::mapSourceSystemNameToDto)</span>
+<span class="nc" id="L25">                .collect(Collectors.toList());</span>
+
+<span class="nc" id="L27">        return new SourceSystemsResponseDto()</span>
+<span class="nc" id="L28">                .sourceSystems(sourceSystemDtoList);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>AuditMapperImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">zdms-jacoco-aggregated-reports</a> &gt; <a href="../index.html" class="el_bundle">zdms</a> &gt; <a href="index.source.html" class="el_package">com.zoetis.zdms.mapper</a> &gt; <span class="el_source">AuditMapperImpl.java</span></div><h1>AuditMapperImpl.java</h1><pre class="source lang-java linenums">package com.zoetis.zdms.mapper;
+
+import com.zoetis.zdms.api.dto.AuditDataSetDto;
+import com.zoetis.zdms.api.dto.AuditDto;
+import com.zoetis.zdms.api.dto.AuditsResponseDto;
+import com.zoetis.zdms.api.dto.PageInfoDto;
+import com.zoetis.zdms.model.Audit;
+import com.zoetis.zdms.model.dictionary.DataSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2022-08-04T03:23:00-0400&quot;,
+    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 11 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L20">public class AuditMapperImpl implements AuditMapper {</span>
+
+    @Override
+    public AuditsResponseDto pagedAuditsToGetAuditsResponseDto(Integer pageNumber, List&lt;Audit&gt; elements, Integer totalPages, Long totalElements) {
+<span class="pc bpc" id="L24" title="7 of 8 branches missed.">        if ( pageNumber == null &amp;&amp; elements == null &amp;&amp; totalPages == null &amp;&amp; totalElements == null ) {</span>
+<span class="nc" id="L25">            return null;</span>
+        }
+
+<span class="fc" id="L28">        AuditsResponseDto auditsResponseDto = new AuditsResponseDto();</span>
+
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if ( pageNumber != null ) {</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">            if ( auditsResponseDto.getPageInfo() == null ) {</span>
+<span class="fc" id="L32">                auditsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L34">            integerToPageInfoDto( pageNumber, auditsResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if ( elements != null ) {</span>
+<span class="fc" id="L37">            auditsResponseDto.setAudits( auditListToAuditDtoList( elements ) );</span>
+        }
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if ( totalPages != null ) {</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">            if ( auditsResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L41">                auditsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L43">            integerToPageInfoDto1( totalPages, auditsResponseDto.getPageInfo() );</span>
+        }
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if ( totalElements != null ) {</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">            if ( auditsResponseDto.getPageInfo() == null ) {</span>
+<span class="nc" id="L47">                auditsResponseDto.setPageInfo( new PageInfoDto() );</span>
+            }
+<span class="fc" id="L49">            longToPageInfoDto( totalElements, auditsResponseDto.getPageInfo() );</span>
+        }
+
+<span class="fc" id="L52">        return auditsResponseDto;</span>
+    }
+
+    @Override
+    public AuditDto auditToAuditDto(Audit audit) {
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if ( audit == null ) {</span>
+<span class="nc" id="L58">            return null;</span>
+        }
+
+<span class="fc" id="L61">        AuditDto auditDto = new AuditDto();</span>
+
+<span class="fc" id="L63">        auditDto.setHeader( audit.getTransactionHeader() );</span>
+<span class="fc" id="L64">        auditDto.setMessage( audit.getTransactionMessage() );</span>
+<span class="fc" id="L65">        auditDto.setInitiator( audit.getLogBy() );</span>
+<span class="fc" id="L66">        auditDto.setDate( audit.getLogTime() );</span>
+<span class="fc" id="L67">        auditDto.setDataSet( dataSetToAuditDataSetDto( audit.getDataSet() ) );</span>
+
+<span class="fc" id="L69">        return auditDto;</span>
+    }
+
+    protected void integerToPageInfoDto(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L74">            return;</span>
+        }
+
+<span class="fc" id="L77">        mappingTarget.setPageNumber( integer );</span>
+<span class="fc" id="L78">    }</span>
+
+    protected void longToPageInfoDto(Long long1, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if ( long1 == null ) {</span>
+<span class="nc" id="L82">            return;</span>
+        }
+
+<span class="fc" id="L85">        mappingTarget.setTotalElements( long1 );</span>
+<span class="fc" id="L86">    }</span>
+
+    protected void integerToPageInfoDto1(Integer integer, PageInfoDto mappingTarget) {
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if ( integer == null ) {</span>
+<span class="nc" id="L90">            return;</span>
+        }
+
+<span class="fc" id="L93">        mappingTarget.setTotalPages( integer );</span>
+<span class="fc" id="L94">    }</span>
+
+    protected List&lt;AuditDto&gt; auditListToAuditDtoList(List&lt;Audit&gt; list) {
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L98">            return null;</span>
+        }
+
+<span class="fc" id="L101">        List&lt;AuditDto&gt; list1 = new ArrayList&lt;AuditDto&gt;( list.size() );</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for ( Audit audit : list ) {</span>
+<span class="fc" id="L103">            list1.add( auditToAuditDto( audit ) );</span>
+<span class="fc" id="L104">        }</span>
+
+<span class="fc" id="L106">        return list1;</span>
+    }
+
+    protected AuditDataSetDto dataSetToAuditDataSetDto(DataSet dataSet) {
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if ( dataSet == null ) {</span>
+<span class="nc" id="L111">            return null;</span>
+        }
+
+        AuditDataSetDto auditDataSetDto;
+
+<span class="pc bpc" id="L116" title="2 of 3 branches missed.">        switch ( dataSet ) {</span>
+<span class="nc" id="L117">            case CUSTOMER: auditDataSetDto = AuditDataSetDto.CUSTOMER;</span>
+<span class="nc" id="L118">            break;</span>
+<span class="fc" id="L119">            case PRODUCT: auditDataSetDto = AuditDataSetDto.PRODUCT;</span>
+<span class="fc" id="L120">            break;</span>
+<span class="nc" id="L121">            default: throw new IllegalArgumentException( &quot;Unexpected enum constant: &quot; + dataSet );</span>
+        }
+
+<span class="fc" id="L124">        return auditDataSetDto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
