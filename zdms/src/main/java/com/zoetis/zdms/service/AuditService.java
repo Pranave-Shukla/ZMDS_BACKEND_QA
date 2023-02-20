@@ -12,4 +12,6 @@ import java.util.Set;
 public interface AuditService {
 
     Page<Audit> getAudits(Integer pageNumber, Integer pageSize, SortDirection sortDirection, SortBy.Audit sortBy, Set<SearchBy<SearchByField.Audit>> searchBy);
+    Page<Audit> getCurAudits(Integer pageNumber, Integer pageSize, SortDirection sortDirection, SortBy.Audit sortBy, Set<SearchBy<SearchByField.Audit>> searchBy);
+
 }

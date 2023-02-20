@@ -2,6 +2,7 @@ package com.zoetis.zdms.service.impl.factory;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringPath;
 import com.zoetis.zdms.model.QAudit;
@@ -10,12 +11,17 @@ import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchBy;
 import com.zoetis.zdms.model.dictionary.pageparameter.search.SearchByField;
 import com.zoetis.zdms.model.view.QCustomerView;
 import com.zoetis.zdms.model.view.QProductView;
+//import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
+
+import java.time.*;
 
 import java.time.OffsetDateTime;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class PredicateFactory {
@@ -92,7 +98,36 @@ public class PredicateFactory {
     }
 
     public Predicate buildAuditPredicate(Set<SearchBy<SearchByField.Audit>> searchBySet) {
+
+
+
+
         BooleanBuilder predicateBuilder = new BooleanBuilder();
+
+
+//        BooleanBuilder predicateBuilder = new BooleanBuilder()
+//        .and(logT.isNull().or(logT.after(from1)));
+
+        searchBySet
+                .forEach(searchBy -> {
+                    FieldPredicateExpressionFactory<?> fieldPredicateExpressionFactory = AUDIT_SEARCH_BY_EXPRESSION.get(searchBy.getSearchByField());
+                    predicateBuilder.and(fieldPredicateExpressionFactory.create(searchBy.getValues()));
+                });
+        return predicateBuilder;
+    }
+
+    public Predicate buildCurAuditPredicate(Set<SearchBy<SearchByField.Audit>> searchBySet) {
+
+         OffsetDateTime from1 = OffsetDateTime.now().with(firstDayOfYear()).minusYears(1);
+        
+         OffsetDateTime to1 = OffsetDateTime.now();
+
+        DateTimePath<OffsetDateTime> logT = QAudit.audit.logTime;
+
+        BooleanBuilder predicateBuilder = new BooleanBuilder()
+                .and(logT.isNull().or(logT.between(from1,to1)));
+
+
 
         searchBySet
                 .forEach(searchBy -> {
